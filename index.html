@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beatriz & Julio — Casamento</title>
+  <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- CONFIG
+    RSVP_WHATSAPP: 5512996263115
+    PRESENTES_URL: presentes.html
+    HORARIO: 18:00
+    CERIMONIA: Basílica Nossa Senhora do Carmo
+    RECEPCAO: Jockey Club Campineiro (ao lado)
+    CIDADE: Campinas — SP
+  -->
+
+  <header class="site-header">
+    <button class="site-header__menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="site-header__couple" href="index.html">
+      Beatriz <span class="site-header__star">⁕</span> Julio
+    </a>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" aria-label="Menu principal">
+    <ul class="nav-drawer__list">
+      <li><a class="nav-drawer__link is-active" href="index.html">Home</a></li>
+      <li><a class="nav-drawer__link" href="mood.html">Mood da Festa</a></li>
+      <li><a class="nav-drawer__link" href="concierge.html">Hospedagem e Dicas</a></li>
+      <li><a class="nav-drawer__link" href="presentes.html">Presentes</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <section class="hero hero--venue">
+      <img class="hero__image" src="assets/images/joquey.png" alt="Jockey Club Campineiro, Campinas">
+      <div class="hero__monogram" aria-hidden="true">B+J</div>
+    </section>
+
+    <section class="invitation container">
+      <div class="invitation__parents">
+        <div class="invitation__parents-col">
+          Nome Mãe Noiva<br>
+          Nome Pai Noiva
+        </div>
+        <div class="invitation__parents-col invitation__parents-col--right">
+          Nome Mãe Noivo<br>
+          Nome Pai Noivo
+        </div>
+      </div>
+      <p class="invitation__text">
+        Beatriz e Julio vão se casar e, junto de suas famílias, estão animados em te convidar para a cerimônia na Basílica Nossa Senhora do Carmo, no centro de Campinas. A recepção será em seguida, no Jockey Club Campineiro, ao lado.
+      </p>
+    </section>
+
+    <section class="event-details container">
+      <div class="event-details__col">
+        12 Junho 2027<br>
+        às 18:00
+      </div>
+      <img class="event-details__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
+      <div class="event-details__col event-details__col--right">
+        Basílica Nossa Senhora do Carmo<br>
+        Campinas — SP
+      </div>
+    </section>
+
+    <section class="event-reception container">
+      <p class="event-reception__label">Recepção</p>
+      <p class="event-reception__text">
+        Após a cerimônia, no Jockey Club Campineiro — ao lado da basílica.
+      </p>
+    </section>
+
+    <section class="photo-strip">
+      <div class="photo-strip__film" aria-hidden="true">
+        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
+        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
+        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
+      </div>
+      <figure class="photo-strip__polaroid">
+        <img src="assets/images/couple-photo.svg" alt="Beatriz e Julio">
+      </figure>
+    </section>
+
+    <section class="cta-band">
+      <div class="cta-band__buttons">
+        <button type="button" class="btn" data-rsvp>RSVP</button>
+        <a class="btn" href="presentes.html">Presentes</a>
+      </div>
+    </section>
+
+    <section class="photo-grid container" aria-label="Galeria de fotos">
+      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 1">
+      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 2">
+      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 3">
+      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 4">
+    </section>
+
+    <section class="dress-code container">
+      <h2 class="dress-code__title">Dress Code</h2>
+      <p class="dress-code__text">
+        Traje social. Cerimônia na Basílica Nossa Senhora do Carmo e recepção no Jockey Club Campineiro — sugerimos look elegante e confortável para a ocasião.
+      </p>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

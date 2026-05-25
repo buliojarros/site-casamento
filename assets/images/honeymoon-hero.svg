@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" fill="none">
+  <!-- Sky / background -->
+  <rect width="800" height="520" fill="#5c6b4f"/>
+  <rect y="340" width="800" height="180" fill="#4a5640"/>
+
+  <!-- Distant trees -->
+  <ellipse cx="90" cy="300" rx="70" ry="90" fill="#3d4a36" opacity="0.55"/>
+  <ellipse cx="710" cy="310" rx="80" ry="95" fill="#3d4a36" opacity="0.5"/>
+  <ellipse cx="640" cy="320" rx="45" ry="60" fill="#4a5640" opacity="0.45"/>
+
+  <!-- Ground / garden -->
+  <path d="M0 420 Q200 400 400 415 T800 420 L800 520 L0 520 Z" fill="#3d2e28" opacity="0.35"/>
+  <ellipse cx="180" cy="430" rx="55" ry="14" fill="#6b7d5a" opacity="0.35"/>
+  <ellipse cx="620" cy="438" rx="48" ry="12" fill="#6b7d5a" opacity="0.3"/>
+  <path d="M120 445 Q125 420 130 445" stroke="#7a8f68" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M680 442 Q685 418 690 442" stroke="#7a8f68" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Main mansion body -->
+  <rect x="170" y="210" width="460" height="210" fill="#e8e0d4"/>
+  <rect x="170" y="210" width="460" height="210" stroke="#2c2420" stroke-width="2" fill="none" opacity="0.25"/>
+
+  <!-- Side wings -->
+  <rect x="110" y="250" width="70" height="170" fill="#ddd4c8"/>
+  <rect x="110" y="250" width="70" height="170" stroke="#2c2420" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <rect x="620" y="250" width="70" height="170" fill="#ddd4c8"/>
+  <rect x="620" y="250" width="70" height="170" stroke="#2c2420" stroke-width="1.5" fill="none" opacity="0.2"/>
+
+  <!-- Roof - main -->
+  <path d="M150 210 L400 120 L650 210 Z" fill="#3d2e28"/>
+  <path d="M150 210 L400 120 L650 210 Z" stroke="#2c2420" stroke-width="2" fill="none" opacity="0.35"/>
+  <!-- Roof tiles lines -->
+  <path d="M180 198 L400 132 L620 198" stroke="#5c4a3f" stroke-width="1" opacity="0.45"/>
+  <path d="M210 186 L400 144 L590 186" stroke="#5c4a3f" stroke-width="1" opacity="0.35"/>
+  <path d="M240 174 L400 156 L560 174" stroke="#5c4a3f" stroke-width="1" opacity="0.25"/>
+
+  <!-- Wing roofs -->
+  <path d="M95 250 L145 220 L195 250 Z" fill="#3d2e28"/>
+  <path d="M605 250 L655 220 L705 250 Z" fill="#3d2e28"/>
+
+  <!-- Central pediment -->
+  <path d="M320 210 L400 165 L480 210 Z" fill="#d4c9ba"/>
+  <path d="M320 210 L400 165 L480 210 Z" stroke="#b8956a" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+  <!-- Columns / veranda -->
+  <rect x="205" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="255" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="305" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="355" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="405" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="455" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="505" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="555" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+  <rect x="581" y="260" width="14" height="160" fill="#f2ece4" stroke="#2c2420" stroke-width="1" opacity="0.9"/>
+
+  <!-- Veranda roof line -->
+  <rect x="195" y="255" width="410" height="8" fill="#b8956a" opacity="0.55"/>
+
+  <!-- Upper floor windows - arched -->
+  <path d="M230 230 Q245 210 260 230 L260 265 L230 265 Z" fill="#c4b8a8" stroke="#2c2420" stroke-width="1.2" opacity="0.85"/>
+  <path d="M290 230 Q305 210 320 230 L320 265 L290 265 Z" fill="#c4b8a8" stroke="#2c2420" stroke-width="1.2" opacity="0.85"/>
+  <path d="M480 230 Q495 210 510 230 L510 265 L480 265 Z" fill="#c4b8a8" stroke="#2c2420" stroke-width="1.2" opacity="0.85"/>
+  <path d="M540 230 Q555 210 570 230 L570 265 L540 265 Z" fill="#c4b8a8" stroke="#2c2420" stroke-width="1.2" opacity="0.85"/>
+
+  <!-- Central balcony door upper -->
+  <rect x="355" y="225" width="90" height="45" fill="#c4b8a8" stroke="#2c2420" stroke-width="1.2"/>
+  <line x1="400" y1="225" x2="400" y2="270" stroke="#2c2420" stroke-width="1"/>
+  <rect x="350" y="268" width="100" height="6" fill="#b8956a" opacity="0.6"/>
+
+  <!-- Ground floor windows -->
+  <rect x="225" y="300" width="42" height="58" rx="2" fill="#d9d0c2" stroke="#2c2420" stroke-width="1.2"/>
+  <line x1="246" y1="300" x2="246" y2="358" stroke="#2c2420" stroke-width="0.8" opacity="0.5"/>
+  <rect x="285" y="300" width="42" height="58" rx="2" fill="#d9d0c2" stroke="#2c2420" stroke-width="1.2"/>
+  <line x1="306" y1="300" x2="306" y2="358" stroke="#2c2420" stroke-width="0.8" opacity="0.5"/>
+  <rect x="473" y="300" width="42" height="58" rx="2" fill="#d9d0c2" stroke="#2c2420" stroke-width="1.2"/>
+  <line x1="494" y1="300" x2="494" y2="358" stroke="#2c2420" stroke-width="0.8" opacity="0.5"/>
+  <rect x="533" y="300" width="42" height="58" rx="2" fill="#d9d0c2" stroke="#2c2420" stroke-width="1.2"/>
+  <line x1="554" y1="300" x2="554" y2="358" stroke="#2c2420" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Main entrance - grand door -->
+  <path d="M355 320 Q400 295 445 320 L445 420 L355 420 Z" fill="#3d2e28"/>
+  <path d="M355 320 Q400 295 445 320 L445 420 L355 420 Z" stroke="#b8956a" stroke-width="2" fill="none" opacity="0.75"/>
+  <rect x="388" y="350" width="24" height="70" rx="12" fill="#b8956a" opacity="0.45"/>
+  <circle cx="408" cy="385" r="3" fill="#e8e0d4"/>
+
+  <!-- Steps -->
+  <rect x="330" y="420" width="140" height="12" fill="#c4b8a8"/>
+  <rect x="315" y="432" width="170" height="10" fill="#b8ab9a"/>
+  <rect x="300" y="442" width="200" height="8" fill="#a89888"/>
+
+  <!-- Wing windows -->
+  <rect x="125" y="290" width="28" height="40" fill="#d9d0c2" stroke="#2c2420" stroke-width="1"/>
+  <rect x="125" y="350" width="28" height="40" fill="#d9d0c2" stroke="#2c2420" stroke-width="1"/>
+  <rect x="647" y="290" width="28" height="40" fill="#d9d0c2" stroke="#2c2420" stroke-width="1"/>
+  <rect x="647" y="350" width="28" height="40" fill="#d9d0c2" stroke="#2c2420" stroke-width="1"/>
+
+  <!-- Chimney -->
+  <rect x="520" y="135" width="28" height="55" fill="#3d2e28"/>
+  <rect x="515" y="128" width="38" height="10" fill="#2c2420" opacity="0.6"/>
+
+  <!-- Subtle atmospheric overlay for hero text readability -->
+  <rect width="800" height="520" fill="url(#heroFade)" opacity="0.18"/>
+
+  <defs>
+    <linearGradient id="heroFade" x1="400" y1="0" x2="400" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2c2420" stop-opacity="0.1"/>
+      <stop offset="0.5" stop-color="#2c2420" stop-opacity="0"/>
+      <stop offset="1" stop-color="#2c2420" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+</svg>

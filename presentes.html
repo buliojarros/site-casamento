@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentes — Beatriz & Julio</title>
+  <meta name="description" content="Contribua com a lua de mel de Beatriz e Julio via PIX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- CONFIG
+    PIX_CHAVE: 403.278.938-00
+    PIX_NOME: Beatriz e Julio
+  -->
+
+  <header class="site-header">
+    <button class="site-header__menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="site-header__couple" href="index.html">
+      Beatriz <span class="site-header__star">⁕</span> Julio
+    </a>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" aria-label="Menu principal">
+    <ul class="nav-drawer__list">
+      <li><a class="nav-drawer__link" href="index.html">Home</a></li>
+      <li><a class="nav-drawer__link" href="mood.html">Mood da Festa</a></li>
+      <li><a class="nav-drawer__link" href="concierge.html">Hospedagem e Dicas</a></li>
+      <li><a class="nav-drawer__link is-active" href="presentes.html">Presentes</a></li>
+    </ul>
+  </nav>
+
+  <main class="page page--presentes">
+    <section class="presentes-hero">
+      <img class="presentes-hero__image" src="assets/images/honeymoon-hero.png" alt="Casarão antigo">
+      <div class="presentes-hero__overlay">
+        <p class="presentes-hero__subtitle">Com carinho</p>
+        <h1 class="presentes-hero__title">Presentes</h1>
+        <div class="presentes-hero__seal" aria-hidden="true">B+J</div>
+      </div>
+    </section>
+
+    <section class="presentes-letter container">
+      <img class="presentes-letter__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
+      <p class="presentes-letter__lead">
+        Montamos recentemente a nossa casa e estamos muito felizes com o cantinho que construímos juntos.
+      </p>
+      <p class="presentes-letter__text">
+        Por isso, não precisamos de presentes físicos — sua presença neste dia já significa o mundo para nós.
+      </p>
+      <p class="presentes-letter__text">
+        Se desejar nos presentear, ficaremos muito gratos por uma contribuição para a nossa lua de mel. Cada gesto nos ajuda a viver essa nova fase com ainda mais carinho.
+      </p>
+    </section>
+
+    <section class="presentes-highlight">
+      <div class="container">
+        <p class="presentes-highlight__label">Destino dos presentes</p>
+        <h2 class="presentes-highlight__title">Lua de mel</h2>
+        <p class="presentes-highlight__text">
+          Suas contribuições nos ajudam a celebrar o começo da nossa vida a dois fora da rotina — com viagem, descanso e bons momentos juntos.
+        </p>
+      </div>
+    </section>
+
+    <section class="presentes-pix container">
+      <div class="presentes-pix__card">
+        <div class="presentes-pix__header">
+          <h2 class="presentes-pix__title">Contribuir via PIX</h2>
+          <p class="presentes-pix__intro">Escaneie o QR Code ou copie a chave abaixo no app do seu banco.</p>
+        </div>
+
+        <figure class="presentes-pix__qr">
+          <img src="assets/images/pix-qrcode.png" alt="QR Code PIX para lua de mel de Beatriz e Julio" width="240" height="240">
+        </figure>
+
+        <div class="presentes-pix__details">
+          <p class="presentes-pix__label">Chave PIX (CPF)</p>
+          <p class="presentes-pix__key" id="pix-key">403.278.938-00</p>
+          <p class="presentes-pix__name">Beatriz e Julio</p>
+          <button type="button" class="btn btn--olive presentes-pix__copy" data-copy="#pix-key">Copiar chave</button>
+          <p class="presentes-pix__hint" data-copy-feedback aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="presentes-footer-note container">
+      <p class="presentes-footer-note__text">Obrigado por fazer parte da nossa história.</p>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

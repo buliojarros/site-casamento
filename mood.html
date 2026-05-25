@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood da Festa — Beatriz & Julio</title>
+  <meta name="description" content="Drinks especiais, playlist e dress code do casamento de Beatriz e Julio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- CONFIG
+    DRINK_NOIVA_NOME: Drink da Beatriz
+    DRINK_NOIVO_NOME: Drink do Julio
+    PLAYLIST_URL: #
+  -->
+
+  <header class="site-header">
+    <button class="site-header__menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <a class="site-header__couple" href="index.html">
+      Beatriz <span class="site-header__star">⁕</span> Julio
+    </a>
+  </header>
+
+  <div class="nav-overlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" aria-label="Menu principal">
+    <ul class="nav-drawer__list">
+      <li><a class="nav-drawer__link" href="index.html">Home</a></li>
+      <li><a class="nav-drawer__link is-active" href="mood.html">Mood da Festa</a></li>
+      <li><a class="nav-drawer__link" href="concierge.html">Hospedagem e Dicas</a></li>
+      <li><a class="nav-drawer__link" href="presentes.html">Presentes</a></li>
+    </ul>
+  </nav>
+
+  <main class="page">
+    <section class="section container">
+      <p class="section-subtitle">Esquenta</p>
+      <h1 class="section-title">Mood da Festa</h1>
+      <p class="body-text">
+        Antes do grande dia, preparamos algumas dicas para você entrar no clima: os drinks favoritos do casal, a playlist oficial e o dress code da celebração.
+      </p>
+    </section>
+
+    <hr class="divider container">
+
+    <section class="drink-block container">
+      <div class="drink-block__arch">
+        <img src="assets/images/drink-glass.svg" alt="Ilustração de drink">
+      </div>
+      <div class="drink-block__content">
+        <h2 class="drink-block__title">Drink da Beatriz</h2>
+        <div class="drink-block__seal" aria-hidden="true">B+J</div>
+        <p class="drink-block__label">Ingredientes</p>
+        <p class="drink-block__list">
+          Gelo<br>
+          Vodka<br>
+          Uva verde<br>
+          Água com gás<br>
+          Hortelã
+        </p>
+        <p class="drink-block__label" style="margin-top: 0.75rem;">Harmoniza com</p>
+        <p class="drink-block__list">Entradas leves e petiscos de coquetel.</p>
+      </div>
+    </section>
+
+    <hr class="divider container">
+
+    <section class="drink-block drink-block--reverse drink-block--olive container">
+      <div class="drink-block__arch">
+        <img src="assets/images/drink-glass-white.svg" alt="Ilustração de drink">
+      </div>
+      <div class="drink-block__content">
+        <h2 class="drink-block__title">Drink do Julio</h2>
+        <div class="drink-block__seal" aria-hidden="true">B+J</div>
+        <p class="drink-block__label">Ingredientes</p>
+        <p class="drink-block__list">
+          Gelo<br>
+          Gin<br>
+          Tônica<br>
+          Espresso<br>
+          Raspas de limão
+        </p>
+        <p class="drink-block__label" style="margin-top: 0.75rem;">Harmoniza com</p>
+        <p class="drink-block__list">Coquetel e sobremesas cítricas.</p>
+      </div>
+    </section>
+
+    <section class="playlist-section">
+      <span class="playlist-section__bg-text" aria-hidden="true">Playlist</span>
+      <div class="playlist-section__cover">
+        <img src="assets/images/playlist-cover.svg" alt="Capa da playlist">
+      </div>
+      <a class="btn btn--olive" href="#" data-link="playlist">Playlist</a>
+    </section>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
