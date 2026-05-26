@@ -57,7 +57,9 @@
       if (!toggle || !image) return;
 
       function updateGrayscale() {
-        image.classList.toggle('save-the-date__image--grayscale', toggle.checked);
+        var isGrayscale = toggle.checked;
+        image.classList.toggle('save-the-date__image--grayscale', isGrayscale);
+        document.body.classList.toggle('save-the-date-page--grayscale', isGrayscale);
       }
 
       toggle.addEventListener('change', updateGrayscale);

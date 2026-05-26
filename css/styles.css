@@ -1260,9 +1260,15 @@ button.btn {
     0 3px 11px rgba(0, 0, 0, 0.4);
 }
 
+.save-the-date__label,
+.save-the-date__couple,
+.save-the-date__details.event-details {
+  transform: translateY(-80px);
+}
+
 .save-the-date__label {
   font-family: var(--font-serif);
-  font-size: clamp(0.75rem, 2.9vw, 0.875rem);
+  font-size: clamp(1rem, 3.89vw, 1.17rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.85);
@@ -1298,6 +1304,10 @@ button.btn {
   text-align: center;
 }
 
+.save-the-date-page--grayscale .save-the-date__star {
+  color: var(--white);
+}
+
 .save-the-date__details.event-details {
   width: 100%;
   padding: clamp(0.5rem, 2vh, 0.75rem) 0;
@@ -1320,7 +1330,7 @@ button.btn {
 
 .save-the-date__note {
   position: relative;
-  top: 2.2rem;
+  top: 1.8rem;
   margin-bottom: -10rem;
   font-size: clamp(0.6875rem, 2.3vw, 0.8125rem);
   letter-spacing: 0.12em;
