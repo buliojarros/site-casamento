@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="save-the-date-page">
+  <label class="save-the-date__grayscale-toggle">
+    <input type="checkbox" id="grayscale-toggle" checked>
+    <span>P&amp;B</span>
+  </label>
+
   <main class="save-the-date">
     <section class="save-the-date__hero">
       <img
@@ -22,8 +27,10 @@
 
       <div class="save-the-date__content container">
         <p class="save-the-date__label">Save the Date</p>
-        <h1 class="save-the-date__couple" style="padding-right: 46px;">
-          Beatriz <span class="save-the-date__star">⁕</span> Julio
+        <h1 class="save-the-date__couple">
+          <span class="save-the-date__couple-name">Beatriz</span>
+          <span class="save-the-date__star" aria-hidden="true">⁕</span>
+          <span class="save-the-date__couple-name">Julio</span>
         </h1>
 
         <div class="event-details save-the-date__details">
@@ -31,7 +38,7 @@
             12 Junho 2027<br>
             às 18:00
           </div>
-          <img class="event-details__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
+          <div aria-hidden="true"></div>
           <div class="event-details__col event-details__col--right">
             Basílica Nossa Senhora do Carmo<br>
             Campinas — SP
@@ -42,5 +49,20 @@
       </div>
     </section>
   </main>
+
+  <script>
+    (function () {
+      var toggle = document.getElementById('grayscale-toggle');
+      var image = document.querySelector('.save-the-date__image');
+      if (!toggle || !image) return;
+
+      function updateGrayscale() {
+        image.classList.toggle('save-the-date__image--grayscale', toggle.checked);
+      }
+
+      toggle.addEventListener('change', updateGrayscale);
+      updateGrayscale();
+    })();
+  </script>
 </body>
 </html>
