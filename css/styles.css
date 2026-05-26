@@ -80,6 +80,10 @@ ul {
   padding: 0 1.25rem;
 }
 
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
 .section {
   padding: 2rem 0;
 }
@@ -509,7 +513,7 @@ button.btn {
 /* Dress code */
 
 .dress-code {
-  padding: 2rem 1.25rem 4rem;
+  padding: 2rem 1.25rem 1.5rem;
   text-align: center;
 }
 
@@ -612,9 +616,13 @@ button.btn {
 
 .playlist-section {
   position: relative;
-  padding: 3rem 1.25rem 2.5rem;
+  padding: 3rem 1.25rem 5rem;
   text-align: center;
   overflow: hidden;
+}
+
+.playlist-section__intro {
+  margin-bottom: 1.5rem;
 }
 
 .playlist-section__bg-text {

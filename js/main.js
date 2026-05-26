@@ -42,6 +42,19 @@
     });
   });
 
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (event) {
+      var targetId = anchor.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+
+      var target = document.querySelector(targetId);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       if (rsvpModal && rsvpModal.classList.contains("is-open")) {
