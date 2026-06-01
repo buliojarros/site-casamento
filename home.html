@@ -43,45 +43,32 @@
   </nav>
 
   <main class="page">
-    <section id="inicio" class="hero hero--venue">
-      <img class="hero__image" src="assets/images/joquey.png" alt="Campinas, centro histórico">
-      <div class="hero__monogram" aria-hidden="true">B+J</div>
-    </section>
+    <div class="first-screen">
+      <section id="inicio" class="hero hero--venue">
+        <img class="hero__image" src="assets/images/joquey.png" alt="Campinas, centro histórico">
+        <div class="hero__monogram" aria-hidden="true">B+J</div>
+      </section>
 
-    <section class="invitation container">
-      <div class="invitation__parents">
-        <div class="invitation__parents-col">
-          Nome Mãe Noiva<br>
-          Nome Pai Noiva
-        </div>
-        <div class="invitation__parents-col invitation__parents-col--right">
-          Nome Mãe Noivo<br>
-          Nome Pai Noivo
-        </div>
-      </div>
-      <p class="invitation__text">
-        Beatriz e Julio vão se casar e, junto de suas famílias, estão animados em te convidar para a cerimônia na Basílica Nossa Senhora do Carmo, no centro de Campinas. A recepção será em seguida, ao lado da basílica.
-      </p>
-    </section>
-
-    <section class="event-details container">
-      <div class="event-details__col">
-        12 Junho 2027<br>
-        às 18:00
-      </div>
-      <img class="event-details__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
-      <div class="event-details__col event-details__col--right">
-        Basílica Nossa Senhora do Carmo<br>
-        Campinas — SP
-      </div>
-    </section>
-
-    <section class="event-reception container">
-      <p class="event-reception__label">Recepção</p>
-      <p class="event-reception__text">
-        Após a cerimônia, ao lado da basílica.
-      </p>
-    </section>
+      <section class="invitation container">
+        <p class="invitation__text">
+          Beatriz e Julio vão se casar <br>
+          e junto de suas famílias estão animados <br>
+          em te convidar para a cerimônia <br>
+          seguida de coquetel e boa música
+        </p>
+        <section class="event-details">
+          <div class="event-details__col">
+            12 Junho 2027<br>
+            às 18:00
+          </div>
+          <img class="event-details__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
+          <div class="event-details__col event-details__col--right">
+            Basílica Nossa Senhora do Carmo<br>
+            Campinas — SP
+          </div>
+        </section>
+      </section>    
+    </div>
 
     <section class="photo-strip">
       <div class="photo-strip__film" aria-hidden="true">
@@ -96,8 +83,8 @@
 
     <section class="cta-band">
       <div class="cta-band__buttons">
-        <button type="button" class="btn" data-rsvp>RSVP</button>
-        <a class="btn" href="#presentes">Presentes</a>
+        <button type="button" class="btn" data-rsvp>Confirme sua presença</button>
+
       </div>
     </section>
 
@@ -121,9 +108,9 @@
       <h2 class="section-title">Hospedagem e Dicas Úteis</h2>
     </section>
 
-    <section class="page-hero">
+    <!-- <section class="page-hero">
       <img src="assets/images/hotel-hero.svg" alt="Quarto de hotel">
-    </section>
+    </section> -->
 
     <section class="section container">
       <h3 class="section-subtitle">Onde ficar</h3>
@@ -227,7 +214,7 @@
       </p>
     </section>
 
-    <section class="presentes-highlight">
+    <!-- <section class="presentes-highlight">
       <div class="container">
         <p class="presentes-highlight__label">Destino dos presentes</p>
         <h3 class="presentes-highlight__title">Lua de mel</h3>
@@ -235,7 +222,7 @@
           Suas contribuições nos ajudam a celebrar o começo da nossa vida a dois fora da rotina — com viagem, descanso e bons momentos juntos.
         </p>
       </div>
-    </section>
+    </section> -->
 
     <section class="presentes-pix container">
       <div class="presentes-pix__card">
@@ -258,20 +245,25 @@
       </div>
     </section>
 
-    <section class="presentes-footer-note container">
+    <div class="presentes-footer-note container">
       <p class="presentes-footer-note__text">Obrigado por fazer parte da nossa história.</p>
-    </section>
+    </div>
 
     <section id="playlist" class="playlist-section">
-      <span class="playlist-section__bg-text" aria-hidden="true">Playlist</span>
-      <h2 class="section-title">Playlist</h2>
-      <p class="body-text playlist-section__intro">
-        Entre no clima da festa com a nossa seleção de músicas.
-      </p>
-      <div class="playlist-section__cover">
-        <img src="assets/images/playlist-cover.svg" alt="Capa da playlist">
+      <div class="playlist-section__container">
+        <p class="playlist-section__intro">
+          Entre no clima da festa com a nossa seleção de músicas.
+        </p>
+          <iframe 
+            style="border-radius:12px; overflow:hidden; border:none;"
+            src="https://open.spotify.com/embed/playlist/6Q1dMNiorIiwlzqyEdG9Ay?utm_source=generator&theme=0" 
+            width="80%" 
+            height="352" 
+            frameBorder="0" 
+            allowfullscreen="" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"></iframe>
       </div>
-      <a class="btn btn--olive" href="#" target="_blank" rel="noopener noreferrer">Ouvir playlist</a>
     </section>
   </main>
 
