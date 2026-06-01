@@ -253,10 +253,10 @@
       
       if (!isMenuOpen) {
         if (currentScrollY > 50 && currentScrollY > lastScrollY) {
-          // Scrolling down - hide the header
+          // Scrolling down — hide the header
           header.classList.add("site-header--hidden");
-        } else if (currentScrollY <= 50) {
-          // Scrolled back to the top - show the header
+        } else if (currentScrollY < lastScrollY || currentScrollY <= 50) {
+          // Scrolling up OR near the top — show the header
           header.classList.remove("site-header--hidden");
         }
       }
