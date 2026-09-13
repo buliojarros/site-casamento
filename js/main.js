@@ -69,73 +69,49 @@
   var RSVP_MESSAGE =
     "Olá! Sou {nome} e confirmo presença no casamento de Beatriz e Julio (12/06/2027).";
 
-  var rsvpModal = null;
-  var rsvpInput = null;
+  var rsvpModal = document.getElementById("rsvp-modal");
+  var rsvpInput = document.getElementById("rsvp-name");
+  var rsvpForm = document.getElementById("rsvp-form");
   var rsvpTrigger = null;
 
-  function buildRsvpModal() {
-    var modal = document.createElement("div");
-    modal.className = "rsvp-modal";
-    modal.id = "rsvp-modal";
-    modal.setAttribute("aria-hidden", "true");
-    modal.innerHTML =
-      '<button type="button" class="rsvp-modal__backdrop" data-rsvp-close aria-label="Fechar"></button>' +
-      '<div class="rsvp-modal__dialog" role="dialog" aria-labelledby="rsvp-modal-title" aria-modal="true">' +
-      '<h2 id="rsvp-modal-title" class="rsvp-modal__title">Confirmar presença</h2>' +
-      '<p class="rsvp-modal__text">Como podemos te chamar?</p>' +
-      '<form class="rsvp-modal__form">' +
-      '<label for="rsvp-name" class="visually-hidden">Seu nome</label>' +
-      '<input type="text" id="rsvp-name" class="rsvp-modal__input" placeholder="Seu nome" required autocomplete="name">' +
-      '<div class="rsvp-modal__actions">' +
-      '<button type="button" class="btn" data-rsvp-close>Cancelar</button>' +
-      '<button type="submit" class="btn btn--olive">Enviar</button>' +
-      "</div></form></div>";
-
-    document.body.appendChild(modal);
-
-    modal.querySelector(".rsvp-modal__form").addEventListener("submit", function (event) {
-      event.preventDefault();
-      submitRsvp();
-    });
-
-    modal.querySelectorAll("[data-rsvp-close]").forEach(function (el) {
-      el.addEventListener("click", closeRsvpModal);
-    });
-
-    return modal;
-  }
-
   function openRsvpModal(trigger) {
-    if (!rsvpModal) {
-      rsvpModal = buildRsvpModal();
-      rsvpInput = rsvpModal.querySelector("#rsvp-name");
-    }
+    if (!rsvpModal || !rsvpInput) return;
 
     rsvpTrigger = trigger || null;
     rsvpModal.classList.add("is-open");
-    rsvpModal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
     rsvpInput.value = "";
-    window.setTimeout(function () {
-      rsvpInput.focus();
-    }, 50);
+    rsvpInput.focus();
   }
 
   function closeRsvpModal() {
     if (!rsvpModal) return;
 
     rsvpModal.classList.remove("is-open");
-    rsvpModal.setAttribute("aria-hidden", "true");
-
-    if (!menuBtn || !menuBtn.classList.contains("is-open")) {
-      document.body.style.overflow = "";
-    }
 
     if (rsvpTrigger) {
       rsvpTrigger.focus();
       rsvpTrigger = null;
     }
   }
+
+  if (rsvpModal) {
+    rsvpModal.addEventListener("click", function (event) {
+      if (event.target === rsvpModal) {
+        closeRsvpModal();
+      }
+    });
+  }
+
+  if (rsvpForm) {
+    rsvpForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      submitRsvp();
+    });
+  }
+
+  document.querySelectorAll("[data-rsvp-close]").forEach(function (el) {
+    el.addEventListener("click", closeRsvpModal);
+  });
 
   function submitRsvp() {
     var nome = rsvpInput.value.trim();
@@ -240,30 +216,44 @@
     update();
   }
 
-  // Scroll behavior for the site header
-  var lastScrollY = window.scrollY;
+  // Header: hamburger color over light sections
   var header = document.querySelector(".site-header");
+  var hero = document.querySelector(".hero");
 
   if (header) {
-    window.addEventListener("scroll", function () {
-      var currentScrollY = window.scrollY;
-      
-      // Never hide the header if the menu drawer is open
-      var isMenuOpen = menuBtn && menuBtn.classList.contains("is-open");
-      
-      if (!isMenuOpen) {
-        if (currentScrollY > 50 && currentScrollY > lastScrollY) {
-          // Scrolling down — hide the header
-          header.classList.add("site-header--hidden");
-        } else if (currentScrollY < lastScrollY || currentScrollY <= 50) {
-          // Scrolling up OR near the top — show the header
-          header.classList.remove("site-header--hidden");
-        }
-      }
-      
-      lastScrollY = currentScrollY;
-    }, { passive: true });
+    function updateHeaderTone() {
+      var threshold = hero ? hero.offsetHeight * 0.65 : 120;
+      header.classList.toggle("site-header--on-light", window.scrollY > threshold);
+    }
+
+    window.addEventListener("scroll", updateHeaderTone, { passive: true });
+    window.addEventListener("resize", updateHeaderTone, { passive: true });
+    updateHeaderTone();
   }
 
   document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+
+  // Scroll reveal animation
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    // Fallback: show all immediately
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+  }
 })();

@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatriz & Julio — Casamento</title>
   <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -16,20 +13,16 @@
     PIX_CHAVE: 403.278.938-00
     PLAYLIST_URL: #
     HORARIO: 18:00
-    CERIMONIA: Basílica Nossa Senhora do Carmo
-    RECEPCAO: Ao lado da basílica
-    CIDADE: Campinas — SP
+    CERIMONIA: Basílica Nossa Senhora do Carmo — Rua Barão de Jaguara, s/n, Centro, Campinas — SP
+    FESTA: Jockey Club Campineiro — Clube 88 — Praça Antônio Pompeia, 39, Centro, Campinas — SP
   -->
 
-  <header class="site-header">
+  <header class="site-header site-header--on-light">
     <button class="site-header__menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <a class="site-header__couple" href="#inicio">
-      Beatriz <span class="site-header__star">⁕</span> Julio
-    </a>
   </header>
 
   <div class="nav-overlay" aria-hidden="true"></div>
@@ -45,186 +38,157 @@
   <main class="page">
     <div class="first-screen">
       <section id="inicio" class="hero hero--venue">
-        <img class="hero__image" src="assets/images/joquey.png" alt="Campinas, centro histórico">
-        <div class="hero__monogram" aria-hidden="true">B+J</div>
+        <img class="hero__image" src="assets/images/swans-art-nouveau.jpg" alt="Cisnes — ilustração Art Nouveau">
       </section>
 
-      <section class="invitation container">
-        <p class="invitation__text">
-          Beatriz e Julio vão se casar <br>
-          e junto de suas famílias estão animados <br>
-          em te convidar para a cerimônia <br>
-          seguida de coquetel e boa música
+      <div class="hero__monogram-stack">
+        <img class="hero__monogram-fill" src="assets/images/monograma-fill.svg" alt="" aria-hidden="true">
+        <img class="hero__monogram-mark" src="assets/images/monograma-olive.png" alt="Bia & Julio">
+      </div>
+
+      <section class="invitation reveal">
+        <p class="invitation__date">
+          Dia 12 de junho de 2027<br>
+          às 18h00
         </p>
-        <section class="event-details">
-          <div class="event-details__col">
-            12 Junho 2027<br>
-            às 18:00
+
+        <div class="invitation__venues">
+          <div class="invitation__venue">
+            <p class="invitation__venue-label">Cerimônia</p>
+            <h2 class="invitation__venue-name">Basílica Nossa Senhora do Carmo</h2>
+            <p class="invitation__venue-address">Rua Barão de Jaguara, s/n, Centro — Campinas, SP</p>
           </div>
-          <img class="event-details__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
-          <div class="event-details__col event-details__col--right">
-            Basílica Nossa Senhora do Carmo<br>
-            Campinas — SP
+
+          <p class="invitation__amp" aria-hidden="true">&amp;</p>
+
+          <div class="invitation__venue">
+            <p class="invitation__venue-label">Festa</p>
+            <h2 class="invitation__venue-name">Jockey Club Campineiro — Clube 88</h2>
+            <p class="invitation__venue-address">Praça Antônio Pompeia, 39, Centro — Campinas, SP</p>
           </div>
-        </section>
-      </section>    
+        </div>
+
+        <button type="button" class="invitation__rsvp" data-rsvp>Confirme sua presença</button>
+      </section>
     </div>
 
-    <section class="photo-strip">
-      <div class="photo-strip__film" aria-hidden="true">
-        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
-        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
-        <img class="photo-strip__film-thumb" src="assets/images/gallery-thumb.svg" alt="">
-      </div>
-      <figure class="photo-strip__polaroid">
-        <img src="assets/images/couple-photo.svg" alt="Beatriz e Julio">
-      </figure>
-    </section>
-
-    <section class="cta-band">
-      <div class="cta-band__buttons">
-        <button type="button" class="btn" data-rsvp>Confirme sua presença</button>
-
-      </div>
-    </section>
-
-    <section class="photo-grid container" aria-label="Galeria de fotos">
-      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 1">
-      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 2">
-      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 3">
-      <img class="photo-grid__item" src="assets/images/gallery-thumb.svg" alt="Foto 4">
-    </section>
-
-    <section class="dress-code container">
+    <section class="dress-code dress-code--gold reveal">
+      <!-- <p class="dress-code__label">Dress Code</p> -->
       <h2 class="dress-code__title">Dress Code</h2>
-      <p class="dress-code__text">
-        Traje social. Cerimônia na Basílica Nossa Senhora do Carmo, com recepção ao lado da basílica — sugerimos look elegante e confortável para a ocasião.
-      </p>
+      <p class="dress-code__place">Venham com vestidos longos e ternos completos</p>
+      <p class="dress-code__place">Recomendamos um sapato confortável para a breve caminhada entre a cerimônia e a festa</p>
+      <p class="dress-code__note">Look elegante e confortável</p>
+      <img class="dress-code__dog" src="assets/images/dog-burgundy.png" alt="" aria-hidden="true">
     </section>
 
-    <hr class="divider container">
-
-    <section id="hospedagem" class="section container section--tight">
-      <h2 class="section-title">Hospedagem e Dicas Úteis</h2>
-    </section>
-
-    <!-- <section class="page-hero">
-      <img src="assets/images/hotel-hero.svg" alt="Quarto de hotel">
-    </section> -->
-
-    <section class="section container">
-      <h3 class="section-subtitle">Onde ficar</h3>
-      <p class="body-text">
-        Separamos algumas opções de hotéis no centro e região de Campinas para facilitar sua estadia. Recomendamos reservar com antecedência.
-      </p>
-    </section>
-
-    <section class="carousel container" data-carousel="hospedagem">
-      <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Hotel anterior">‹</button>
-      <div class="carousel__track">
-        <div class="carousel__slides">
-          <article class="carousel__slide">
-            <div class="info-card">
-              <img class="info-card__image" src="assets/images/hotel-room.svg" alt="Quarto do hotel">
-              <div>
-                <h3 class="info-card__title">Nome do Hotel 1</h3>
-                <p class="info-card__text">
-                  Rua Exemplo, 123 — Bairro<br>
-                  Cidade — Estado<br>
-                  Tel: (00) 0000-0000
-                </p>
-                <div class="info-card__links">
-                  <a href="#">Reserva via WhatsApp</a>
-                  <a href="#">Acesse aqui para mais informações</a>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article class="carousel__slide">
-            <div class="info-card">
-              <img class="info-card__image" src="assets/images/hotel-room.svg" alt="Quarto do hotel">
-              <div>
-                <h3 class="info-card__title">Nome do Hotel 2</h3>
-                <p class="info-card__text">
-                  Av. Exemplo, 456 — Centro<br>
-                  Cidade — Estado<br>
-                  Tel: (00) 0000-0000
-                </p>
-                <div class="info-card__links">
-                  <a href="#">Reserva via WhatsApp</a>
-                  <a href="#">Acesse aqui para mais informações</a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+    <section id="hospedagem" class="band band--pattern-olive">
+      <div class="container section section--tight reveal">
+        <h2 class="section-title">Hospedagem e Dicas Úteis</h2>
       </div>
-      <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próximo hotel">›</button>
-    </section>
 
-    <hr class="divider container">
+      <div class="container section reveal">
+        <h3 class="section-subtitle">Onde ficar</h3>
+        <p class="body-text">
+          Separamos algumas opções de hotéis no centro e região de Campinas para facilitar sua estadia. Recomendamos reservar com antecedência.
+        </p>
+      </div>
 
-    <section class="section container">
-      <h3 class="section-title">Dicas Úteis</h3>
-    </section>
-
-    <section class="carousel container" data-carousel="dicas">
-      <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Dica anterior">‹</button>
-      <div class="carousel__track">
-        <div class="carousel__slides">
-          <article class="carousel__slide">
-            <div class="info-card info-card--gray">
-              <div>
-                <h3 class="info-card__title">Cabeleireiro</h3>
-                <p class="info-card__text">
-                  Salão Exemplo<br>
-                  Rua Beleza, 789 — Centro<br>
-                  Cidade — Estado
-                </p>
-                <div class="info-card__links">
-                  <a href="#">Agende pelo WhatsApp</a>
-                  <a href="#">Visite o site</a>
+      <section class="carousel container" data-carousel="hospedagem">
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Hotel anterior">‹</button>
+        <div class="carousel__track">
+          <div class="carousel__slides">
+            <article class="carousel__slide">
+              <div class="info-card">
+                <div>
+                  <h3 class="info-card__title">Nome do Hotel 1</h3>
+                  <p class="info-card__text">
+                    Rua Exemplo, 123 — Bairro<br>
+                    Cidade — Estado<br>
+                    Tel: (00) 0000-0000
+                  </p>
+                  <div class="info-card__links">
+                    <a href="#">Reserva via WhatsApp</a>
+                    <a href="#">Acesse aqui para mais informações</a>
+                  </div>
                 </div>
               </div>
-              <img class="info-card__image" src="assets/images/hairdresser.svg" alt="Cabeleireiro">
-            </div>
-          </article>
+            </article>
+            <article class="carousel__slide">
+              <div class="info-card">
+                <div>
+                  <h3 class="info-card__title">Nome do Hotel 2</h3>
+                  <p class="info-card__text">
+                    Av. Exemplo, 456 — Centro<br>
+                    Cidade — Estado<br>
+                    Tel: (00) 0000-0000
+                  </p>
+                  <div class="info-card__links">
+                    <a href="#">Reserva via WhatsApp</a>
+                    <a href="#">Acesse aqui para mais informações</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-      </div>
-      <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próxima dica">›</button>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próximo hotel">›</button>
+      </section>
     </section>
 
-    <hr class="divider container">
+    <section class="band band--pattern-burgundy">
+      <div class="container section reveal">
+        <h3 class="section-title">Dicas Úteis</h3>
+      </div>
 
-    <section id="presentes" class="section container">
+      <section class="carousel container" data-carousel="dicas">
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Dica anterior">‹</button>
+        <div class="carousel__track">
+          <div class="carousel__slides">
+            <article class="carousel__slide">
+              <div class="info-card info-card--on-burgundy">
+                <div>
+                  <h3 class="info-card__title">Cabeleireiro</h3>
+                  <p class="info-card__text">
+                    Salão Exemplo<br>
+                    Rua Beleza, 789 — Centro<br>
+                    Cidade — Estado
+                  </p>
+                  <div class="info-card__links">
+                    <a href="#">Agende pelo WhatsApp</a>
+                    <a href="#">Visite o site</a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próxima dica">›</button>
+      </section>
+    </section>
+
+    <section id="presentes" class="section container reveal">
       <p class="section-subtitle">Com carinho</p>
       <h2 class="section-title">Presentes</h2>
     </section>
 
-    <section class="presentes-letter container">
-      <img class="presentes-letter__ornament" src="assets/images/ornament.svg" alt="" aria-hidden="true">
+    <section class="presentes-swan-banner" aria-hidden="true">
+      <img src="assets/images/swans-art-nouveau.jpg" alt="">
+    </section>
+
+    <section class="presentes-letter container reveal">
+      <img class="presentes-letter__ornament" src="assets/images/monograma-olive.png" alt="" aria-hidden="true">
       <p class="presentes-letter__lead">
         Montamos recentemente a nossa casa e estamos muito felizes com o cantinho que construímos juntos.
       </p>
       <p class="presentes-letter__text">
-        Por isso, não precisamos de presentes físicos — sua presença neste dia já significa o mundo para nós.
+        Sua presença neste dia já significa o mundo para nós. Se desejar nos presentear, você pode contribuir para a nossa lua de mel ou escolher um item da nossa lista.
       </p>
       <p class="presentes-letter__text">
-        Se desejar nos presentear, ficaremos muito gratos por uma contribuição para a nossa lua de mel. Cada gesto nos ajuda a viver essa nova fase com ainda mais carinho.
+        Ficaremos muito gratos por qualquer gesto — cada um nos ajuda a viver essa nova fase com ainda mais carinho.
       </p>
     </section>
 
-    <!-- <section class="presentes-highlight">
-      <div class="container">
-        <p class="presentes-highlight__label">Destino dos presentes</p>
-        <h3 class="presentes-highlight__title">Lua de mel</h3>
-        <p class="presentes-highlight__text">
-          Suas contribuições nos ajudam a celebrar o começo da nossa vida a dois fora da rotina — com viagem, descanso e bons momentos juntos.
-        </p>
-      </div>
-    </section> -->
-
-    <section class="presentes-pix container">
+    <section class="presentes-pix container reveal">
       <div class="presentes-pix__card">
         <div class="presentes-pix__header">
           <h3 class="presentes-pix__title">Contribuir via PIX</h3>
@@ -245,8 +209,24 @@
       </div>
     </section>
 
+    <section class="presentes-amazon container reveal">
+      <h3 class="presentes-amazon__title">Lista de presentes</h3>
+      <p class="presentes-amazon__text">
+        Se preferir um presente em vez de contribuição em dinheiro, montamos uma lista na Amazon.
+      </p>
+      <a
+        class="btn btn--burgundy"
+        href="https://www.amazon.com.br/hz/wishlist/ls/1V5BBC9HXZ12V?ref_=wl_share"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ver lista na Amazon
+      </a>
+    </section>
+
     <div class="presentes-footer-note container">
       <p class="presentes-footer-note__text">Obrigado por fazer parte da nossa história.</p>
+      <img class="presentes-footer-note__dog" src="assets/images/dog-sage.png" alt="" aria-hidden="true">
     </div>
 
     <section id="playlist" class="playlist-section">
@@ -254,19 +234,44 @@
         <p class="playlist-section__intro">
           Entre no clima da festa com a nossa seleção de músicas.
         </p>
-          <iframe 
-            style="border-radius:12px; overflow:hidden; border:none;"
-            src="https://open.spotify.com/embed/playlist/6Q1dMNiorIiwlzqyEdG9Ay?utm_source=generator&theme=0" 
-            width="80%" 
-            height="352" 
-            frameBorder="0" 
-            allowfullscreen="" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy"></iframe>
+          <iframe
+            class="playlist-section__embed"
+            src="https://open.spotify.com/embed/playlist/6Q1dMNiorIiwlzqyEdG9Ay?utm_source=generator&theme=0"
+            title="Playlist Bia e Julio no Spotify"
+            width="100%"
+            height="352"
+            frameBorder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
       </div>
     </section>
   </main>
 
-  <script src="js/main.js"></script>
+  <div class="rsvp-modal" id="rsvp-modal">
+    <div class="rsvp-modal__dialog" role="dialog" aria-labelledby="rsvp-modal-title" aria-modal="true">
+      <button type="button" class="rsvp-modal__close" data-rsvp-close aria-label="Fechar">×</button>
+      <h2 id="rsvp-modal-title" class="rsvp-modal__title">Confirmar presença</h2>
+      <p class="rsvp-modal__text">Como podemos te chamar?</p>
+      <form class="rsvp-modal__form" id="rsvp-form">
+        <label for="rsvp-name" class="visually-hidden">Seu nome</label>
+        <input
+          type="text"
+          id="rsvp-name"
+          class="rsvp-modal__input"
+          name="name"
+          placeholder="Seu nome"
+          autocomplete="name"
+          maxlength="80"
+        >
+        <div class="rsvp-modal__actions">
+          <button type="submit" class="btn btn--olive">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

@@ -1,21 +1,71 @@
-/* Design system — Modelo 01 Nós Wedding */
+/* Design system — Beatriz & Julio | Identidade Visual */
+
+@font-face {
+  font-family: 'Bethany Elingston';
+  src: url('../assets/fonts/Bethany Elingston.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney';
+  src: url('../assets/fonts/Whitney-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Whitney';
+  src: url('../assets/fonts/whitney-bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Snell Roundhand';
+  src: url('../assets/fonts/SnellRoundhand.ttc') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
-  --bg-beige: #D8CDBF;
-  --bg-beige-light: #f2ece4;
-  --olive: #5c6b4f;
-  --olive-dark: #4a5640;
-  --brown-dark: #3d2e28;
-  --gold: #96744f;
-  --gold-light: #d4b896;
-  --text-dark: #2c2420;
-  --text-muted: #6b635c;
+  /* Brand palette from identity manual */
+  --olive: #7b7a38;
+  --olive-light: #93924b;
+  --sage: #a9b8ab;
+  --sage-light: #c4cfc5;
+  --gold: #f3c460;
+  --gold-light: #f7d68a;
+  --cream: #f4e7db;
+  --burgundy: #632941;
+  --burgundy-light: #7d3a55;
+  --dark: #1d1d1b;
+
+  /* Semantic aliases */
+  --bg-primary: var(--cream);
+  --bg-accent: var(--olive);
+  --bg-accent-deep: var(--burgundy);
+  --text-dark: var(--dark);
+  --text-muted: #8a8a7a;
+  --text-on-dark: var(--cream);
   --white: #ffffff;
-  --gray-card: #d9d4cc;
-  --wood: #c4a882;
-  --wood-light: #dcc9a8;
-  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans: "Montserrat", system-ui, -apple-system, sans-serif;
+
+  /* Legacy aliases (backward compat for save-the-date) */
+  --bg-beige: var(--cream);
+  --bg-beige-light: var(--cream);
+  --olive-dark: var(--burgundy);
+  --brown-dark: var(--dark);
+  --gold-light: #f7d68a;
+  --wood: var(--burgundy);
+  --wood-light: var(--sage);
+  --gray-card: #f0ebe4;
+
+  /* Typography */
+  --font-serif: 'Bethany Elingston', Georgia, "Times New Roman", serif;
+  --font-sans: 'Whitney', system-ui, -apple-system, sans-serif;
+  --font-script: 'Snell Roundhand', cursive;
+
+  /* Layout */
   --max-width: 480px;
   --max-width-desktop: 900px;
   --header-height: 56px;
@@ -42,7 +92,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   color: var(--text-dark);
-  background-color: var(--bg-beige);
+  background-color: var(--cream);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -66,11 +116,12 @@ ul {
   list-style: none;
 }
 
-/* Layout */
+/* =============================================
+   LAYOUT
+   ============================================= */
 
 .page {
   min-height: 100vh;
-  padding-top: var(--header-height);
 }
 
 .container {
@@ -102,12 +153,11 @@ ul {
 }
 
 .section-subtitle {
-  font-family: var(--font-serif);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  font-family: var(--font-script);
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
   text-align: center;
-  color: var(--text-muted);
+  color: var(--olive);
   margin-bottom: 0.75rem;
 }
 
@@ -122,13 +172,80 @@ ul {
   text-align: left;
 }
 
-.divider {
-  border: none;
-  border-top: 1px solid rgba(44, 36, 32, 0.12);
-  margin: 1.5rem 0;
+/* =============================================
+   PATTERN SECTION BANDS
+   ============================================= */
+
+.band {
+  position: relative;
+  width: 100%;
+  padding: 2.5rem 0 3rem;
+  overflow: hidden;
 }
 
-/* Header */
+.band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.band > * {
+  position: relative;
+  z-index: 1;
+}
+
+.band--pattern-olive {
+  background-color: var(--cream);
+}
+
+.band--pattern-olive::before {
+  background: url('../assets/images/pattern-olive-outline.png') center / 320px repeat;
+  opacity: 0.12;
+}
+
+.band--pattern-burgundy {
+  background-color: var(--burgundy);
+  color: var(--cream);
+}
+
+.band--pattern-burgundy::before {
+  background: url('../assets/images/pattern-burgundy-solid.png') center / 320px repeat;
+  opacity: 0.22;
+}
+
+.band--pattern-burgundy .section-title,
+.band--pattern-burgundy .section-subtitle {
+  color: var(--cream);
+}
+
+.band--pattern-burgundy .carousel__btn {
+  color: var(--cream);
+}
+
+/* =============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal--delay-1 { transition-delay: 0.1s; }
+.reveal--delay-2 { transition-delay: 0.2s; }
+.reveal--delay-3 { transition-delay: 0.3s; }
+
+/* =============================================
+   HEADER — invisible, hamburger only
+   ============================================= */
 
 .site-header {
   position: fixed;
@@ -139,19 +256,17 @@ ul {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: var(--bg-beige);
-  border-bottom: 1px solid rgba(44, 36, 32, 0.08);
-  transition: transform 0.3s ease-in-out;
-}
-
-.site-header--hidden {
-  transform: translateY(-100%);
+  pointer-events: none;
+  background: transparent;
+  border: none;
 }
 
 .site-header__menu-btn {
+  pointer-events: auto;
   position: absolute;
   left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -162,14 +277,21 @@ ul {
   border: none;
   background: none;
   cursor: pointer;
+  z-index: 1;
 }
 
 .site-header__menu-btn span {
   display: block;
   width: 100%;
   height: 1.5px;
+  background-color: var(--cream);
+  box-shadow: 0 1px 2px rgba(29, 29, 27, 0.35);
+  transition: transform var(--transition), opacity var(--transition), background-color var(--transition), box-shadow var(--transition);
+}
+
+.site-header--on-light .site-header__menu-btn span {
   background-color: var(--text-dark);
-  transition: transform var(--transition), opacity var(--transition);
+  box-shadow: none;
 }
 
 .site-header__menu-btn.is-open span:nth-child(1) {
@@ -202,13 +324,15 @@ ul {
   margin: 0 0.35em;
 }
 
-/* Mobile nav overlay */
+/* =============================================
+   NAV DRAWER
+   ============================================= */
 
 .nav-overlay {
   position: fixed;
   inset: 0;
   z-index: 90;
-  background-color: rgba(44, 36, 32, 0.5);
+  background-color: rgba(29, 29, 27, 0.5);
   opacity: 0;
   visibility: hidden;
   transition: opacity var(--transition), visibility var(--transition);
@@ -227,7 +351,12 @@ ul {
   width: min(280px, 80vw);
   height: 100%;
   padding: calc(var(--header-height) + 1.5rem) 1.5rem 1.5rem;
-  background-color: var(--bg-beige-light);
+  background-color: var(--cream);
+  background-image: url('../assets/images/pattern-olive-outline.png');
+  background-size: 120px;
+  background-position: center;
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
   transform: translateX(-100%);
   transition: transform var(--transition);
 }
@@ -248,19 +377,29 @@ ul {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
+  transition: color var(--transition);
+}
+
+.nav-drawer__link:hover {
+  color: var(--olive);
 }
 
 .nav-drawer__link.is-active {
   color: var(--olive);
 }
 
-/* First Screen Fold */
+/* =============================================
+   FIRST SCREEN FOLD
+   ============================================= */
 
 .first-screen {
+  --hero-band: 34vh;
+  --hero-band: 34dvh;
+  position: relative;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--header-height));
-  min-height: calc(100dvh - var(--header-height));
+  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
 }
 
@@ -272,103 +411,207 @@ ul {
   width: 100%;
 }
 
-/* Hero */
+/* =============================================
+   HERO — Swans crop + overlapping monogram
+   ============================================= */
 
 .hero {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  max-height: 520px;
   overflow: hidden;
 }
 
+.hero--venue {
+  height: var(--hero-band);
+  min-height: var(--hero-band);
+}
+
 .hero__image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  transform: scaleX(1.16);
+  transform-origin: center;
 }
 
-.hero--venue .hero__image {
-  object-position: center 35%;
-}
-
-.hero--venue::after {
-  content: "";
+.hero__monogram-stack {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(44, 36, 32, 0.1) 0%,
-    rgba(44, 36, 32, 0.25) 100%
-  );
-  pointer-events: none;
-}
-
-.hero__monogram {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
+  left: 50%;
+  top: var(--hero-band);
+  z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-serif);
-  font-size: clamp(4rem, 18vw, 6rem);
-  font-weight: 400;
-  color: var(--gold);
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  width: clamp(188px, 44vw, 248px);
+  overflow: visible;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
-/* Invitation */
+.hero__monogram-fill,
+.hero__monogram-mark {
+  max-width: none;
+}
+
+.hero__monogram-fill {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.hero__monogram-mark {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  height: auto;
+}
+
+.hero__tagline {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-align: center;
+}
+
+/* =============================================
+   INVITATION — digital invite layout
+   ============================================= */
 
 .invitation {
-  padding: 3rem 1.25rem 2rem;
+  position: relative;
+  padding: clamp(7rem, 22vw, 9.5rem) 1.5rem 3.5rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-}
-
-.invitation__text {
-  font-family: var(--font-serif);
-  font-size: 0.8125rem;
-  line-height: 1.8;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   text-align: center;
-  max-width: 340px;
-  margin: 0 auto;
+  background-color: var(--cream);
 }
 
-/* Event details */
+.invitation__date {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.55;
+  color: #8a8580;
+  margin: 0 0 2.25rem;
+}
+
+.invitation__venues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.invitation__venue-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9a9590;
+  margin: 0 0 0.55rem;
+}
+
+.invitation__venue-name {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: #7a7570;
+  margin: 0 0 0.45rem;
+}
+
+.invitation__venue-address {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: #a39e98;
+  margin: 0;
+}
+
+.invitation__amp {
+  font-family: var(--font-script);
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #8a8580;
+  margin: 0.15rem 0;
+}
+
+.invitation__rsvp {
+  appearance: none;
+  margin-top: 2.5rem;
+  min-width: 260px;
+  padding: 0.85rem 2.25rem 0.7rem;
+  border: 1px solid #8a8580;
+  border-radius: 8px;
+  background-color: transparent;
+  font-family: var(--font-script);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: #8a8580;
+  cursor: pointer;
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.invitation__rsvp:hover {
+  background-color: var(--burgundy);
+  border-color: var(--burgundy);
+  color: var(--cream);
+}
+
+/* =============================================
+   EVENT DETAILS — stacked, centered
+   ============================================= */
 
 .event-details {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  padding-top: 2rem;
+  gap: 1rem;
+  padding-top: 2.25rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  
-}
-
-.event-details__col {
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.7;
-  text-align: left;
-}
-
-.event-details__col--right {
-  text-align: right;
+  text-align: center;
 }
 
 .event-details__ornament {
-  width: 150px;
-  height: 150px;
-  opacity: 0.6;
+  width: 72px;
+  height: 72px;
+  opacity: 0.9;
+}
+
+.event-details__date,
+.event-details__place {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.event-details__place {
+  color: var(--text-muted);
 }
 
 .event-reception {
@@ -394,63 +637,24 @@ ul {
   margin: 0 auto;
 }
 
-/* Photo strip */
-
-.photo-strip {
-  position: relative;
-  background-color: var(--brown-dark);
-  padding: 2.5rem 1.25rem;
-  min-height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.photo-strip__film {
-  position: absolute;
-  left: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 48px;
-  padding: 6px 4px;
-  background: var(--white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.photo-strip__film-thumb {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  background: var(--gray-card);
-}
-
-.photo-strip__polaroid {
-  width: 140px;
-  padding: 8px 8px 28px;
-  background: var(--white);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  transform: rotate(2deg);
-}
-
-.photo-strip__polaroid img {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-}
-
-/* CTA footer band */
+/* =============================================
+   CTA BAND — Burgundy
+   ============================================= */
 
 .cta-band {
-  background: linear-gradient(
-    180deg,
-    var(--wood-light) 0%,
-    var(--wood) 50%,
-    var(--wood-light) 100%
-  );
-  padding: 2rem 1.25rem;
+  position: relative;
+  background-color: var(--burgundy);
+  padding: 3rem 1.25rem;
+  overflow: hidden;
+}
+
+.cta-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/pattern-burgundy-solid.png') center / 280px repeat;
+  opacity: 0.18;
+  pointer-events: none;
 }
 
 .cta-band__buttons {
@@ -458,7 +662,13 @@ ul {
   gap: 0.75rem;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
+
+/* =============================================
+   BUTTONS
+   ============================================= */
 
 .btn {
   display: inline-flex;
@@ -473,10 +683,10 @@ ul {
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid var(--text-dark);
-  background-color: var(--bg-beige-light);
+  background-color: var(--cream);
   color: var(--text-dark);
   cursor: pointer;
-  transition: background-color var(--transition), color var(--transition);
+  transition: background-color var(--transition), color var(--transition), transform 0.15s ease;
 }
 
 button.btn {
@@ -485,7 +695,12 @@ button.btn {
 
 .btn:hover {
   background-color: var(--text-dark);
-  color: var(--bg-beige-light);
+  color: var(--cream);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn--olive {
@@ -495,9 +710,37 @@ button.btn {
 }
 
 .btn--olive:hover {
-  background-color: var(--olive-dark);
-  border-color: var(--olive-dark);
+  background-color: var(--burgundy);
+  border-color: var(--burgundy);
   color: var(--white);
+}
+
+.btn--burgundy {
+  background-color: var(--burgundy);
+  border-color: var(--burgundy);
+  color: var(--white);
+}
+
+.btn--burgundy:hover {
+  background-color: var(--olive);
+  border-color: var(--olive);
+  color: var(--white);
+}
+
+.btn--cta {
+  min-width: 240px;
+  padding: 1rem 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  background-color: var(--cream);
+  border-color: var(--cream);
+  color: var(--burgundy);
+}
+
+.btn--cta:hover {
+  background-color: transparent;
+  border-color: var(--cream);
+  color: var(--cream);
 }
 
 .btn--center {
@@ -505,45 +748,84 @@ button.btn {
   display: flex;
 }
 
-/* Photo grid */
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  padding: 1.5rem 1.25rem;
-}
-
-.photo-grid__item {
-  aspect-ratio: 1;
-  object-fit: cover;
-  background: var(--gray-card);
-}
-
-/* Dress code */
+/* =============================================
+   DRESS CODE — same stationery as invitation
+   ============================================= */
 
 .dress-code {
-  padding: 2rem 1.25rem 1.5rem;
+  position: relative;
+  padding: 3.5rem 1.5rem 3rem;
   text-align: center;
+  background-color: var(--cream);
+  overflow: hidden;
+}
+
+.dress-code--gold {
+  background-color: #efe4c8;
+}
+
+.dress-code--gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/pattern-gold-outline.png') center / 280px repeat;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.dress-code > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dress-code__label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #9a9590;
+  margin: 0 0 0.55rem;
 }
 
 .dress-code__title {
-  font-family: var(--font-serif);
-  font-size: 0.8125rem;
-  letter-spacing: 0.2em;
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  margin-bottom: 0.75rem;
+  line-height: 1.45;
+  color: #7a7570;
+  margin: 0 0 1.35rem;
 }
 
-.dress-code__text {
-  font-size: 0.75rem;
+.dress-code__place {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   line-height: 1.7;
-  color: var(--text-muted);
-  max-width: 320px;
-  margin: 0 auto;
+  color: #a39e98;
+  margin: 0;
 }
 
-/* Playlist */
+.dress-code__note {
+  font-family: var(--font-script);
+  font-size: 1.15rem;
+  color: #8a8580;
+  margin: 1.35rem 0 0;
+}
+
+.dress-code__dog {
+  display: block;
+  width: 64px;
+  height: auto;
+  margin: 1.75rem auto 0;
+  opacity: 0.45;
+}
+
+/* =============================================
+   PLAYLIST — Beige → Burgundy
+   ============================================= */
 
 .playlist-section {
   position: relative;
@@ -553,7 +835,20 @@ button.btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(to bottom, var(--bg-beige) 50%, var(--olive) 50%);
+  background: linear-gradient(to bottom, var(--cream) 50%, var(--burgundy) 50%);
+  overflow: hidden;
+}
+
+.playlist-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: url('../assets/images/pattern-burgundy-solid.png') center / 120px repeat;
+  opacity: 0.08;
+  pointer-events: none;
 }
 
 .playlist-section__container {
@@ -563,6 +858,8 @@ button.btn {
   justify-content: center;
   gap: 2rem;
   width: 100%;
+  max-width: 900px;
+  padding: 0 1.25rem;
   z-index: 2;
 }
 
@@ -578,6 +875,16 @@ button.btn {
   line-height: 1.5;
 }
 
+.playlist-section__embed {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: 352px;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .playlist-section__cover {
   position: relative;
   min-width: 192px;
@@ -586,11 +893,13 @@ button.btn {
   aspect-ratio: 1;
   background-color: var(--white);
   border-radius: 12px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 16px 40px rgba(29, 29, 27, 0.2);
   z-index: 2;
 }
 
-/* Concierge */
+/* =============================================
+   CAROUSELS
+   ============================================= */
 
 .page-hero {
   width: 100%;
@@ -630,18 +939,19 @@ button.btn {
   width: 32px;
   height: 32px;
   padding: 0;
-  border: 1px solid rgba(44, 36, 32, 0.2);
+  border: 1px solid rgba(29, 29, 27, 0.2);
   border-radius: 50%;
   background: var(--white);
   color: var(--text-dark);
   font-size: 1rem;
   line-height: 1;
   cursor: pointer;
-  transition: background-color var(--transition);
+  transition: background-color var(--transition), border-color var(--transition);
 }
 
 .carousel__btn:hover {
-  background-color: var(--bg-beige-light);
+  background-color: var(--cream);
+  border-color: var(--olive);
 }
 
 .carousel__btn--prev {
@@ -657,26 +967,35 @@ button.btn {
   cursor: not-allowed;
 }
 
+/* Info cards — text only (olive / burgundy) */
+
 .info-card {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 1rem;
-  padding: 1.25rem;
+  display: block;
+  padding: 1.5rem 1.25rem;
   background-color: var(--olive);
   color: var(--white);
-  min-height: 160px;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/pattern-olive-outline.png') center / 100px repeat;
+  opacity: 0.06;
+  pointer-events: none;
 }
 
 .info-card--gray {
-  grid-template-columns: 1fr 100px;
-  background-color: var(--gray-card);
-  color: var(--text-dark);
+  background-color: var(--burgundy);
+  color: var(--white);
 }
 
-.info-card__image {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
+.info-card--gray::before {
+  background-image: url('../assets/images/pattern-burgundy-solid.png');
+  opacity: 0.08;
 }
 
 .info-card__title {
@@ -685,12 +1004,21 @@ button.btn {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  z-index: 1;
+  position: relative;
 }
 
 .info-card__text {
   font-size: 0.6875rem;
   line-height: 1.7;
   margin-bottom: 0.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.info-card__links {
+  z-index: 1;
+  position: relative;
 }
 
 .info-card__links a {
@@ -701,11 +1029,26 @@ button.btn {
 }
 
 .info-card--gray .info-card__links a {
-  color: var(--olive-dark);
+  color: var(--gold-light);
 }
 
 .info-card__links a:hover {
   opacity: 0.8;
+}
+
+/* Cream card on burgundy pattern band */
+.info-card--on-burgundy {
+  background-color: var(--cream);
+  color: var(--text-dark);
+}
+
+.info-card--on-burgundy::before {
+  background-image: url('../assets/images/pattern-burgundy-solid.png');
+  opacity: 0.06;
+}
+
+.info-card--on-burgundy .info-card__links a {
+  color: var(--burgundy);
 }
 
 .concierge-cta {
@@ -713,91 +1056,131 @@ button.btn {
   text-align: center;
 }
 
-/* RSVP modal */
+/* =============================================
+   RSVP MODAL
+   ============================================= */
 
 .rsvp-modal {
   position: fixed;
   inset: 0;
-  z-index: 200;
-  display: flex;
+  z-index: 400;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1.25rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition), visibility var(--transition);
+  background-color: rgba(29, 29, 27, 0.55);
 }
 
 .rsvp-modal.is-open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.rsvp-modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(44, 36, 32, 0.55);
-  border: none;
-  cursor: pointer;
+  display: flex;
 }
 
 .rsvp-modal__dialog {
   position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 360px;
-  padding: 2rem 1.5rem;
-  background-color: var(--bg-beige-light);
-  border: 1px solid rgba(44, 36, 32, 0.1);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  padding: 2.75rem 2rem 2rem;
+  background-color: var(--cream);
+  border: 1px solid #d8d0c8;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(29, 29, 27, 0.2);
+}
+
+.rsvp-modal__close {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: #8a8580;
+  cursor: pointer;
+}
+
+.rsvp-modal__close:hover {
+  color: var(--text-dark);
 }
 
 .rsvp-modal__title {
   font-family: var(--font-serif);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 0.5rem;
+  color: #7a7570;
+  margin-bottom: 0.65rem;
 }
 
 .rsvp-modal__text {
   font-size: 0.75rem;
-  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  color: #9a9590;
   text-align: center;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .rsvp-modal__input {
+  display: block;
+  position: relative;
+  z-index: 2;
   width: 100%;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-  color: var(--text-dark);
-  background-color: var(--white);
-  border: 1px solid rgba(44, 36, 32, 0.15);
+  height: auto;
+  min-height: 48px;
+  padding: 12px 16px;
+  margin-bottom: 1.5rem;
+  pointer-events: auto;
+  -webkit-user-select: text;
+  user-select: text;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: normal;
+  text-transform: none;
+  color: #1d1d1b;
+  -webkit-text-fill-color: #1d1d1b;
+  caret-color: #1d1d1b;
+  background-color: #ffffff;
+  border: 1px solid #c8c0b8;
+  border-radius: 8px;
   outline: none;
+  overflow: visible;
   transition: border-color var(--transition);
 }
 
 .rsvp-modal__input:focus {
   border-color: var(--olive);
+  color: #1d1d1b;
+  -webkit-text-fill-color: #1d1d1b;
 }
 
 .rsvp-modal__input::placeholder {
-  color: var(--text-muted);
+  color: #b0aaa4;
+  -webkit-text-fill-color: #b0aaa4;
 }
 
 .rsvp-modal__actions {
   display: flex;
-  gap: 0.75rem;
   justify-content: center;
 }
 
 .rsvp-modal__actions .btn {
-  min-width: 0;
-  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 120px;
+  height: 40px;
+  padding: 4px 1.25rem 0;
+  border-radius: 8px;
+  line-height: 1;
+  letter-spacing: 0.12em;
 }
 
 .visually-hidden {
@@ -812,10 +1195,12 @@ button.btn {
   border: 0;
 }
 
-/* Presentes */
+/* =============================================
+   PRESENTES
+   ============================================= */
 
 .page--presentes {
-  background-color: var(--bg-beige);
+  background-color: var(--cream);
 }
 
 .presentes-hero {
@@ -842,8 +1227,8 @@ button.btn {
   padding: 1.5rem;
   background: linear-gradient(
     180deg,
-    rgba(44, 36, 32, 0.15) 0%,
-    rgba(44, 36, 32, 0.35) 100%
+    rgba(29, 29, 27, 0.15) 0%,
+    rgba(29, 29, 27, 0.35) 100%
   );
 }
 
@@ -880,14 +1265,47 @@ button.btn {
   letter-spacing: 0.05em;
 }
 
+/* Presentes — Swan Banner */
+
+.presentes-swan-banner {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  max-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.presentes-swan-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  transform: scaleX(1.16);
+  transform-origin: center;
+}
+
+.presentes-swan-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(244, 231, 219, 0.3) 0%,
+    rgba(244, 231, 219, 0) 30%,
+    rgba(244, 231, 219, 0) 70%,
+    rgba(244, 231, 219, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
 .presentes-letter {
   padding: 2.5rem 1.25rem 2rem;
   text-align: center;
 }
 
 .presentes-letter__ornament {
-  width: 36px;
-  height: 36px;
+  width: 56px;
+  height: 56px;
   margin: 0 auto 1.25rem;
   opacity: 0.7;
 }
@@ -911,8 +1329,8 @@ button.btn {
 }
 
 .presentes-highlight {
-  background-color: var(--brown-dark);
-  color: var(--bg-beige-light);
+  background-color: var(--dark);
+  color: var(--cream);
   padding: 2.25rem 1.25rem;
   text-align: center;
 }
@@ -937,10 +1355,12 @@ button.btn {
 .presentes-highlight__text {
   font-size: 0.8125rem;
   line-height: 1.75;
-  color: rgba(242, 236, 228, 0.85);
+  color: rgba(244, 231, 219, 0.85);
   max-width: 320px;
   margin: 0 auto;
 }
+
+/* PIX section */
 
 .presentes-pix {
   padding: 2.5rem 1.25rem 0.5rem;
@@ -950,14 +1370,27 @@ button.btn {
   max-width: 400px;
   margin: 0 auto;
   padding: 2rem 1.5rem 2.25rem;
-  background-color: var(--bg-beige-light);
-  border: 1px solid rgba(44, 36, 32, 0.08);
-  box-shadow: 0 12px 40px rgba(44, 36, 32, 0.08);
+  background-color: var(--cream);
+  border: 1px solid rgba(29, 29, 27, 0.08);
+  box-shadow: 0 12px 40px rgba(29, 29, 27, 0.08);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.presentes-pix__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('../assets/images/pattern-olive-outline.png') center / 180px repeat;
+  opacity: 0.03;
+  pointer-events: none;
 }
 
 .presentes-pix__header {
   margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__title {
@@ -979,7 +1412,9 @@ button.btn {
   padding: 1rem;
   margin-bottom: 1.75rem;
   background-color: var(--white);
-  border: 1px solid rgba(44, 36, 32, 0.06);
+  border: 1px solid rgba(29, 29, 27, 0.06);
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__qr img {
@@ -994,6 +1429,8 @@ button.btn {
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__key {
@@ -1001,16 +1438,22 @@ button.btn {
   font-size: 1.375rem;
   letter-spacing: 0.06em;
   margin-bottom: 0.35rem;
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__name {
   font-size: 0.75rem;
   color: var(--text-muted);
   margin-bottom: 1.25rem;
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__copy {
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .presentes-pix__hint {
@@ -1018,14 +1461,46 @@ button.btn {
   margin-top: 0.75rem;
   font-size: 0.6875rem;
   color: var(--olive);
+  position: relative;
+  z-index: 1;
 }
+
+.presentes-amazon {
+  padding: 2rem 1.25rem 1rem;
+  text-align: center;
+}
+
+.presentes-amazon__title {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.presentes-amazon__text {
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 340px;
+  margin: 0 auto 1.25rem;
+}
+
+.presentes-amazon .btn {
+  text-decoration: none;
+}
+
+/* Presentes footer with dog */
 
 .presentes-footer-note {
   height: var(--footer-height);
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   margin-top: 4vh;
+  gap: 1.5rem;
 }
 
 .presentes-footer-note__text {
@@ -1039,7 +1514,15 @@ button.btn {
   margin: 0 auto;
 }
 
-/* Desktop */
+.presentes-footer-note__dog {
+  width: 64px;
+  height: auto;
+  opacity: 0.3;
+}
+
+/* =============================================
+   DESKTOP
+   ============================================= */
 
 @media (min-width: 768px) {
   body {
@@ -1062,27 +1545,22 @@ button.btn {
     width: 100%;
   }
 
-  .hero {
-    aspect-ratio: 16 / 9;
-    max-height: 480px;
+  .first-screen {
+    --hero-band: 38vh;
+    --hero-band: 38dvh;
   }
 
-  .invitation__text {
-    font-size: 0.9375rem;
-    max-width: 480px;
+  .hero__monogram-stack {
+    width: clamp(200px, 24vw, 268px);
   }
 
-  .photo-strip__polaroid {
-    width: 180px;
+  .invitation {
+    padding-top: 9.5rem;
   }
 
   .drink-block {
     max-width: 560px;
     margin: 0 auto;
-  }
-
-  .info-card {
-    grid-template-columns: 140px 1fr;
   }
 
   .carousel {
@@ -1101,15 +1579,14 @@ button.btn {
 }
 
 @media (min-width: 900px) {
-  /* Constrain only the page content, not the full body */
-  .page {
-    max-width: 900px;
-    margin: 0 auto;
-    box-shadow: 0 0 60px rgba(0, 0, 0, 0.12);
+  .invitation__venues {
+    max-width: 640px;
   }
 }
 
-/* Save the Date landing */
+/* =============================================
+   SAVE THE DATE (index.html) — unchanged
+   ============================================= */
 
 .save-the-date-page {
   height: 100vh;
@@ -1143,12 +1620,12 @@ button.btn {
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(0, 0, 0, 0.35);
+  color: rgba(244, 231, 219, 0.9);
+  background: rgba(29, 29, 27, 0.35);
   border-radius: var(--radius-sm);
   cursor: pointer;
   user-select: none;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 3px rgba(29, 29, 27, 0.55);
 }
 
 .save-the-date__grayscale-toggle input {
@@ -1174,7 +1651,7 @@ button.btn {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(29, 29, 27, 0.4);
 }
 
 .save-the-date__content {
@@ -1188,16 +1665,16 @@ button.btn {
   max-height: 100%;
   padding: 1.25rem;
   text-align: center;
-  color: var(--white);
-  --save-the-date-shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.4);
-  --save-the-date-shadow-soft-strong: 0 1px 4px rgba(0, 0, 0, 0.65), 0 4px 16px rgba(0, 0, 0, 0.5);
+  color: var(--cream);
+  --save-the-date-shadow-soft: 0 1px 3px rgba(29, 29, 27, 0.55), 0 2px 10px rgba(29, 29, 27, 0.4);
+  --save-the-date-shadow-soft-strong: 0 1px 4px rgba(29, 29, 27, 0.65), 0 4px 16px rgba(29, 29, 27, 0.5);
   --save-the-date-shadow:
-    -1px -1px 2px rgba(0, 0, 0, 0.5),
-    1px -1px 2px rgba(0, 0, 0, 0.5),
-    -1px 1px 2px rgba(0, 0, 0, 0.5),
-    1px 1px 2px rgba(0, 0, 0, 0.5),
-    0 2px 4px rgba(0, 0, 0, 0.55),
-    0 3px 11px rgba(0, 0, 0, 0.4);
+    -1px -1px 2px rgba(29, 29, 27, 0.5),
+    1px -1px 2px rgba(29, 29, 27, 0.5),
+    -1px 1px 2px rgba(29, 29, 27, 0.5),
+    1px 1px 2px rgba(29, 29, 27, 0.5),
+    0 2px 4px rgba(29, 29, 27, 0.55),
+    0 3px 11px rgba(29, 29, 27, 0.4);
 }
 
 .save-the-date__label,
@@ -1211,7 +1688,7 @@ button.btn {
   font-size: clamp(1rem, 3.89vw, 1.17rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(244, 231, 219, 0.85);
   margin-bottom: clamp(0.375rem, 2vh, 0.75rem);
   text-shadow: var(--save-the-date-shadow);
 }
@@ -1240,25 +1717,37 @@ button.btn {
 }
 
 .save-the-date__star {
-  color: var(--white);
+  color: var(--cream);
   text-align: center;
 }
 
 .save-the-date-page--grayscale .save-the-date__star {
-  color: var(--white);
+  color: var(--cream);
 }
 
 .save-the-date__details.event-details {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.75rem;
   width: 100%;
   padding: clamp(0.5rem, 2vh, 0.75rem) 0;
   margin-bottom: clamp(0.5rem, 2vh, 1rem);
+  text-align: initial;
 }
 
 .save-the-date__details .event-details__col {
-  color: var(--white);
+  color: var(--cream);
   font-size: clamp(0.6875rem, 2.3vw, 0.8125rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   line-height: 1.5;
+  text-align: left;
   text-shadow: var(--save-the-date-shadow);
+}
+
+.save-the-date__details .event-details__col--right {
+  text-align: right;
 }
 
 .save-the-date__details .event-details__ornament {
@@ -1275,6 +1764,6 @@ button.btn {
   font-size: clamp(0.6875rem, 2.3vw, 0.8125rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(244, 231, 219, 0.8);
   text-shadow: var(--save-the-date-shadow);
 }
