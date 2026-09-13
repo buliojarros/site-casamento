@@ -22,6 +22,7 @@
     }
 
     document.body.style.overflow = isOpen ? "hidden" : "";
+    updateHeaderTone();
   }
 
   if (menuBtn) {
@@ -216,22 +217,65 @@
     update();
   }
 
-  // Header: hamburger color over light sections
+  // Header: light hamburger over hero + colored sections (olive / sage)
   var header = document.querySelector(".site-header");
-  var hero = document.querySelector(".hero");
+  var darkBgSections = document.querySelectorAll(".hero, .dress-code--gold, .presentes");
 
-  if (header) {
-    function updateHeaderTone() {
-      var threshold = hero ? hero.offsetHeight * 0.65 : 120;
-      header.classList.toggle("site-header--on-light", window.scrollY > threshold);
+  function updateHeaderTone() {
+    if (!header) return;
+
+    if (menuBtn && menuBtn.classList.contains("is-open")) {
+      header.classList.add("site-header--on-light");
+      return;
     }
 
+    var headerBottom = header.offsetHeight || 56;
+    var overDark = false;
+
+    darkBgSections.forEach(function (section) {
+      var rect = section.getBoundingClientRect();
+      if (rect.top < headerBottom && rect.bottom > 0) {
+        overDark = true;
+      }
+    });
+
+    header.classList.toggle("site-header--on-light", !overDark);
+  }
+
+  if (header) {
     window.addEventListener("scroll", updateHeaderTone, { passive: true });
     window.addEventListener("resize", updateHeaderTone, { passive: true });
     updateHeaderTone();
   }
 
   document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+
+  document.querySelectorAll("[data-tips-tabs]").forEach(function (root) {
+    var tabs = root.querySelectorAll(".tips__tab");
+    var panels = root.querySelectorAll(".tips__panel");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var targetId = tab.getAttribute("aria-controls");
+
+        tabs.forEach(function (item) {
+          var selected = item === tab;
+          item.classList.toggle("is-active", selected);
+          item.setAttribute("aria-selected", String(selected));
+        });
+
+        panels.forEach(function (panel) {
+          var active = panel.id === targetId;
+          panel.classList.toggle("is-active", active);
+          if (active) {
+            panel.removeAttribute("hidden");
+          } else {
+            panel.setAttribute("hidden", "");
+          }
+        });
+      });
+    });
+  });
 
   // Scroll reveal animation
   if ("IntersectionObserver" in window) {

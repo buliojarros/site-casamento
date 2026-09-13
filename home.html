@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beatriz & Julio — Casamento</title>
   <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
-  <link rel="stylesheet" href="css/styles.css?v=47">
+  <link rel="stylesheet" href="css/styles.css?v=82">
 </head>
 <body>
   <!-- CONFIG
@@ -29,6 +29,7 @@
   <nav class="nav-drawer" aria-label="Menu principal">
     <ul class="nav-drawer__list">
       <li><a class="nav-drawer__link" href="#inicio">Início</a></li>
+      <li><a class="nav-drawer__link" href="#dress-code">Dress Code</a></li>
       <li><a class="nav-drawer__link" href="#dicas">Dicas</a></li>
       <li><a class="nav-drawer__link" href="#presentes">Presentes</a></li>
       <li><a class="nav-drawer__link" href="#playlist">Playlist</a></li>
@@ -72,189 +73,131 @@
       </section>
     </div>
 
-    <section class="dress-code dress-code--gold reveal">
+    <section id="dress-code" class="dress-code dress-code--gold reveal">
       <!-- <p class="dress-code__label">Dress Code</p> -->
       <h2 class="dress-code__title">Dress Code</h2>
       <p class="dress-code__note">Passeio completo</p>
-      <p class="dress-code__place">Venham de vestidos longos e terno completo.</p>
-      <p class="dress-code__place">Recomendamos um sapato confortável para a breve<br>caminhada entre a cerimônia e a festa.</p>
+      <p class="dress-code__place">Sugerimos vestidos longos e terno completo.</p>
+      <p class="dress-code__place">Venha com um sapato confortável para a breve caminhada entre a cerimônia e a festa.</p>
       <img class="dress-code__dog" src="assets/images/dog-dark.png" alt="" aria-hidden="true">
     </section>
 
     <section id="dicas" class="tips">
       <h2 class="tips__heading">Dicas</h2>
-      <div class="tips__sheet">
-      <div class="tips__group reveal">
-        <h3 class="tips__title">Hospedagem</h3>
-        <section class="carousel container tips__carousel tips__carousel--sage" data-carousel="hospedagem">
-          <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Hotel anterior">‹</button>
-          <div class="carousel__track">
-            <div class="carousel__slides">
-              <article class="carousel__slide">
-                <div class="info-card info-card--paper">
-                  <div>
-                    <h3 class="info-card__title">Nome do Hotel 1</h3>
-                    <p class="info-card__text">
-                      Rua Exemplo, 123 — Bairro<br>
-                      Cidade — Estado<br>
-                      Tel: (00) 0000-0000
-                    </p>
-                    <div class="info-card__links">
-                      <a href="#">Reserva via WhatsApp</a>
-                      <a href="#">Acesse aqui para mais informações</a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              <article class="carousel__slide">
-                <div class="info-card info-card--paper">
-                  <div>
-                    <h3 class="info-card__title">Nome do Hotel 2</h3>
-                    <p class="info-card__text">
-                      Av. Exemplo, 456 — Centro<br>
-                      Cidade — Estado<br>
-                      Tel: (00) 0000-0000
-                    </p>
-                    <div class="info-card__links">
-                      <a href="#">Reserva via WhatsApp</a>
-                      <a href="#">Acesse aqui para mais informações</a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-          <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próximo hotel">›</button>
-        </section>
-      </div>
+      <div class="tips__sheet" data-tips-tabs>
+        <div class="tips__tabs" role="tablist" aria-label="Tipos de dica">
+          <button type="button" class="tips__tab is-active" role="tab" id="tab-hospedagem" aria-selected="true" aria-controls="panel-hospedagem">Hotéis</button>
+          <button type="button" class="tips__tab" role="tab" id="tab-arrumar" aria-selected="false" aria-controls="panel-arrumar">Beleza</button>
+          <button type="button" class="tips__tab" role="tab" id="tab-restaurantes" aria-selected="false" aria-controls="panel-restaurantes">Restaurantes</button>
+        </div>
 
-      <div class="tips__group reveal">
-        <h3 class="tips__title">Onde se arrumar</h3>
-        <section class="carousel container tips__carousel tips__carousel--rose" data-carousel="arrumar">
-          <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Dica anterior">‹</button>
-          <div class="carousel__track">
-            <div class="carousel__slides">
-              <article class="carousel__slide">
-                <div class="info-card info-card--paper">
-                  <div>
-                    <h3 class="info-card__title">Cabeleireiro</h3>
-                    <p class="info-card__text">
-                      Salão Exemplo<br>
-                      Rua Beleza, 789 — Centro<br>
-                      Cidade — Estado
-                    </p>
-                    <div class="info-card__links">
-                      <a href="#">Agende pelo WhatsApp</a>
-                      <a href="#">Visite o site</a>
-                    </div>
-                  </div>
-                </div>
-              </article>
+        <div class="tips__panel is-active" id="panel-hospedagem" role="tabpanel" aria-labelledby="tab-hospedagem">
+          <p class="tips__intro">Hotéis próximos à cerimônia e à festa.</p>
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h3 class="tips__place-name">Vitória Hotel Concept - Campinas</h3>
+              <p class="tips__place-text">
+                Av. José de Sousa Campos, 425 — Nova Campinas<br>
+                Campinas — SP
+              </p>
             </div>
-          </div>
-          <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próxima dica">›</button>
-        </section>
-      </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://wa.me/5508005802571?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Vit%C3%B3ria%20Hotel%20Concept%20Campinas%20para%20o%20casamento%20de%20Beatriz%20e%20Julio%20(12%2F06%2F2027)." target="_blank" rel="noopener noreferrer">Reserva via WhatsApp</a>
+              <a class="tips__place-more" href="https://www.vitoriahoteis.com.br/" target="_blank" rel="noopener noreferrer">Mais informações</a>
+            </div>
+          </article>
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h3 class="tips__place-name">Nome do Hotel 2</h3>
+              <p class="tips__place-text">
+                Av. Exemplo, 456 — Centro<br>
+                Cidade — Estado<br>
+                Tel: (00) 0000-0000
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="#">Reserva via WhatsApp</a>
+              <a class="tips__place-more" href="#">Mais informações</a>
+            </div>
+          </article>
+        </div>
 
-      <div class="tips__group reveal">
-        <h3 class="tips__title">Nossos restaurantes favoritos</h3>
-        <section class="carousel container tips__carousel tips__carousel--gold" data-carousel="restaurantes">
-          <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Restaurante anterior">‹</button>
-          <div class="carousel__track">
-            <div class="carousel__slides">
-              <article class="carousel__slide">
-                <div class="info-card info-card--paper">
-                  <div>
-                    <h3 class="info-card__title">Nome do Restaurante 1</h3>
-                    <p class="info-card__text">
-                      Rua Exemplo, 123 — Centro<br>
-                      Campinas — SP<br>
-                      Tel: (00) 0000-0000
-                    </p>
-                    <div class="info-card__links">
-                      <a href="#">Reserva via WhatsApp</a>
-                      <a href="#">Acesse aqui para mais informações</a>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              <article class="carousel__slide">
-                <div class="info-card info-card--paper">
-                  <div>
-                    <h3 class="info-card__title">Nome do Restaurante 2</h3>
-                    <p class="info-card__text">
-                      Av. Exemplo, 456 — Centro<br>
-                      Campinas — SP<br>
-                      Tel: (00) 0000-0000
-                    </p>
-                    <div class="info-card__links">
-                      <a href="#">Reserva via WhatsApp</a>
-                      <a href="#">Acesse aqui para mais informações</a>
-                    </div>
-                  </div>
-                </div>
-              </article>
+        <div class="tips__panel" id="panel-arrumar" role="tabpanel" aria-labelledby="tab-arrumar" hidden>
+          <p class="tips__intro">Onde se arrumar no dia.</p>
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h3 class="tips__place-name">Cabeleireiro</h3>
+              <p class="tips__place-text">
+                Salão Exemplo<br>
+                Rua Beleza, 789 — Centro<br>
+                Cidade — Estado
+              </p>
             </div>
-          </div>
-          <button class="carousel__btn carousel__btn--next" type="button" aria-label="Próximo restaurante">›</button>
-        </section>
-      </div>
+            <div class="tips__place-links">
+              <a class="btn" href="#">Agende pelo WhatsApp</a>
+              <a class="tips__place-more" href="#">Visite o site</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="tips__panel" id="panel-restaurantes" role="tabpanel" aria-labelledby="tab-restaurantes" hidden>
+          <p class="tips__intro">Onde comer por perto.</p>
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h3 class="tips__place-name">Nome do Restaurante 1</h3>
+              <p class="tips__place-text">
+                Rua Exemplo, 123 — Centro<br>
+                Campinas — SP<br>
+                Tel: (00) 0000-0000
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="#">Reserva via WhatsApp</a>
+              <a class="tips__place-more" href="#">Mais informações</a>
+            </div>
+          </article>
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h3 class="tips__place-name">Nome do Restaurante 2</h3>
+              <p class="tips__place-text">
+                Av. Exemplo, 456 — Centro<br>
+                Campinas — SP<br>
+                Tel: (00) 0000-0000
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="#">Reserva via WhatsApp</a>
+              <a class="tips__place-more" href="#">Mais informações</a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
     <section id="presentes" class="presentes">
-    <div class="container section reveal">
       <h2 class="section-title">Presentes</h2>
-    </div>
+      <!-- <img class="presentes-letter__ornament" src="assets/images/monograma-gold.png" alt="" aria-hidden="true"> -->
 
-    <section class="presentes-letter container reveal">
-      <img class="presentes-letter__ornament" src="assets/images/monograma-olive.png" alt="" aria-hidden="true">
       <p class="presentes-letter__lead">
-        Montamos recentemente a nossa casa e estamos muito felizes com o cantinho que construímos juntos.
+        Sua presença neste dia já é o nosso maior presente.<br>
+        Se quiser nos presentear, você pode contribuir via PIX para a lua de mel ou escolher um item da <a href="https://www.amazon.com.br/hz/wishlist/ls/1V5BBC9HXZ12V?ref_=wl_share" target="_blank" rel="noopener noreferrer">nossa lista</a>.
       </p>
-      <p class="presentes-letter__text">
-        Sua presença neste dia já significa o mundo para nós. Se desejar nos presentear, você pode contribuir para a nossa lua de mel ou escolher um item da nossa lista.
-      </p>
-      <p class="presentes-letter__text">
-        Ficaremos muito gratos por qualquer gesto — cada um nos ajuda a viver essa nova fase com ainda mais carinho.
-      </p>
-    </section>
-
-    <section class="presentes-pix container reveal">
-      <div class="presentes-pix__card">
-        <div class="presentes-pix__header">
-          <h3 class="presentes-pix__title">Contribuir via PIX</h3>
-          <p class="presentes-pix__intro">Escaneie o QR Code ou copie a chave abaixo no app do seu banco.</p>
-        </div>
-
-        <figure class="presentes-pix__qr">
-          <img src="assets/images/pix-qrcode.png" alt="QR Code PIX para lua de mel de Beatriz e Julio" width="240" height="240">
-        </figure>
-
-        <div class="presentes-pix__details">
-          <p class="presentes-pix__label">Chave PIX (CPF)</p>
+      <figure class="presentes-pix__qr">
+        <img src="assets/images/pix-qrcode.png" alt="QR Code PIX para lua de mel de Beatriz e Julio" width="240" height="240">
+      </figure>
+      <div class="presentes-pix__details">
+        <p class="presentes-pix__label">Chave PIX (CPF)</p>
+        <div class="presentes-pix__key-row">
           <p class="presentes-pix__key" id="pix-key">403.278.938-00</p>
-          <p class="presentes-pix__name">Beatriz e Julio</p>
-          <button type="button" class="btn btn--invite presentes-pix__copy" data-copy="#pix-key">Copiar chave</button>
-          <p class="presentes-pix__hint" data-copy-feedback aria-live="polite"></p>
+          <button type="button" class="presentes-pix__copy" data-copy="#pix-key" aria-label="Copiar chave PIX">
+            <svg class="presentes-pix__copy-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="9" y="9" width="11" height="13" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M6.5 15H5.5A1.5 1.5 0 0 1 4 13.5v-10A1.5 1.5 0 0 1 5.5 2h10A1.5 1.5 0 0 1 17 3.5V5" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+          </button>
         </div>
+        <p class="presentes-pix__hint" data-copy-feedback aria-live="polite"></p>
       </div>
-    </section>
-
-    <section class="presentes-amazon container reveal">
-      <h3 class="presentes-amazon__title">Lista de presentes</h3>
-      <p class="presentes-amazon__text">
-        Se preferir um presente em vez de contribuição em dinheiro, montamos uma lista na Amazon.
-      </p>
-      <a
-        class="btn btn--invite"
-        href="https://www.amazon.com.br/hz/wishlist/ls/1V5BBC9HXZ12V?ref_=wl_share"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Ver lista na Amazon
-      </a>
-    </section>
     </section>
 
     <div class="closing">
@@ -309,6 +252,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=2"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
