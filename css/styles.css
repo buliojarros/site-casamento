@@ -440,6 +440,7 @@ ul {
   max-height: 100svh;
   min-height: 100svh;
   width: 100%;
+  overflow: hidden;
 }
 
 .full-screen {
@@ -530,16 +531,14 @@ ul {
 .invitation {
   position: relative;
   padding: clamp(7rem, 22vw, 9.5rem) 1.5rem 3.5rem;
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   background-color: var(--cream);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 
 .invitation__date {
