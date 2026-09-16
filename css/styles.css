@@ -843,7 +843,7 @@ button.btn {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat-x;
+  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat;
   opacity: 0.05;
   pointer-events: none;
 }
@@ -1943,6 +1943,11 @@ button.btn {
    ============================================= */
 
 @media (max-width: 767px) {
+  :root {
+    --pattern-tile: clamp(360px, 100vw, 520px);
+    --pattern-tile-small: clamp(180px, 50vw, 260px);
+  }
+
   .first-screen {
     --hero-band: 36vw;
   }
