@@ -277,6 +277,51 @@
     });
   });
 
+  function scrollTipsSectionIntoView(root) {
+    var section = root.closest("#dicas") || root.closest(".tips");
+    if (!section) {
+      return;
+    }
+
+    var target =
+      section.querySelector(".tips__tabs") ||
+      section.querySelector(".tips__heading") ||
+      section;
+
+    var headerHeight =
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue("--header-height"),
+        10
+      ) || 56;
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      });
+    });
+  }
+
+  document.querySelectorAll("[data-tips-accordion]").forEach(function (root) {
+    var groups = root.querySelectorAll(".tips__group-block");
+
+    groups.forEach(function (group) {
+      group.addEventListener("toggle", function () {
+        if (!group.open) {
+          return;
+        }
+
+        groups.forEach(function (other) {
+          if (other !== group) {
+            other.open = false;
+          }
+        });
+
+        scrollTipsSectionIntoView(root);
+      });
+    });
+  });
+
   // Scroll reveal animation
   if ("IntersectionObserver" in window) {
     var revealObserver = new IntersectionObserver(

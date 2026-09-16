@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Beatriz & Julio — Casamento</title>
   <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
-  <link rel="stylesheet" href="css/styles.css?v=95">
+  <link rel="stylesheet" href="css/styles.css?v=102">
 </head>
 <body>
   <!-- CONFIG
@@ -111,12 +111,20 @@
             <div class="tips__place-info">
               <h3 class="tips__place-name">Vitória Hotel Concept - Campinas</h3>
               <p class="tips__place-text">
-                Av. José de Sousa Campos, 425 — Nova Campinas<br>
-                Campinas — SP
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Vit%C3%B3ria+Hotel+Concept+Av.+Jos%C3%A9+de+Sousa+Campos+425+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Av. José de Sousa Campos, 425 — Nova Campinas<br>
+                  Campinas — SP
+                </a>
               </p>
             </div>
             <div class="tips__place-links">
-              <a class="btn" href="https://wa.me/5508005802571?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Vit%C3%B3ria%20Hotel%20Concept%20Campinas%20para%20o%20casamento%20de%20Beatriz%20e%20Julio%20(12%2F06%2F2027)." target="_blank" rel="noopener noreferrer">Reserva via WhatsApp</a>
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Vit%C3%B3ria+Hotel+Concept+Av.+Jos%C3%A9+de+Sousa+Campos+425+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+              <a class="tips__place-more" href="https://wa.me/5508005802571?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva%20no%20Vit%C3%B3ria%20Hotel%20Concept%20Campinas%20para%20o%20casamento%20de%20Beatriz%20e%20Julio%20(12%2F06%2F2027)." target="_blank" rel="noopener noreferrer">Reserva via WhatsApp</a>
               <a class="tips__place-more" href="https://www.vitoriahoteis.com.br/" target="_blank" rel="noopener noreferrer">Mais informações</a>
             </div>
           </article>
@@ -154,36 +162,214 @@
           </article>
         </div>
 
-        <div class="tips__panel" id="panel-restaurantes" role="tabpanel" aria-labelledby="tab-restaurantes" hidden>
-          <p class="tips__intro">Onde comer por perto.</p>
-          <article class="tips__place">
+        <div class="tips__panel" id="panel-restaurantes" role="tabpanel" aria-labelledby="tab-restaurantes" data-tips-accordion hidden>
+          <p class="tips__intro">Sugestões de cafés, restaurantes e bares em Campinas.</p>
+
+          <details class="tips__group-block">
+            <summary class="tips__group">Café</summary>
+            <div class="tips__group-content">
+              <article class="tips__place">
+                <div class="tips__place-info">
+                  <h4 class="tips__place-name">Pão do Cambuí</h4>
+                  <p class="tips__place-text">
+                    <a
+                      class="tips__place-address"
+                      href="https://www.google.com/maps/search/?api=1&amp;query=P%C3%A3o+do+Cambu%C3%AD+Rua+Dr.+Em%C3%ADlio+Ribas+70+Campinas"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Rua Dr. Emílio Ribas, 70 — Cambuí<br>
+                      Campinas — SP
+                    </a><br>
+                    Tel: (19) 3252-3224
+                  </p>
+                </div>
+                <div class="tips__place-links">
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=P%C3%A3o+do+Cambu%C3%AD+Rua+Dr.+Em%C3%ADlio+Ribas+70+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                  <a class="tips__place-more" href="https://www.ifood.com.br/delivery/campinas-sp/pao-do-cambui-boulangerie-cambui/bdd898d2-08e0-4538-b536-0adf9ed9991f" target="_blank" rel="noopener noreferrer">iFood</a>
+                </div>
+              </article>
+
+              <article class="tips__place">
+                <div class="tips__place-info">
+                  <h4 class="tips__place-name">Café Maritaka</h4>
+                  <p class="tips__place-text">
+                    <a
+                      class="tips__place-address"
+                      href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9+Maritaka+Heitor+Penteado+1580+Campinas"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Rua Dr. Heitor Penteado, 1580 — Joaquim Egídio<br>
+                      Campinas — SP
+                    </a><br>
+                    Tel: (19) 3298-6768
+                  </p>
+                </div>
+                <div class="tips__place-links">
+                  <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Caf%C3%A9+Maritaka+Heitor+Penteado+1580+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+                </div>
+              </article>
+            </div>
+          </details>
+
+          <details class="tips__group-block">
+            <summary class="tips__group">Restaurantes</summary>
+            <div class="tips__group-content">
+              <article class="tips__place">
             <div class="tips__place-info">
-              <h3 class="tips__place-name">Nome do Restaurante 1</h3>
+              <h4 class="tips__place-name">Sumirê</h4>
               <p class="tips__place-text">
-                Rua Exemplo, 123 — Centro<br>
-                Campinas — SP<br>
-                Tel: (00) 0000-0000
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Sumir%C3%AA+Av.+Romeu+T%C3%B3rtima+304+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Av. Dr. Romeu Tórtima, 304 — Barão Geraldo<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 3249-2032
               </p>
             </div>
             <div class="tips__place-links">
-              <a class="btn" href="#">Reserva via WhatsApp</a>
-              <a class="tips__place-more" href="#">Mais informações</a>
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Sumir%C3%AA+Av.+Romeu+T%C3%B3rtima+304+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
             </div>
           </article>
+
           <article class="tips__place">
             <div class="tips__place-info">
-              <h3 class="tips__place-name">Nome do Restaurante 2</h3>
+              <h4 class="tips__place-name">Fogão Mineiro</h4>
               <p class="tips__place-text">
-                Av. Exemplo, 456 — Centro<br>
-                Campinas — SP<br>
-                Tel: (00) 0000-0000
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Fog%C3%A3o+Mineiro+Rua+Coronel+Alfredo+Augusto+do+Nascimento+1052+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rua Coronel Alfredo Augusto do Nascimento, 1052 — Sousas<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 3258-6026
               </p>
             </div>
             <div class="tips__place-links">
-              <a class="btn" href="#">Reserva via WhatsApp</a>
-              <a class="tips__place-more" href="#">Mais informações</a>
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Fog%C3%A3o+Mineiro+Rua+Coronel+Alfredo+Augusto+do+Nascimento+1052+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
             </div>
           </article>
+
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h4 class="tips__place-name">Lastro Pizzaria</h4>
+              <p class="tips__place-text">
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Lastro+Pizzaria+Jos%C3%A9+Vilagelin+J%C3%BAnior+19+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rua José Vilagelin Júnior, 19 — Cambuí<br>
+                  Campinas — SP
+                </a>
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Lastro+Pizzaria+Jos%C3%A9+Vilagelin+J%C3%BAnior+19+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+              <a class="tips__place-more" href="https://www.ifood.com.br/delivery/campinas-sp/lastro-pizzaria-cambui-cambui/2d0b4791-c828-482b-ba06-5af4cdbf83e3" target="_blank" rel="noopener noreferrer">iFood</a>
+            </div>
+          </article>
+
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h4 class="tips__place-name">Bronco Burger</h4>
+              <p class="tips__place-text">
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Bronco+Burger+Jos%C3%A9+Vilagelin+J%C3%BAnior+25+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rua José Vilagelin Júnior, 25 — Cambuí<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 2121-1020
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Bronco+Burger+Jos%C3%A9+Vilagelin+J%C3%BAnior+25+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+              <a class="tips__place-more" href="https://www.ifood.com.br/delivery/campinas-sp/bronco-burger---cambui-cambui/4a21401f-c179-4581-aef2-990046a72c24" target="_blank" rel="noopener noreferrer">iFood</a>
+            </div>
+          </article>
+
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h4 class="tips__place-name">City Tortas</h4>
+              <p class="tips__place-text">
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=City+Tortas+J%C3%BAlio+de+Mesquita+73+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Av. Júlio de Mesquita, 73 — Cambuí<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 2512-0414
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=City+Tortas+J%C3%BAlio+de+Mesquita+73+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+            </div>
+          </article>
+            </div>
+          </details>
+
+          <details class="tips__group-block">
+            <summary class="tips__group">Bares</summary>
+            <div class="tips__group-content">
+              <article class="tips__place">
+            <div class="tips__place-info">
+              <h4 class="tips__place-name">Facca Bar</h4>
+              <p class="tips__place-text">
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=Facca+Bar+Rua+Concei%C3%A7%C3%A3o+157+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rua Conceição, 157 — Centro<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 3232-0970
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Facca+Bar+Rua+Concei%C3%A7%C3%A3o+157+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+            </div>
+          </article>
+
+          <article class="tips__place">
+            <div class="tips__place-info">
+              <h4 class="tips__place-name">City Bar</h4>
+              <p class="tips__place-text">
+                <a
+                  class="tips__place-address"
+                  href="https://www.google.com/maps/search/?api=1&amp;query=City+Bar+J%C3%BAlio+de+Mesquita+450+Campinas"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Av. Júlio de Mesquita, 450 — Cambuí<br>
+                  Campinas — SP
+                </a><br>
+                Tel: (19) 3252-5296
+              </p>
+            </div>
+            <div class="tips__place-links">
+              <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=City+Bar+J%C3%BAlio+de+Mesquita+450+Campinas" target="_blank" rel="noopener noreferrer">Ver no mapa</a>
+            </div>
+          </article>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -266,6 +452,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>

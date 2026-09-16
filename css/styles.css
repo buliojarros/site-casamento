@@ -996,6 +996,101 @@ button.btn {
   margin: 0 0 1.75rem;
 }
 
+.tips__group-block {
+  width: 100%;
+}
+
+.tips__group-block + .tips__group-block {
+  border-top: 1px solid rgba(99, 41, 65, 0.18);
+}
+
+.tips__group-block > summary.tips__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  padding: 1.75rem 0 1.25rem;
+  margin: 0;
+  transition: color 0.25s ease;
+}
+
+.tips__group-block:first-of-type > summary.tips__group {
+  padding-top: 0;
+}
+
+.tips__group-block > summary.tips__group::-webkit-details-marker {
+  display: none;
+}
+
+.tips__group-block > summary.tips__group::marker {
+  content: "";
+}
+
+.tips__group-block > summary.tips__group::after {
+  content: "";
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 1.5px solid var(--burgundy);
+  border-bottom: 1.5px solid var(--burgundy);
+  transform: rotate(45deg);
+  transition: transform 0.55s ease-in-out, border-color 0.25s ease, margin-top 0.55s ease-in-out;
+  margin-top: -0.15em;
+}
+
+.tips__group-block[open] > summary.tips__group::after {
+  transform: rotate(-135deg);
+  margin-top: 0.1em;
+}
+
+.tips__group-block > summary.tips__group:hover {
+  color: var(--olive);
+}
+
+.tips__group-block > summary.tips__group:hover::after {
+  border-color: var(--olive);
+}
+
+.tips__group {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+.tips__group-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+  transition:
+    max-height 0.6s ease-in-out,
+    opacity 0.5s ease-in-out,
+    padding-bottom 0.6s ease-in-out;
+}
+
+.tips__group-block[open] .tips__group-content {
+  max-height: 2400px;
+  opacity: 1;
+  padding-bottom: 0.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tips__group-content {
+    transition: none;
+  }
+
+  .tips__group-block > summary.tips__group,
+  .tips__group-block > summary.tips__group::after {
+    transition: none;
+  }
+}
+
 .tips__place {
   display: flex;
   flex-direction: column;
@@ -1029,6 +1124,15 @@ button.btn {
   line-height: 1.55;
   color: #8a8580;
   margin: 0;
+}
+
+.tips__place-address {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tips__place-address:hover {
+  color: var(--olive);
 }
 
 .tips__place-links {
