@@ -75,6 +75,17 @@
   --pattern-tile: clamp(280px, 40vw, 480px);
   --pattern-tile-small: clamp(140px, 20vw, 220px);
   --pattern-shift-y: calc(var(--pattern-tile) * -0.1);
+  --paper-texture: url('../assets/images/paper-texture.png');
+  --paper-texture-size: 320px;
+  --paper-texture-opacity: 0.08;
+  --paper-texture-opacity-dark: 0.07;
+  --paper-texture-blend: soft-light;
+  --paper-texture-blend-dark: soft-light;
+  --paper-texture-size-nav: 520px;
+  --paper-texture-opacity-nav: 0.035;
+  --paper-texture-size-soft: 560px;
+  --paper-texture-opacity-soft: 0.045;
+  --paper-texture-size-burgundy: 280px;
 }
 
 *,
@@ -183,6 +194,37 @@ ul {
 }
 
 /* =============================================
+   PAPER TEXTURE — subtle grain overlay
+   ============================================= */
+
+.cta-band::after,
+.band::after,
+.closing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size);
+  background-repeat: repeat;
+  opacity: var(--paper-texture-opacity);
+  mix-blend-mode: var(--paper-texture-blend);
+  pointer-events: none;
+}
+
+.cta-band::after,
+.band--pattern-burgundy::after {
+  opacity: var(--paper-texture-opacity-dark);
+  mix-blend-mode: var(--paper-texture-blend-dark);
+}
+
+.cta-band > *,
+.closing > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =============================================
    PATTERN SECTION BANDS
    ============================================= */
 
@@ -197,13 +239,13 @@ ul {
   content: "";
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
 }
 
 .band > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .band--sage {
@@ -396,6 +438,20 @@ ul {
   background-blend-mode: soft-light;
   transform: translateX(-100%);
   transition: transform var(--transition);
+  overflow: hidden;
+}
+
+.nav-drawer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-nav);
+  background-repeat: repeat;
+  opacity: var(--paper-texture-opacity-nav);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
 }
 
 .nav-drawer.is-open {
@@ -403,6 +459,8 @@ ul {
 }
 
 .nav-drawer__list {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -538,6 +596,10 @@ ul {
   justify-content: center;
   text-align: center;
   background-color: var(--cream);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-soft);
+  background-repeat: repeat;
+  background-blend-mode: overlay;
   overflow: hidden;
 }
 
@@ -837,20 +899,25 @@ button.btn {
 
 .dress-code--gold {
   background-color: var(--olive);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size);
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
 }
 
 .dress-code--gold::before {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat;
-  opacity: 0.05;
+  opacity: 0.09;
   pointer-events: none;
 }
 
 .dress-code > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .dress-code__label {
@@ -913,13 +980,17 @@ button.btn {
   justify-content: flex-start;
   gap: 1rem;
   background-color: var(--cream);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-soft);
+  background-repeat: repeat;
+  background-blend-mode: overlay;
   padding: 2.5rem 1.5rem;
   text-align: center;
 }
 
 .tips > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .tips__sheet {
@@ -1242,11 +1313,15 @@ button.btn {
 
 .playlist-section__player::before {
   background-color: var(--burgundy);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-burgundy);
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
 }
 
 .playlist-section__player::after {
-  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat-x;
-  opacity: 0.1;
+  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat;
+  opacity: 0.14;
 }
 
 .playlist-section__embed {
@@ -1730,6 +1805,10 @@ button.btn {
   justify-content: flex-start;
   gap: 0.75rem;
   background-color: var(--sage);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size);
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
   padding: 2.5rem 1.5rem;
   text-align: center;
   overflow: hidden;
@@ -1747,7 +1826,7 @@ button.btn {
 
 .presentes > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .presentes .section-title {
