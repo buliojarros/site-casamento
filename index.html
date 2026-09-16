@@ -2,65 +2,62 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Beatriz & Julio — Save the Date</title>
   <meta name="description" content="Save the date: Beatriz e Julio se casam em 12 de junho de 2027 em Campinas — SP.">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=94">
 </head>
 <body class="save-the-date-page">
-  <label class="save-the-date__grayscale-toggle">
-    <input type="checkbox" id="grayscale-toggle" checked>
-    <span>P&amp;B</span>
-  </label>
-
   <main class="save-the-date">
     <section class="save-the-date__hero">
       <img
         class="save-the-date__image"
-        src="assets/images/basilica-interior.jpg"
-        alt="Interior da Basílica Nossa Senhora do Carmo"
+        src="assets/images/save-the-date.png"
+        alt="Save the Date — Beatriz e Julio, 12 de junho de 2027, Campinas, SP"
+        width="472"
+        height="1024"
       >
-      <div class="save-the-date__overlay" aria-hidden="true"></div>
-
-      <div class="save-the-date__content container">
-        <p class="save-the-date__label">Save the Date</p>
-        <h1 class="save-the-date__couple">
-          <span class="save-the-date__couple-name">Beatriz</span>
-          <span class="save-the-date__star" aria-hidden="true">✶</span>
-          <span class="save-the-date__couple-name">Julio</span>
-        </h1>
-
-        <div class="event-details save-the-date__details">
-          <div class="event-details__col">
-            12 Junho 2027<br>
-            às 18:00
-          </div>
-          <div aria-hidden="true"></div>
-          <div class="event-details__col event-details__col--right">
-            Basílica Nossa Senhora do Carmo<br>
-            Campinas — SP
-          </div>
-        </div>
-
-        <p class="save-the-date__note">Convite completo em breve.</p>
-      </div>
     </section>
   </main>
 
+  <img
+    class="save-the-date__kimi"
+    src="assets/images/dog-dark.png"
+    alt=""
+    aria-hidden="true"
+    hidden
+  >
+
   <script>
     (function () {
-      var toggle = document.getElementById('grayscale-toggle');
-      var image = document.querySelector('.save-the-date__image');
-      if (!toggle || !image) return;
+      var image = document.querySelector(".save-the-date__image");
+      var kimi = document.querySelector(".save-the-date__kimi");
+      if (!image || !kimi) return;
 
-      function updateGrayscale() {
-        var isGrayscale = toggle.checked;
-        image.classList.toggle('save-the-date__image--grayscale', isGrayscale);
-        document.body.classList.toggle('save-the-date-page--grayscale', isGrayscale);
+      var kimiWidth = 64;
+
+      function updateKimi() {
+        var imageWidth = image.getBoundingClientRect().width;
+        var kimiSize = kimi.getBoundingClientRect().width || kimiWidth;
+        kimi.hidden = window.innerWidth <= imageWidth + 8 * kimiSize;
       }
 
-      toggle.addEventListener('change', updateGrayscale);
-      updateGrayscale();
+      function watchKimi() {
+        updateKimi();
+        if ("ResizeObserver" in window) {
+          var observer = new ResizeObserver(updateKimi);
+          observer.observe(image);
+          observer.observe(kimi);
+        } else {
+          window.addEventListener("resize", updateKimi);
+        }
+      }
+
+      if (image.complete) {
+        watchKimi();
+      } else {
+        image.addEventListener("load", watchKimi);
+      }
     })();
   </script>
 </body>
