@@ -1069,15 +1069,14 @@ button.btn {
   opacity: 0;
   padding-bottom: 0;
   transition:
-    max-height 0.6s ease-in-out,
-    opacity 0.5s ease-in-out,
-    padding-bottom 0.6s ease-in-out;
+    max-height 0.55s ease-in-out,
+    opacity 0.45s ease-in-out,
+    padding-bottom 0.55s ease-in-out;
 }
 
 .tips__group-block[open] .tips__group-content {
-  max-height: 2400px;
   opacity: 1;
-  padding-bottom: 0.25rem;
+  padding-bottom: 1.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1963,6 +1962,54 @@ button.btn {
 
   .invitation__rsvp {
     margin-top: 1.5rem;
+  }
+
+  .tips__place {
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .tips__place + .tips__place {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .tips__place-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tips__place-name {
+    font-size: 0.875rem;
+    color: var(--burgundy);
+    margin-bottom: 0.35rem;
+  }
+
+  .tips__place-text {
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .tips__place-links {
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 0.15rem;
+  }
+
+  .tips__place-links .btn {
+    min-height: 44px;
+    height: auto;
+    padding: 0.7rem 1.25rem;
+  }
+
+  .tips__place-links .tips__place-more {
+    min-height: 44px;
+    padding: 0.55rem 1rem;
+  }
+
+  .tips__group-block > summary.tips__group {
+    padding: 1.35rem 0 1rem;
   }
 }
 
