@@ -570,6 +570,17 @@ ul {
   margin: 0 0 0.55rem;
 }
 
+.invitation__venue-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.invitation__venue-link:hover .invitation__venue-name,
+.invitation__venue-link:hover .invitation__venue-address {
+  color: var(--olive);
+}
+
 .invitation__venue-name {
   font-family: var(--font-sans);
   font-size: clamp(0.95rem, 3.2vw, 1.2rem);
