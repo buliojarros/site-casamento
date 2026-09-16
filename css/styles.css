@@ -1627,7 +1627,7 @@ button.btn {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat-x;
+  background: url('../assets/images/pattern-dark-outline.png') center var(--pattern-shift-y) / var(--pattern-tile) auto repeat;
   opacity: 0.05;
   pointer-events: none;
 }
