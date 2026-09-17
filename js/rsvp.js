@@ -12,7 +12,7 @@
     token: null,
     invitationId: null,
     guests: [],
-    unlockFirstName: "",
+    greeterName: "",
   };
 
   var modal = document.getElementById("rsvp-modal");
@@ -60,6 +60,23 @@
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z\s-]/g, "")
       .split(/\s+/)[0];
+  }
+
+  function displayFirstName(fullName) {
+    return String(fullName || "").trim().split(/\s+/)[0] || "";
+  }
+
+  function findGreeterName(guests, inputFirstName) {
+    var normalized = normalizeName(inputFirstName);
+    var i;
+
+    for (i = 0; i < guests.length; i++) {
+      if (normalizeName(guests[i].fullName) === normalized) {
+        return displayFirstName(guests[i].fullName);
+      }
+    }
+
+    return "";
   }
 
   function isAdminLogin(firstName) {
@@ -181,7 +198,7 @@
     state.token = null;
     state.invitationId = null;
     state.guests = [];
-    state.unlockFirstName = "";
+    state.greeterName = "";
     showMessage("", "");
 
     var firstName = document.getElementById("rsvp-first-name");
@@ -237,7 +254,7 @@
     if (greeting) {
       greeting.textContent =
         "Olá, " +
-        (state.unlockFirstName || "convidado") +
+        (state.greeterName || "convidado") +
         "! Confirme a presença de cada pessoa:";
     }
 
@@ -351,8 +368,6 @@
       return;
     }
 
-    state.unlockFirstName = firstName.trim().split(/\s+/)[0];
-
     apiRequest("unlock", { firstName: firstName, last4: last4 })
       .then(function (data) {
         if (!data.ok) {
@@ -363,6 +378,7 @@
         state.token = data.token;
         state.invitationId = data.invitationId;
         state.guests = data.guests;
+        state.greeterName = findGreeterName(data.guests, firstName);
         renderGuestList(data.guests);
         setStep("rsvp");
         showMessage("", "");
@@ -438,7 +454,7 @@
     }
 
     messageEl.innerHTML =
-      "Vai fazer falta, mas entendemos demais.<br><br>" + editNote;
+      "Sentiremos muito a sua falta.<br><br>" + editNote;
   }
 
   function statusLabel(status) {

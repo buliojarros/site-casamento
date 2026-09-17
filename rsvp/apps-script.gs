@@ -208,7 +208,7 @@ function unlock(payload) {
   if (!matched) {
     return {
       ok: false,
-      message: "Não encontramos seu nome na lista. Entre em contato com os noivos.",
+      message: "Não encontramos seu nome na lista.\nEntre em contato com os noivos.",
     };
   }
 
