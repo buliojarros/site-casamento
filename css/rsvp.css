@@ -1,0 +1,302 @@
+/* RSVP modal — extensions on top of styles.css */
+
+.rsvp-modal__label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8580;
+}
+
+.rsvp-modal__field {
+  margin-bottom: 1rem;
+}
+
+.rsvp-modal__error {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--burgundy);
+  background: color-mix(in srgb, var(--burgundy) 8%, white);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.rsvp-modal__success {
+  margin-bottom: 1rem;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--olive);
+  background: color-mix(in srgb, var(--olive) 10%, white);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.rsvp-modal.is-open {
+  overflow-y: auto;
+}
+
+.rsvp-modal.is-open .rsvp-modal__dialog {
+  margin: auto;
+}
+
+.rsvp-modal__dialog--wide {
+  max-width: min(440px, 100%);
+}
+
+.rsvp-modal__dialog.is-expanded {
+  max-width: min(520px, 100%);
+  max-height: calc(100dvh - 2.5rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rsvp-modal__dialog.is-expanded .rsvp-modal__title,
+.rsvp-modal__dialog.is-expanded #rsvp-message {
+  flex-shrink: 0;
+}
+
+.rsvp-modal__dialog.is-expanded .rsvp-modal__step:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.rsvp-modal__dialog.is-expanded .rsvp-modal__back,
+.rsvp-modal__dialog.is-expanded .rsvp-modal__text,
+.rsvp-modal__dialog.is-expanded .rsvp-modal__stats,
+.rsvp-modal__dialog.is-expanded .rsvp-modal__actions {
+  flex-shrink: 0;
+}
+
+.rsvp-modal__dialog.is-expanded #rsvp-confirm-form {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.rsvp-modal__dialog.is-loading {
+  pointer-events: none;
+}
+
+.rsvp-modal__loader {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(244, 231, 219, 0.72);
+  border-radius: 8px;
+}
+
+.rsvp-modal__loader[hidden] {
+  display: none !important;
+}
+
+.rsvp-modal__loader-spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #d8d0c8;
+  border-top-color: var(--olive);
+  border-radius: 50%;
+  animation: rsvp-spin 0.7s linear infinite;
+}
+
+@keyframes rsvp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rsvp-modal__step[hidden] {
+  display: none !important;
+}
+
+.rsvp-modal__guest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.rsvp-modal__dialog.is-expanded .rsvp-modal__guest-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-bottom: 1rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rsvp-modal__guest {
+  padding: 0.85rem;
+  background: #fff;
+  border: 1px solid #d8d0c8;
+  border-radius: 8px;
+}
+
+.rsvp-modal__guest-name {
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.rsvp-modal__choices {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rsvp-modal__choice {
+  flex: 1;
+  min-width: 120px;
+}
+
+.rsvp-modal__choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rsvp-modal__choice span {
+  display: block;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #7a7570;
+  background: #f8f4ef;
+  border: 1px solid #d8d0c8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.rsvp-modal__choice input:checked + span {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: var(--white);
+}
+
+.rsvp-modal__choice input[value="declined"]:checked + span {
+  background: var(--burgundy);
+  border-color: var(--burgundy);
+}
+
+.rsvp-modal__back {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9a9590;
+  cursor: pointer;
+  text-align: left;
+}
+
+.rsvp-modal__back:hover {
+  color: var(--olive);
+}
+
+.rsvp-modal__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rsvp-modal__stat {
+  padding: 0.65rem 0.35rem;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #d8d0c8;
+  border-radius: 6px;
+}
+
+.rsvp-modal__stat-value {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--olive);
+}
+
+.rsvp-modal__stat-label {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9a9590;
+}
+
+.rsvp-modal__admin-list {
+  border: 1px solid #d8d0c8;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.rsvp-modal__dialog.is-expanded .rsvp-modal__admin-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rsvp-modal__admin-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #ece6df;
+}
+
+.rsvp-modal__admin-row:last-child {
+  border-bottom: none;
+}
+
+.rsvp-modal__admin-name {
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.rsvp-modal__admin-badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+.rsvp-modal__admin-badge--confirmed {
+  color: var(--olive);
+  background: color-mix(in srgb, var(--olive) 12%, white);
+}
+
+.rsvp-modal__admin-badge--declined {
+  color: var(--burgundy);
+  background: color-mix(in srgb, var(--burgundy) 10%, white);
+}
+
+.rsvp-modal__admin-badge--pending {
+  color: #8a8580;
+  background: #f0ebe4;
+}
+

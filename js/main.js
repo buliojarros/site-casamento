@@ -58,81 +58,12 @@
 
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
+      var rsvpModal = document.getElementById("rsvp-modal");
       if (rsvpModal && rsvpModal.classList.contains("is-open")) {
-        closeRsvpModal();
-      } else {
-        setMenuOpen(false);
+        return;
       }
+      setMenuOpen(false);
     }
-  });
-
-  var RSVP_PHONE = "5512996263115";
-  var RSVP_MESSAGE =
-    "Olá! Sou {nome} e confirmo presença no casamento de Beatriz e Julio (12/06/2027).";
-
-  var rsvpModal = document.getElementById("rsvp-modal");
-  var rsvpInput = document.getElementById("rsvp-name");
-  var rsvpForm = document.getElementById("rsvp-form");
-  var rsvpTrigger = null;
-
-  function openRsvpModal(trigger) {
-    if (!rsvpModal || !rsvpInput) return;
-
-    rsvpTrigger = trigger || null;
-    rsvpModal.classList.add("is-open");
-    rsvpInput.value = "";
-    rsvpInput.focus();
-  }
-
-  function closeRsvpModal() {
-    if (!rsvpModal) return;
-
-    rsvpModal.classList.remove("is-open");
-
-    if (rsvpTrigger) {
-      rsvpTrigger.focus();
-      rsvpTrigger = null;
-    }
-  }
-
-  if (rsvpModal) {
-    rsvpModal.addEventListener("click", function (event) {
-      if (event.target === rsvpModal) {
-        closeRsvpModal();
-      }
-    });
-  }
-
-  if (rsvpForm) {
-    rsvpForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-      submitRsvp();
-    });
-  }
-
-  document.querySelectorAll("[data-rsvp-close]").forEach(function (el) {
-    el.addEventListener("click", closeRsvpModal);
-  });
-
-  function submitRsvp() {
-    var nome = rsvpInput.value.trim();
-    if (!nome) {
-      rsvpInput.focus();
-      return;
-    }
-
-    var text = RSVP_MESSAGE.replace("{nome}", nome);
-    var url =
-      "https://wa.me/" + RSVP_PHONE + "?text=" + encodeURIComponent(text);
-
-    window.open(url, "_blank", "noopener,noreferrer");
-    closeRsvpModal();
-  }
-
-  document.querySelectorAll("[data-rsvp]").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      openRsvpModal(btn);
-    });
   });
 
   document.querySelectorAll("[data-copy]").forEach(function (btn) {

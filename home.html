@@ -6,7 +6,8 @@
   <title>Beatriz & Julio — Casamento</title>
   <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
   <link rel="icon" href="assets/images/monograma-gold.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=124">
+  <link rel="stylesheet" href="css/styles.css?v=129">
+  <link rel="stylesheet" href="css/rsvp.css?v=4">
 </head>
 <body>
   <!-- CONFIG
@@ -327,34 +328,75 @@
               loading="lazy"
             ></iframe>
           </div>
+          <p class="playlist-section__credit">feito com amor por Bia e Julio</p>
         </div>
       </section>
     </div>
   </main>
 
   <div class="rsvp-modal" id="rsvp-modal">
-    <div class="rsvp-modal__dialog" role="dialog" aria-labelledby="rsvp-modal-title" aria-modal="true">
+    <div class="rsvp-modal__dialog rsvp-modal__dialog--wide" role="dialog" aria-labelledby="rsvp-modal-title" aria-modal="true">
       <button type="button" class="rsvp-modal__close" data-rsvp-close aria-label="Fechar">×</button>
       <h2 id="rsvp-modal-title" class="rsvp-modal__title">Confirmar presença</h2>
-      <p class="rsvp-modal__text">Como podemos te chamar?</p>
-      <form class="rsvp-modal__form" id="rsvp-form">
-        <label for="rsvp-name" class="visually-hidden">Seu nome</label>
-        <input
-          type="text"
-          id="rsvp-name"
-          class="rsvp-modal__input"
-          name="name"
-          placeholder="Seu nome"
-          autocomplete="name"
-          maxlength="80"
-        >
-        <div class="rsvp-modal__actions">
-          <button type="submit" class="btn btn--olive">Enviar</button>
-        </div>
-      </form>
+
+      <div id="rsvp-message" class="rsvp-modal__error" hidden></div>
+
+      <div class="rsvp-modal__step" data-rsvp-step="unlock">
+        <p class="rsvp-modal__text" id="rsvp-unlock-hint">Informe seu primeiro nome e os últimos 4 dígitos do celular.<br>Por favor, confirmar até 15 de março de 2027.</p>
+        <form id="rsvp-unlock-form" novalidate>
+          <div class="rsvp-modal__field">
+            <label for="rsvp-first-name" class="rsvp-modal__label">Primeiro nome</label>
+            <input
+              type="text"
+              id="rsvp-first-name"
+              class="rsvp-modal__input"
+              name="firstName"
+              placeholder="Ex.: João"
+              autocomplete="given-name"
+              maxlength="40"
+              required
+            >
+          </div>
+          <div class="rsvp-modal__field">
+            <label for="rsvp-second-field" class="rsvp-modal__label" id="rsvp-second-label">Últimos 4 dígitos do celular</label>
+            <input
+              type="text"
+              id="rsvp-second-field"
+              class="rsvp-modal__input"
+              name="secondField"
+              placeholder="Ex.: 5432"
+              inputmode="numeric"
+              maxlength="4"
+              required
+            >
+          </div>
+          <div class="rsvp-modal__actions">
+            <button type="submit" class="btn btn--olive" id="rsvp-unlock-submit">Continuar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="rsvp-modal__step" data-rsvp-step="rsvp" hidden>
+        <button type="button" class="rsvp-modal__back" data-rsvp-back>← Voltar</button>
+        <p class="rsvp-modal__text" id="rsvp-greeting">Confirme a presença de cada pessoa:</p>
+        <form id="rsvp-confirm-form">
+          <div class="rsvp-modal__guest-list" id="rsvp-guest-list"></div>
+          <div class="rsvp-modal__actions">
+            <button type="submit" class="btn btn--olive">Enviar confirmação</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="rsvp-modal__step" data-rsvp-step="admin" hidden>
+        <button type="button" class="rsvp-modal__back" data-rsvp-back>← Voltar</button>
+        <p class="rsvp-modal__text">Confirmações recebidas.</p>
+        <div class="rsvp-modal__stats" id="rsvp-admin-stats"></div>
+        <div class="rsvp-modal__admin-list" id="rsvp-admin-list"></div>
+      </div>
     </div>
   </div>
 
-  <script src="js/main.js?v=17"></script>
+  <script src="js/main.js?v=18"></script>
+  <script src="js/rsvp.js?v=12"></script>
 </body>
 </html>
