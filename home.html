@@ -6,8 +6,8 @@
   <title>Beatriz & Julio — Casamento</title>
   <meta name="description" content="Beatriz e Julio vão se casar em 12 de junho de 2027. Confirme sua presença e veja todas as informações do casamento.">
   <link rel="icon" href="assets/images/monograma-gold.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css?v=129">
-  <link rel="stylesheet" href="css/rsvp.css?v=4">
+  <link rel="stylesheet" href="css/styles.css?v=130">
+  <link rel="stylesheet" href="css/rsvp.css?v=5">
 </head>
 <body>
   <!-- CONFIG
@@ -377,7 +377,6 @@
       </div>
 
       <div class="rsvp-modal__step" data-rsvp-step="rsvp" hidden>
-        <button type="button" class="rsvp-modal__back" data-rsvp-back>← Voltar</button>
         <p class="rsvp-modal__text" id="rsvp-greeting">Confirme a presença de cada pessoa:</p>
         <form id="rsvp-confirm-form">
           <div class="rsvp-modal__guest-list" id="rsvp-guest-list"></div>
@@ -387,9 +386,14 @@
         </form>
       </div>
 
+      <div class="rsvp-modal__step" data-rsvp-step="thanks" hidden>
+        <p class="rsvp-modal__text rsvp-modal__text--thanks" id="rsvp-thanks-message"></p>
+        <div class="rsvp-modal__actions">
+          <button type="button" class="btn btn--olive" data-rsvp-edit>Editar confirmação</button>
+        </div>
+      </div>
+
       <div class="rsvp-modal__step" data-rsvp-step="admin" hidden>
-        <button type="button" class="rsvp-modal__back" data-rsvp-back>← Voltar</button>
-        <p class="rsvp-modal__text">Confirmações recebidas.</p>
         <div class="rsvp-modal__stats" id="rsvp-admin-stats"></div>
         <div class="rsvp-modal__admin-list" id="rsvp-admin-list"></div>
       </div>
@@ -397,6 +401,6 @@
   </div>
 
   <script src="js/main.js?v=18"></script>
-  <script src="js/rsvp.js?v=12"></script>
+  <script src="js/rsvp.js?v=19"></script>
 </body>
 </html>

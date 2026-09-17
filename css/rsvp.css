@@ -121,6 +121,11 @@
   display: none !important;
 }
 
+.rsvp-modal__text--thanks {
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
 .rsvp-modal__guest-list {
   display: flex;
   flex-direction: column;

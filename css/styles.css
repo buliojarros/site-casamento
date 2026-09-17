@@ -1601,6 +1601,10 @@ button.btn {
   max-width: 400px;
   padding: 2.75rem 2rem 2rem;
   background-color: var(--cream);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-soft);
+  background-repeat: repeat;
+  background-blend-mode: overlay;
   border: 1px solid #d8d0c8;
   border-radius: 8px;
   box-shadow: 0 16px 48px rgba(29, 29, 27, 0.2);

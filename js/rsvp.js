@@ -134,12 +134,14 @@
     var titles = {
       unlock: "Confirmar presença",
       rsvp: "Sua confirmação",
-      admin: "Confirmar presença",
+      thanks: "",
+      admin: "Confirmações recebidas",
     };
 
     var titleEl = document.getElementById("rsvp-modal-title");
     if (titleEl) {
       titleEl.textContent = titles[step] || "RSVP";
+      titleEl.hidden = false;
     }
 
     updateDialogSize(step);
@@ -397,7 +399,9 @@
             if (guest) guest.status = item.status;
           });
 
-          showMessage("success", "Confirmação enviada com sucesso!");
+          showMessage("", "");
+          setStep("thanks");
+          renderThanks(responses);
         })
         .catch(function (err) {
           showMessage("error", err.message);
@@ -405,6 +409,34 @@
     } catch (err) {
       showMessage("error", err.message);
     }
+  }
+
+  function renderThanks(responses) {
+    var messageEl = document.getElementById("rsvp-thanks-message");
+    var titleEl = document.getElementById("rsvp-modal-title");
+    if (!messageEl) return;
+
+    var hasConfirmed = responses.some(function (item) {
+      return item.status === "confirmed";
+    });
+    var editNote =
+      "Se mudar de ideia, é só voltar aqui até " +
+      CONFIG.RSVP_DEADLINE_LABEL +
+      ".";
+
+    if (titleEl) {
+      titleEl.textContent = hasConfirmed ? "Que alegria!" : "Recebemos sua resposta";
+    }
+
+    if (hasConfirmed) {
+      messageEl.innerHTML =
+        "Mal podemos esperar para celebrar com você!<br><br>" +
+        editNote;
+      return;
+    }
+
+    messageEl.innerHTML =
+      "Vai fazer falta, mas entendemos demais.<br><br>" + editNote;
   }
 
   function statusLabel(status) {
@@ -472,6 +504,14 @@
       showMessage("", "");
       setStep("unlock");
       updateUnlockFormState();
+    });
+  });
+
+  document.querySelectorAll("[data-rsvp-edit]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      showMessage("", "");
+      renderGuestList(state.guests);
+      setStep("rsvp");
     });
   });
 
