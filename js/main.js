@@ -107,47 +107,6 @@
     });
   });
 
-  function initCarousel(root) {
-    var track = root.querySelector(".carousel__slides");
-    var slides = root.querySelectorAll(".carousel__slide");
-    var prevBtn = root.querySelector(".carousel__btn--prev");
-    var nextBtn = root.querySelector(".carousel__btn--next");
-    var index = 0;
-    var total = slides.length;
-
-    if (!track || total <= 1) {
-      if (prevBtn) prevBtn.disabled = true;
-      if (nextBtn) nextBtn.disabled = true;
-      return;
-    }
-
-    function update() {
-      track.style.transform = "translateX(-" + index * 100 + "%)";
-      if (prevBtn) prevBtn.disabled = index === 0;
-      if (nextBtn) nextBtn.disabled = index === total - 1;
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener("click", function () {
-        if (index > 0) {
-          index -= 1;
-          update();
-        }
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener("click", function () {
-        if (index < total - 1) {
-          index += 1;
-          update();
-        }
-      });
-    }
-
-    update();
-  }
-
   // Header: light hamburger over hero + colored sections (olive / sage)
   var header = document.querySelector(".site-header");
   var darkBgSections = document.querySelectorAll(".hero, .dress-code--gold, .presentes");
@@ -178,8 +137,6 @@
     window.addEventListener("resize", updateHeaderTone, { passive: true });
     updateHeaderTone();
   }
-
-  document.querySelectorAll("[data-carousel]").forEach(initCarousel);
 
   document.querySelectorAll("[data-tips-tabs]").forEach(function (root) {
     var tabs = root.querySelectorAll(".tips__tab");
