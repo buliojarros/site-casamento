@@ -64,6 +64,14 @@
   --font-serif: 'Bethany Elingston', Georgia, "Times New Roman", serif;
   --font-sans: 'Whitney', system-ui, -apple-system, sans-serif;
   --font-script: 'Snell Roundhand', cursive;
+  --text-caption: 0.6875rem;
+  --text-body-sm: 0.75rem;
+  --text-body: 0.8125rem;
+  --text-body-lg: 0.875rem;
+  --text-title: clamp(0.95rem, 3.2vw, 1.2rem);
+  --text-script-sm: 1.15rem;
+  --text-script: 1.5rem;
+  --text-script-lg: 1.75rem;
 
   /* Layout */
   --max-width: 480px;
@@ -102,7 +110,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   font-weight: 400;
   line-height: 1.6;
   color: var(--text-dark);
@@ -154,7 +162,7 @@ ul {
 
 .section-title {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -165,7 +173,7 @@ ul {
 
 .section-subtitle {
   font-family: var(--font-script);
-  font-size: 1.15rem;
+  font-size: var(--text-script-sm);
   letter-spacing: 0;
   text-align: center;
   color: #8a8580;
@@ -174,7 +182,7 @@ ul {
 
 .section-label {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   text-align: center;
@@ -183,7 +191,7 @@ ul {
 }
 
 .body-text {
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   line-height: 1.7;
   color: var(--text-muted);
   text-align: center;
@@ -198,8 +206,7 @@ ul {
    ============================================= */
 
 .cta-band::after,
-.band::after,
-.closing::after {
+.band::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -387,7 +394,7 @@ ul {
 
 .site-header__couple {
   font-family: var(--font-serif);
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -575,7 +582,7 @@ ul {
   position: relative;
   z-index: 1;
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--cream);
@@ -605,7 +612,7 @@ ul {
 
 .invitation__date {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 3.4vw, 1.25rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -625,7 +632,7 @@ ul {
 
 .invitation__venue-label {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: #9a9590;
@@ -645,7 +652,7 @@ ul {
 
 .invitation__venue-name {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -656,7 +663,7 @@ ul {
 
 .invitation__venue-address {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.6;
@@ -666,7 +673,7 @@ ul {
 
 .invitation__amp {
   font-family: var(--font-script);
-  font-size: 1.75rem;
+  font-size: var(--text-script-lg);
   line-height: 1;
   color: #8a8580;
   margin: 0.15rem 0;
@@ -681,7 +688,7 @@ ul {
   border-radius: 8px;
   background-color: transparent;
   font-family: var(--font-script);
-  font-size: 1.5rem;
+  font-size: var(--text-script);
   line-height: 1.2;
   color: #8a8580;
   cursor: pointer;
@@ -717,7 +724,7 @@ ul {
 
 .event-details__date,
 .event-details__place {
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.75;
@@ -735,7 +742,7 @@ ul {
 
 .event-reception__label {
   font-family: var(--font-serif);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold);
@@ -743,7 +750,7 @@ ul {
 }
 
 .event-reception__text {
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   line-height: 1.7;
   letter-spacing: 0.04em;
   color: var(--text-muted);
@@ -793,7 +800,7 @@ ul {
   height: 40px;
   padding: 4px 1.25rem 0;
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.12em;
@@ -823,7 +830,7 @@ button.btn {
   border-color: #8a8580;
   background-color: transparent;
   font-family: var(--font-script);
-  font-size: 1.25rem;
+  font-size: var(--text-script);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
@@ -864,7 +871,7 @@ button.btn {
 .btn--cta {
   min-width: 240px;
   padding: 1rem 2rem;
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   letter-spacing: 0.18em;
   background-color: var(--cream);
   border-color: var(--cream);
@@ -922,7 +929,7 @@ button.btn {
 
 .dress-code__label {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: rgba(244, 231, 219, 0.7);
@@ -931,7 +938,7 @@ button.btn {
 
 .dress-code__title {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -942,7 +949,7 @@ button.btn {
 
 .dress-code__place {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.7;
@@ -953,7 +960,7 @@ button.btn {
 
 .dress-code__note {
   font-family: var(--font-script);
-  font-size: 1.5rem;
+  font-size: var(--text-script);
   color: var(--gold);
   margin: 0 0 1.35rem;
 }
@@ -1023,7 +1030,7 @@ button.btn {
   padding: 0.55rem 0.1rem 0.7rem;
   margin-bottom: -1px;
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #9a9590;
@@ -1059,7 +1066,7 @@ button.btn {
 
 .tips__intro {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: var(--text-body-lg);
   line-height: 1.6;
   letter-spacing: 0.03em;
   color: #9a9590;
@@ -1127,7 +1134,7 @@ button.btn {
 
 .tips__group {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   font-weight: 500;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -1189,7 +1196,7 @@ button.btn {
 
 .tips__place-text {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   letter-spacing: 0.02em;
   line-height: 1.55;
   color: #8a8580;
@@ -1227,7 +1234,7 @@ button.btn {
 
 .tips__place-more {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--burgundy);
@@ -1235,7 +1242,7 @@ button.btn {
 
 .tips__heading {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1250,11 +1257,16 @@ button.btn {
    ============================================= */
 
 .closing {
+  position: relative;
   height: 100vh;
   height: 100dvh;
   display: flex;
   flex-direction: column;
   background-color: var(--cream);
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-size-soft);
+  background-repeat: repeat;
+  background-blend-mode: overlay;
   overflow: hidden;
 }
 
@@ -1284,7 +1296,7 @@ button.btn {
 
 .playlist-section__intro {
   font-family: var(--font-sans);
-  font-size: 0.6875rem;
+  font-size: var(--text-body);
   font-weight: 400;
   color: #a39e98;
   letter-spacing: 0.12em;
@@ -1466,7 +1478,7 @@ button.btn {
 
 .info-card__title {
   font-family: var(--font-sans);
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -1475,7 +1487,7 @@ button.btn {
 }
 
 .info-card__text {
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   line-height: 1.7;
   margin-bottom: 0.5rem;
   z-index: 1;
@@ -1489,14 +1501,14 @@ button.btn {
 
 .info-card__links a {
   display: block;
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.04em;
   color: inherit;
   margin-bottom: 0.35rem;
 }
 
 .info-card--paper .info-card__title {
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  font-size: var(--text-title);
   font-weight: 500;
   letter-spacing: 0.14em;
   line-height: 1.45;
@@ -1586,7 +1598,7 @@ button.btn {
   padding: 0;
   border: none;
   background: none;
-  font-size: 1.75rem;
+  font-size: var(--text-script-lg);
   line-height: 1;
   color: #8a8580;
   cursor: pointer;
@@ -1598,7 +1610,7 @@ button.btn {
 
 .rsvp-modal__title {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: var(--text-title);
   font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1608,7 +1620,7 @@ button.btn {
 }
 
 .rsvp-modal__text {
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   letter-spacing: 0.04em;
   color: #9a9590;
   text-align: center;
@@ -1724,7 +1736,7 @@ button.btn {
 
 .presentes-hero__subtitle {
   font-family: var(--font-serif);
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold-light);
@@ -1750,7 +1762,7 @@ button.btn {
   border: 1px solid var(--gold);
   border-radius: 50%;
   font-family: var(--font-serif);
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   color: var(--gold);
   letter-spacing: 0.05em;
 }
@@ -1831,7 +1843,6 @@ button.btn {
 
 .presentes .section-title {
   margin: 0;
-  font-size: clamp(1.05rem, 3.6vw, 1.35rem);
   color: var(--cream);
 }
 
@@ -1850,11 +1861,10 @@ button.btn {
 
 .presentes-letter__lead {
   font-family: var(--font-sans);
-  font-size: clamp(0.9375rem, 2.8vw, 1.05rem);
+  font-size: var(--text-body-lg);
   line-height: 1.65;
   letter-spacing: 0.03em;
-  color: rgba(244, 231, 219, 0.9);
-  max-width: 600px;
+  color: var(--cream);
   margin: 0;
 }
 
@@ -1873,10 +1883,9 @@ button.btn {
 }
 
 .presentes-letter__text {
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   line-height: 1.7;
-  color: #a39e98;
-  max-width: 340px;
+  color: var(--cream);
   margin: 0 auto 1rem;
 }
 
@@ -1888,7 +1897,7 @@ button.btn {
 }
 
 .presentes-highlight__label {
-  font-size: 0.625rem;
+  font-size: var(--text-caption);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--gold-light);
@@ -1897,7 +1906,7 @@ button.btn {
 
 .presentes-highlight__title {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: var(--text-script);
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1905,7 +1914,7 @@ button.btn {
 }
 
 .presentes-highlight__text {
-  font-size: 0.8125rem;
+  font-size: var(--text-body);
   line-height: 1.75;
   color: rgba(244, 231, 219, 0.85);
   max-width: 320px;
@@ -1936,7 +1945,7 @@ button.btn {
 }
 
 .presentes-pix__label {
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(244, 231, 219, 0.7);
@@ -1985,7 +1994,7 @@ button.btn {
 .presentes-pix__hint {
   min-height: 1.1rem;
   margin: 0.35rem 0 0;
-  font-size: 0.6875rem;
+  font-size: var(--text-caption);
   color: var(--gold-light);
 }
 
@@ -2004,7 +2013,7 @@ button.btn {
 
 .presentes-footer-note__text {
   font-family: var(--font-script);
-  font-size: 1.15rem;
+  font-size: var(--text-script-sm);
   letter-spacing: 0;
   line-height: 1.75;
   color: #8a8580;
@@ -2065,13 +2074,13 @@ button.btn {
   }
 
   .tips__place-name {
-    font-size: 0.875rem;
+    font-size: var(--text-body-lg);
     color: var(--burgundy);
     margin-bottom: 0.35rem;
   }
 
   .tips__place-text {
-    font-size: 0.875rem;
+    font-size: var(--text-body-lg);
     line-height: 1.65;
   }
 
@@ -2103,7 +2112,7 @@ button.btn {
 
 @media (min-width: 768px) {
   body {
-    font-size: 0.875rem;
+    font-size: var(--text-body-lg);
   }
 
   .container {
@@ -2215,7 +2224,7 @@ button.btn {
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: var(--text-body-sm);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(244, 231, 219, 0.9);
