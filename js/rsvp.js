@@ -115,7 +115,7 @@
     }
 
     hint.innerHTML =
-      "Informe seu primeiro nome e os últimos 4 dígitos do celular.<br>Por favor, confirmar até " +
+      "Por favor, confirmar até " +
       CONFIG.RSVP_DEADLINE_LABEL +
       ".";
   }
@@ -271,7 +271,7 @@
       value +
       '"' +
       checked +
-      " required>" +
+      ">" +
       "<span>" +
       label +
       "</span>" +
@@ -286,14 +286,16 @@
       var selected = document.querySelector(
         'input[name="guest-' + guest.guestId + '"]:checked'
       );
-      if (!selected) {
-        throw new Error("Selecione uma opção para " + guest.fullName + ".");
-      }
+      if (!selected) return;
       responses.push({
         guestId: guest.guestId,
         status: selected.value,
       });
     });
+
+    if (!responses.length) {
+      throw new Error("Selecione pelo menos uma confirmação para enviar.");
+    }
 
     return responses;
   }

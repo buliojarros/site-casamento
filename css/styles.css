@@ -94,6 +94,8 @@
   --paper-texture-size-soft: 560px;
   --paper-texture-opacity-soft: 0.045;
   --paper-texture-size-burgundy: 280px;
+  --paper-texture-btn-size: 200px;
+  --paper-texture-btn-blend: overlay;
 }
 
 *,
@@ -229,6 +231,19 @@ ul {
 .closing > * {
   position: relative;
   z-index: 2;
+}
+
+.invitation__rsvp,
+.invitation__rsvp:hover,
+.rsvp-modal__dialog .btn--olive,
+.rsvp-modal__dialog .btn--olive:hover,
+.rsvp-modal__choice span,
+.rsvp-modal__choice input:checked + span,
+.rsvp-modal__choice input[value="declined"]:checked + span {
+  background-image: var(--paper-texture);
+  background-size: var(--paper-texture-btn-size);
+  background-repeat: repeat;
+  background-blend-mode: var(--paper-texture-btn-blend);
 }
 
 /* =============================================
@@ -686,7 +701,7 @@ ul {
   padding: 0.85rem 2.25rem 0.7rem;
   border: 1px solid #8a8580;
   border-radius: 8px;
-  background-color: transparent;
+  background-color: var(--cream);
   font-family: var(--font-script);
   font-size: var(--text-script);
   line-height: 1.2;
@@ -1669,7 +1684,7 @@ button.btn {
   color: #1d1d1b;
   -webkit-text-fill-color: #1d1d1b;
   caret-color: #1d1d1b;
-  background-color: #ffffff;
+  background-color: transparent;
   border: 1px solid #c8c0b8;
   border-radius: 8px;
   outline: none;
@@ -1688,6 +1703,14 @@ button.btn {
   -webkit-text-fill-color: #b0aaa4;
 }
 
+.rsvp-modal__input:-webkit-autofill,
+.rsvp-modal__input:-webkit-autofill:hover,
+.rsvp-modal__input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--cream) inset;
+  -webkit-text-fill-color: #1d1d1b;
+  transition: background-color 9999s ease-out 0s;
+}
+
 .rsvp-modal__actions {
   display: flex;
   justify-content: center;
@@ -1704,6 +1727,14 @@ button.btn {
   border-radius: 8px;
   line-height: 1;
   letter-spacing: 0.12em;
+}
+
+.rsvp-modal__dialog .btn--olive {
+  background-color: var(--olive);
+}
+
+.rsvp-modal__dialog .btn--olive:hover {
+  background-color: var(--burgundy);
 }
 
 .visually-hidden {

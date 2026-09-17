@@ -143,7 +143,7 @@
 
 .rsvp-modal__guest {
   padding: 0.85rem;
-  background: #fff;
+  background: transparent;
   border: 1px solid #d8d0c8;
   border-radius: 8px;
 }
@@ -181,7 +181,7 @@
   text-transform: uppercase;
   text-align: center;
   color: #7a7570;
-  background: #f8f4ef;
+  background-color: var(--cream);
   border: 1px solid #d8d0c8;
   border-radius: 6px;
   cursor: pointer;
@@ -189,13 +189,13 @@
 }
 
 .rsvp-modal__choice input:checked + span {
-  background: var(--olive);
+  background-color: var(--olive);
   border-color: var(--olive);
   color: var(--white);
 }
 
 .rsvp-modal__choice input[value="declined"]:checked + span {
-  background: var(--burgundy);
+  background-color: var(--burgundy);
   border-color: var(--burgundy);
 }
 
