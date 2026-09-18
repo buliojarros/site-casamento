@@ -69,7 +69,22 @@ function parseRequestBody(e) {
   return JSON.parse(raw);
 }
 
-function doGet() {
+function doGet(e) {
+  var params = e && e.parameter ? e.parameter : {};
+  if (params.action) {
+    try {
+      var payload = params.payload ? JSON.parse(params.payload) : {};
+      if (params.action === "unlock") return jsonResponse(unlock(payload));
+      if (params.action === "rsvp") return jsonResponse(saveRsvp(payload));
+      if (params.action === "admin") return jsonResponse(admin(payload));
+      return jsonResponse({ ok: false, message: "Ação inválida." });
+    } catch (err) {
+      return jsonResponse({
+        ok: false,
+        message: "Erro no servidor: " + (err && err.message ? err.message : String(err)),
+      });
+    }
+  }
   return ContentService.createTextOutput("RSVP API OK");
 }
 
@@ -158,9 +173,9 @@ function readGuests() {
         guestId: String(row[map.guest_id]),
         invitationId: String(row[map.invitation_id]),
         fullName: String(row[map.full_name]),
-        firstName: String(row[map.first_name] || normalizeName(row[map.full_name])),
+        firstName: normalizeName(row[map.first_name] || row[map.full_name]),
         phone: normalizePhone(row[map.phone]),
-        phoneLast4: String(row[map.phone_last4] || phoneLast4(row[map.phone])),
+        phoneLast4: phoneLast4(row[map.phone_last4] || row[map.phone]),
         canUnlock: isTruthy(row[map.can_unlock]),
       };
     });

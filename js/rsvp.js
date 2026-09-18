@@ -2,7 +2,7 @@
   "use strict";
 
   var CONFIG = {
-    API_URL: "https://script.google.com/macros/s/AKfycbwmA9ndpoK2_9Y0COyy1MScOqBapNeMuGhMWMpe-gfeT4oK-oyFem2-RfnL1R8U1Jc18Q/exec",
+    API_URL: "https://script.google.com/macros/s/AKfycbyccf-Z1sGBcZFKEh-r4G0Iyp2nqaT35B83G4OOGrjk7tDox5ewDBWG8LhLtMv_i6Zdig/exec",
     RSVP_DEADLINE_END: "2027-03-16T02:59:59.999Z",
     RSVP_DEADLINE_LABEL: "15 de março de 2027",
   };
@@ -219,6 +219,34 @@
     updateUnlockFormState();
   }
 
+  function parseApiResponse(text) {
+    var data;
+    try {
+      data = JSON.parse(text);
+    } catch (parseErr) {
+      throw new Error(
+        "Resposta inválida da API. Confira o deploy (New version) e a URL /exec."
+      );
+    }
+    if (!data.ok) {
+      throw new Error(data.message || "Não foi possível completar a ação.");
+    }
+    return data;
+  }
+
+  function fetchApiText(action, payload) {
+    var url =
+      CONFIG.API_URL +
+      "?action=" +
+      encodeURIComponent(action) +
+      "&payload=" +
+      encodeURIComponent(JSON.stringify(payload));
+
+    return fetch(url, { method: "GET", redirect: "follow" }).then(function (res) {
+      return res.text();
+    });
+  }
+
   function apiRequest(action, payload) {
     if (!CONFIG.API_URL) {
       return Promise.reject(new Error("Configure a URL da API do Apps Script."));
@@ -226,28 +254,13 @@
 
     setLoading(true);
 
-    return fetch(CONFIG.API_URL, {
-      method: "POST",
-      redirect: "follow",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ action: action, payload: payload }),
-    })
-      .then(function (res) {
-        return res.text();
-      })
-      .then(function (text) {
-        var data;
-        try {
-          data = JSON.parse(text);
-        } catch (parseErr) {
-          throw new Error(
-            "Resposta inválida da API. Confira o deploy (New version) e a URL /exec."
-          );
+    return fetchApiText(action, payload)
+      .then(parseApiResponse)
+      .catch(function (err) {
+        if (err.message.indexOf("Resposta inválida") === -1) {
+          throw err;
         }
-        if (!data.ok) {
-          throw new Error(data.message || "Não foi possível completar a ação.");
-        }
-        return data;
+        return fetchApiText(action, payload).then(parseApiResponse);
       })
       .finally(function () {
         setLoading(false);
