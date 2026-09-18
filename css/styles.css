@@ -342,15 +342,13 @@ ul {
 .first-screen {
   /* Width-based so a tall phone still crops the plate’s white margins */
   --hero-band: 42vw;
+  --monogram-size: clamp(148px, 36vw, 196px);
+  --monogram-overhang: calc(var(--monogram-size) * 0.5);
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100svh;
-  max-height: 100svh;
   min-height: 100svh;
   width: 100%;
-  overflow: hidden;
 }
 
 /* =============================================
@@ -387,7 +385,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(148px, 36vw, 196px);
+  width: var(--monogram-size);
   overflow: visible;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -421,12 +419,15 @@ ul {
 
 .invitation {
   position: relative;
-  padding: clamp(7rem, 22vw, 9.5rem) 1.5rem 3.5rem;
+  padding: max(
+    clamp(7rem, 22vw, 9.5rem),
+    calc(var(--monogram-overhang) + 0.75rem)
+  ) 1.5rem 3.5rem;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
   background-color: var(--cream);
   background-image: var(--paper-texture);
@@ -1370,6 +1371,12 @@ button.btn {
   opacity: 0.45;
 }
 
+@media (min-height: 720px) {
+  .first-screen .invitation {
+    justify-content: center;
+  }
+}
+
 /* =============================================
    MOBILE — first-screen fit
    ============================================= */
@@ -1385,8 +1392,11 @@ button.btn {
   }
 
   .invitation {
-    padding: clamp(3.75rem, 13vw, 5rem) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
-    justify-content: center;
+    padding: max(
+      clamp(3.75rem, 13vw, 5rem),
+      calc(var(--monogram-overhang) + 0.75rem)
+    ) 1.25rem max(1.25rem, env(safe-area-inset-bottom));
+    justify-content: flex-start;
   }
 
   .invitation__date {
@@ -1472,14 +1482,11 @@ button.btn {
   .first-screen {
     --hero-band: min(38vh, 42vw);
     --hero-band: min(38dvh, 42vw);
-  }
-
-  .hero__monogram-stack {
-    width: clamp(200px, 24vw, 268px);
+    --monogram-size: clamp(200px, 24vw, 268px);
   }
 
   .invitation {
-    padding-top: 9.5rem;
+    padding-top: max(9.5rem, calc(var(--monogram-overhang) + 0.75rem));
   }
 
   .presentes-letter__lead {
