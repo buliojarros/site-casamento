@@ -144,6 +144,11 @@
 
   function setStep(step) {
     state.step = step;
+
+    if (step !== "thanks") {
+      resetThanksDelighter();
+    }
+
     document.querySelectorAll("[data-rsvp-step]").forEach(function (el) {
       el.hidden = el.getAttribute("data-rsvp-step") !== step;
     });
@@ -179,6 +184,7 @@
     rsvpTrigger = triggerEl || null;
     resetModal();
     modal.classList.add("is-open");
+    document.body.classList.add("rsvp-modal-open");
     var firstInput = document.getElementById("rsvp-first-name");
     if (firstInput) firstInput.focus();
   }
@@ -186,6 +192,7 @@
   function closeModal() {
     if (!modal) return;
     modal.classList.remove("is-open");
+    document.body.classList.remove("rsvp-modal-open");
     loadingCount = 0;
     setLoading(false);
     if (rsvpTrigger) {
@@ -199,6 +206,7 @@
     state.invitationId = null;
     state.guests = [];
     state.greeterName = "";
+    resetThanksDelighter();
     showMessage("", "");
 
     var firstName = document.getElementById("rsvp-first-name");
@@ -429,6 +437,59 @@
     }
   }
 
+  function resetThanksDelighter() {
+    var delighter = document.getElementById("rsvp-thanks-delighter");
+    var body = document.getElementById("rsvp-thanks-body");
+    var monogram = document.getElementById("rsvp-thanks-monogram");
+
+    if (delighter) delighter.innerHTML = "";
+    if (body) body.classList.remove("is-revealed");
+    if (monogram) {
+      monogram.hidden = true;
+      monogram.classList.remove("is-revealed");
+    }
+  }
+
+  function playThanksDelighter(hasConfirmed) {
+    var delighter = document.getElementById("rsvp-thanks-delighter");
+    var body = document.getElementById("rsvp-thanks-body");
+    var monogram = document.getElementById("rsvp-thanks-monogram");
+    var colors = ["#7b7a38", "#632941", "#f3c460", "#a9b8ab"];
+    var i;
+
+    resetThanksDelighter();
+    if (!body) return;
+
+    if (monogram) {
+      monogram.hidden = false;
+      monogram.classList.remove("is-revealed");
+    }
+
+    window.requestAnimationFrame(function () {
+      if (monogram) monogram.classList.add("is-revealed");
+      body.classList.add("is-revealed");
+    });
+
+    if (
+      !hasConfirmed ||
+      !delighter ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+
+    for (i = 0; i < 18; i++) {
+      var particle = document.createElement("span");
+      particle.className = "rsvp-thanks-particle";
+      particle.style.setProperty("--x", (Math.random() * 100).toFixed(1) + "%");
+      particle.style.setProperty("--delay", (Math.random() * 0.35).toFixed(2) + "s");
+      particle.style.setProperty("--drift", ((Math.random() - 0.5) * 48).toFixed(0) + "px");
+      particle.style.setProperty("--size", (4 + Math.random() * 5).toFixed(1) + "px");
+      particle.style.backgroundColor = colors[i % colors.length];
+      delighter.appendChild(particle);
+    }
+  }
+
   function renderThanks(responses) {
     var messageEl = document.getElementById("rsvp-thanks-message");
     var titleEl = document.getElementById("rsvp-modal-title");
@@ -450,11 +511,13 @@
       messageEl.innerHTML =
         "Mal podemos esperar para celebrar com você!<br><br>" +
         editNote;
+      playThanksDelighter(true);
       return;
     }
 
     messageEl.innerHTML =
       "Sentiremos muito a sua falta.<br><br>" + editNote;
+    playThanksDelighter(false);
   }
 
   function statusLabel(status) {
