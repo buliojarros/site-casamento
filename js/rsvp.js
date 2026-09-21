@@ -34,6 +34,14 @@
     dialog.appendChild(loader);
   }
 
+  function setSubmitButtonsDisabled(disabled) {
+    if (!modal) return;
+
+    modal.querySelectorAll('button[type="submit"]').forEach(function (btn) {
+      btn.disabled = disabled;
+    });
+  }
+
   function setLoading(isLoading) {
     ensureLoader();
     var loader = document.getElementById("rsvp-loader");
@@ -45,6 +53,15 @@
     loader.hidden = !busy;
     dialog.classList.toggle("is-loading", busy);
     dialog.setAttribute("aria-busy", busy ? "true" : "false");
+    setSubmitButtonsDisabled(busy);
+  }
+
+  function warmUpApi() {
+    if (!CONFIG.API_URL) return;
+
+    fetch(CONFIG.API_URL, { method: "GET", redirect: "follow" }).catch(function () {
+      // best-effort: acorda o Apps Script após idle (cold start)
+    });
   }
 
   function updateDialogSize(step) {
@@ -636,6 +653,7 @@
   });
 
   ensureLoader();
+  warmUpApi();
 
   window.RSVP_CONFIG = CONFIG;
 })();
