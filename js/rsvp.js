@@ -301,14 +301,19 @@
     guests.forEach(function (guest) {
       var row = document.createElement("div");
       row.className = "rsvp-modal__guest";
-      row.innerHTML =
-        '<span class="rsvp-modal__guest-name">' +
-        guest.fullName +
-        "</span>" +
-        '<div class="rsvp-modal__choices">' +
+
+      var name = document.createElement("span");
+      name.className = "rsvp-modal__guest-name";
+      name.textContent = guest.fullName;
+
+      var choices = document.createElement("div");
+      choices.className = "rsvp-modal__choices";
+      choices.innerHTML =
         choiceHtml(guest.guestId, "confirmed", "Confirmo", guest.status) +
-        choiceHtml(guest.guestId, "declined", "Não poderei ir", guest.status) +
-        "</div>";
+        choiceHtml(guest.guestId, "declined", "Não poderei ir", guest.status);
+
+      row.appendChild(name);
+      row.appendChild(choices);
       list.appendChild(row);
     });
   }
@@ -571,14 +576,18 @@
     data.guests.forEach(function (guest) {
         var row = document.createElement("div");
         row.className = "rsvp-modal__admin-row";
-        row.innerHTML =
-          '<span class="rsvp-modal__admin-name">' +
-          guest.fullName +
-          '</span><span class="rsvp-modal__admin-badge rsvp-modal__admin-badge--' +
-          guest.status +
-          '">' +
-          statusLabel(guest.status) +
-          "</span>";
+
+        var name = document.createElement("span");
+        name.className = "rsvp-modal__admin-name";
+        name.textContent = guest.fullName;
+
+        var badge = document.createElement("span");
+        badge.className =
+          "rsvp-modal__admin-badge rsvp-modal__admin-badge--" + guest.status;
+        badge.textContent = statusLabel(guest.status);
+
+        row.appendChild(name);
+        row.appendChild(badge);
         listEl.appendChild(row);
       });
   }

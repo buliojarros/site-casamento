@@ -9,7 +9,7 @@
  *    guest_id | status | updated_at
  * 4. script.google.com > Novo projeto > cole este arquivo
  * 5. Project Settings > Script Properties:
- *    SPREADSHEET_ID = (opcional, sobrescreve o ID abaixo)
+ *    SPREADSHEET_ID = id da planilha (obrigatório)
  *    ADMIN_PASSWORD = sua-senha
  *    TOKEN_SECRET   = string-aleatoria-longa
  * 6. Deploy > New deployment > Web app
@@ -17,11 +17,13 @@
  * 7. Copie a URL e configure em js/rsvp.js (CONFIG.API_URL)
  */
 
-var SPREADSHEET_ID = "1omE0chO2jlUB4ILH5u_aViqKeSCulWQ3lKL6wqN22yE";
 var SHEET_GUESTS = "convidados";
 var SHEET_RSVPS = "rsvps";
 var RSVP_DEADLINE_END = "2027-03-16T02:59:59.999Z"; // fim do dia 15/03/2027 (Brasília)
 var RSVP_DEADLINE_LABEL = "15 de março de 2027";
+var RATE_LIMIT_WINDOW_SECONDS = 900; // 15 minutos
+var RATE_LIMIT_MAX_UNLOCK = 10;
+var RATE_LIMIT_MAX_ADMIN = 5;
 
 function isRsvpClosed() {
   var end =
@@ -95,9 +97,10 @@ function jsonResponse(data) {
 }
 
 function getSpreadsheet() {
-  var id =
-    PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID") ||
-    SPREADSHEET_ID;
+  var id = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID");
+  if (!id) {
+    throw new Error("SPREADSHEET_ID não configurado nas Script Properties.");
+  }
   return SpreadsheetApp.openById(id);
 }
 
@@ -107,6 +110,30 @@ function getSheet(name) {
     throw new Error('Aba "' + name + '" não encontrada na planilha.');
   }
   return sheet;
+}
+
+function rateLimitKey(scope, identifier) {
+  return "rl_" + scope + "_" + String(identifier || "").slice(0, 80);
+}
+
+function isRateLimited(scope, identifier, max) {
+  var hits = CacheService.getScriptCache().get(rateLimitKey(scope, identifier));
+  return Number(hits || 0) >= max;
+}
+
+function registerFailedAttempt(scope, identifier) {
+  var cache = CacheService.getScriptCache();
+  var key = rateLimitKey(scope, identifier);
+  var hits = Number(cache.get(key) || 0) + 1;
+  cache.put(key, String(hits), RATE_LIMIT_WINDOW_SECONDS);
+}
+
+function clearFailedAttempts(scope, identifier) {
+  CacheService.getScriptCache().remove(rateLimitKey(scope, identifier));
+}
+
+function rateLimitMessage() {
+  return "Muitas tentativas. Aguarde alguns minutos e tente de novo.";
 }
 
 function removeAccents(value) {
@@ -215,17 +242,24 @@ function unlock(payload) {
     return { ok: false, message: "Preencha nome e 4 dígitos." };
   }
 
+  if (isRateLimited("unlock", firstName, RATE_LIMIT_MAX_UNLOCK)) {
+    return { ok: false, message: rateLimitMessage() };
+  }
+
   var guests = readGuests();
   var matched = findGuest(guests, function (g) {
     return g.canUnlock && g.firstName === firstName && g.phoneLast4 === last4;
   });
 
   if (!matched) {
+    registerFailedAttempt("unlock", firstName);
     return {
       ok: false,
       message: "Não encontramos seu nome na lista.\nEntre em contato com os noivos.",
     };
   }
+
+  clearFailedAttempts("unlock", firstName);
 
   var rsvps = readRsvpsMap();
   var group = guests
@@ -328,10 +362,17 @@ function saveRsvp(payload) {
 }
 
 function admin(payload) {
+  if (isRateLimited("admin", "global", RATE_LIMIT_MAX_ADMIN)) {
+    return { ok: false, message: rateLimitMessage() };
+  }
+
   var password = PropertiesService.getScriptProperties().getProperty("ADMIN_PASSWORD");
   if (!payload.password || payload.password !== password) {
+    registerFailedAttempt("admin", "global");
     return { ok: false, message: "Senha incorreta." };
   }
+
+  clearFailedAttempts("admin", "global");
 
   var guests = readGuests();
   var rsvps = readRsvpsMap();
