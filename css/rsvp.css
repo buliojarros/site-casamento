@@ -42,19 +42,47 @@ body.rsvp-modal-open {
 
 .rsvp-modal.is-open {
   overflow-y: auto;
+  align-items: flex-start;
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
 .rsvp-modal.is-open .rsvp-modal__dialog {
-  margin: auto;
+  margin: 0.75rem auto auto;
 }
 
 .rsvp-modal__dialog--wide {
-  max-width: min(440px, 100%);
+  max-width: min(400px, 100%);
+  padding: 2rem 1.35rem 1.5rem;
+}
+
+.rsvp-modal__dialog--wide:not(.is-expanded) {
+  padding: 1.75rem 1.25rem 1.35rem;
+}
+
+.rsvp-modal__dialog--wide:not(.is-expanded) .rsvp-modal__text {
+  margin-bottom: 0.85rem;
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.rsvp-modal__dialog--wide:not(.is-expanded) .rsvp-modal__field {
+  margin-bottom: 0.65rem;
+}
+
+.rsvp-modal__dialog--wide:not(.is-expanded) .rsvp-modal__input {
+  min-height: 44px;
+  padding: 10px 14px;
+  margin-bottom: 0;
+}
+
+.rsvp-modal__dialog--wide:not(.is-expanded) .rsvp-modal__actions {
+  margin-top: 0.35rem;
 }
 
 .rsvp-modal__dialog.is-expanded {
-  max-width: min(520px, 100%);
-  max-height: calc(100dvh - 2.5rem);
+  max-width: min(480px, 100%);
+  max-height: calc(100dvh - 2rem);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -215,14 +243,14 @@ body.rsvp-modal-open {
 .rsvp-modal__guest-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 1.75rem;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
 }
 
 .rsvp-modal__dialog.is-expanded .rsvp-modal__guest-list {
   flex: 1 1 auto;
   min-height: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -234,40 +262,64 @@ body.rsvp-modal-open {
 
 .rsvp-modal__guest-name {
   display: block;
-  margin-bottom: 0.65rem;
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-script);
+  font-size: clamp(1.15rem, 3.2vw, 1.35rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
   color: var(--text-dark);
   text-align: center;
 }
 
 .rsvp-modal__choices {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex-wrap: nowrap;
 }
 
 .rsvp-modal__choice {
+  position: relative;
+  display: block;
   flex: 1;
-  min-width: 120px;
+  min-width: 0;
+  margin: 0;
+  line-height: 0;
 }
 
 .rsvp-modal__choice input {
   position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
   opacity: 0;
   pointer-events: none;
 }
 
 .rsvp-modal__choice span {
-  display: block;
-  padding: 0.55rem 0.65rem;
-  font-size: 0.68rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 38px;
+  min-height: 38px;
+  margin: 0;
+  padding: 0 0.5rem 0 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  color: #7a7570;
+  line-height: 0.625rem;
+  color: #5c5752;
   background-color: var(--cream);
-  border: 1px solid #d8d0c8;
+  background-image: none;
+  border: 1px solid #b8b0a8;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color var(--transition), border-color var(--transition), color var(--transition);
@@ -275,13 +327,16 @@ body.rsvp-modal-open {
 
 .rsvp-modal__choice input:checked + span {
   background-color: var(--olive);
+  background-image: none;
   border-color: var(--olive);
-  color: var(--white);
+  color: var(--cream);
 }
 
 .rsvp-modal__choice input[value="declined"]:checked + span {
   background-color: var(--burgundy);
+  background-image: none;
   border-color: var(--burgundy);
+  color: var(--cream);
 }
 
 .rsvp-modal__back {
@@ -363,6 +418,9 @@ body.rsvp-modal-open {
 
 .rsvp-modal__admin-name {
   flex: 1;
+  font-family: var(--font-script);
+  font-size: 1.15rem;
+  letter-spacing: 0;
   color: var(--text-dark);
 }
 

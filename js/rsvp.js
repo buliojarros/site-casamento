@@ -310,7 +310,7 @@
       choices.className = "rsvp-modal__choices";
       choices.innerHTML =
         choiceHtml(guest.guestId, "confirmed", "Confirmo", guest.status) +
-        choiceHtml(guest.guestId, "declined", "Não poderei ir", guest.status);
+        choiceHtml(guest.guestId, "declined", "Não vou", guest.status);
 
       row.appendChild(name);
       row.appendChild(choices);
