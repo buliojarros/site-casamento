@@ -293,68 +293,65 @@
       greeting.textContent =
         "Olá, " +
         (state.greeterName || "convidado") +
-        "! Confirme a presença de cada pessoa:";
+        "! Por favor, confirme a presença de cada convidado:";
     }
 
     list.innerHTML = "";
 
     guests.forEach(function (guest) {
-      var row = document.createElement("div");
+      var isConfirmed = guest.status === "confirmed";
+      var row = document.createElement("label");
       row.className = "rsvp-modal__guest";
+
+      var check = document.createElement("input");
+      check.type = "checkbox";
+      check.className = "rsvp-modal__check";
+      check.id = "rsvp-" + guest.guestId;
+      check.name = "guest-" + guest.guestId;
+      check.value = "confirmed";
+      check.checked = isConfirmed;
 
       var name = document.createElement("span");
       name.className = "rsvp-modal__guest-name";
       name.textContent = guest.fullName;
 
-      var choices = document.createElement("div");
-      choices.className = "rsvp-modal__choices";
-      choices.innerHTML =
-        choiceHtml(guest.guestId, "confirmed", "Confirmo", guest.status) +
-        choiceHtml(guest.guestId, "declined", "Não vou", guest.status);
+      var status = document.createElement("span");
+      status.className = "rsvp-modal__guest-status";
+      updateGuestStatusLabel(status, isConfirmed);
 
+      check.addEventListener("change", function () {
+        updateGuestStatusLabel(status, check.checked);
+      });
+
+      row.appendChild(check);
       row.appendChild(name);
-      row.appendChild(choices);
+      row.appendChild(status);
       list.appendChild(row);
     });
   }
 
-  function choiceHtml(guestId, value, label, currentStatus) {
-    var checked = currentStatus === value ? " checked" : "";
-    var id = "rsvp-" + guestId + "-" + value;
-    return (
-      '<label class="rsvp-modal__choice">' +
-      '<input type="radio" name="guest-' +
-      guestId +
-      '" id="' +
-      id +
-      '" value="' +
-      value +
-      '"' +
-      checked +
-      ">" +
-      "<span>" +
-      label +
-      "</span>" +
-      "</label>"
-    );
+  function updateGuestStatusLabel(el, isConfirmed) {
+    el.textContent = isConfirmed ? "Confirmado" : "Não irá";
+    el.className =
+      "rsvp-modal__guest-status rsvp-modal__guest-status--" +
+      (isConfirmed ? "confirmed" : "declined");
   }
 
   function collectResponses() {
     var responses = [];
 
     state.guests.forEach(function (guest) {
-      var selected = document.querySelector(
-        'input[name="guest-' + guest.guestId + '"]:checked'
+      var checkbox = document.querySelector(
+        'input[name="guest-' + guest.guestId + '"]'
       );
-      if (!selected) return;
       responses.push({
         guestId: guest.guestId,
-        status: selected.value,
+        status: checkbox && checkbox.checked ? "confirmed" : "declined",
       });
     });
 
     if (!responses.length) {
-      throw new Error("Selecione pelo menos uma confirmação para enviar.");
+      throw new Error("Não foi possível ler a lista de convidados.");
     }
 
     return responses;

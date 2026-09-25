@@ -255,87 +255,79 @@ body.rsvp-modal-open {
 }
 
 .rsvp-modal__guest {
-  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 22rem;
+  margin: 0 auto;
+  padding: 0.15rem 0;
   background: transparent;
+  cursor: pointer;
+}
+
+.rsvp-modal__check {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  border: 2px solid #b8b0a8;
+  border-radius: 4px;
+  background: var(--cream);
+  cursor: pointer;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.rsvp-modal__check:checked {
+  border-color: var(--olive);
+  background-color: var(--olive);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23f4e7db' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round' d='M3.5 8.2l3 3.1 6-6.4'/%3E%3C/svg%3E");
+  background-size: 14px 14px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.rsvp-modal__check:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 2px;
 }
 
 .rsvp-modal__guest-name {
   display: block;
-  margin-bottom: 0.4rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-bottom: 0;
   font-family: var(--font-script);
-  font-size: clamp(1.15rem, 3.2vw, 1.35rem);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.25;
   color: var(--text-dark);
-  text-align: center;
+  text-align: left;
 }
 
-.rsvp-modal__choices {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: nowrap;
-}
-
-.rsvp-modal__choice {
-  position: relative;
-  display: block;
-  flex: 1;
-  min-width: 0;
-  margin: 0;
-  line-height: 0;
-}
-
-.rsvp-modal__choice input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.rsvp-modal__choice span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  width: 100%;
-  height: 38px;
-  min-height: 38px;
-  margin: 0;
-  padding: 0 0.5rem 0 0.5rem;
-  font-size: 0.625rem;
-  font-weight: 500;
+.rsvp-modal__guest-status {
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  text-align: center;
-  line-height: 0.625rem;
-  color: #5c5752;
-  background-color: var(--cream);
-  background-image: none;
-  border: 1px solid #b8b0a8;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.rsvp-modal__choice input:checked + span {
-  background-color: var(--olive);
-  background-image: none;
-  border-color: var(--olive);
-  color: var(--cream);
+.rsvp-modal__guest-status--confirmed {
+  color: var(--olive);
 }
 
-.rsvp-modal__choice input[value="declined"]:checked + span {
-  background-color: var(--burgundy);
-  background-image: none;
-  border-color: var(--burgundy);
-  color: var(--cream);
+.rsvp-modal__guest-status--declined {
+  color: #9a9590;
 }
 
 .rsvp-modal__back {
