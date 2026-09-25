@@ -2,3 +2,5 @@
 .venv/
 *.pdf
 .cursor/
+.clasp.json
+.clasp-tmp/

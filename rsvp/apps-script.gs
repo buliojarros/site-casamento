@@ -6,7 +6,7 @@
  * 2. Aba convidados (linha 1 = cabeçalho):
  *    guest_id | invitation_id | full_name | first_name | phone | phone_last4 | can_unlock
  * 3. Aba rsvps:
- *    guest_id | status | updated_at
+ *    guest_id | full_name | status | updated_at
  * 4. script.google.com > Novo projeto > cole este arquivo
  * 5. Project Settings > Script Properties:
  *    SPREADSHEET_ID = id da planilha (obrigatório)
@@ -15,6 +15,8 @@
  * 6. Deploy > New deployment > Web app
  *    Execute as: Me | Who has access: Anyone
  * 7. Copie a URL e configure em js/rsvp.js (CONFIG.API_URL)
+ * 8. Após editar convidados, rode normalizeGuests() — atualiza a aba
+ *    rsvps com full_name e limpa o cache de 24h
  */
 
 var SHEET_GUESTS = "convidados";
@@ -24,18 +26,21 @@ var RSVP_DEADLINE_LABEL = "15 de março de 2027";
 var RATE_LIMIT_WINDOW_SECONDS = 900; // 15 minutos
 var RATE_LIMIT_MAX_UNLOCK = 10;
 var RATE_LIMIT_MAX_ADMIN = 5;
+var CACHE_KEY_GUESTS = "guests_v1";
+var CACHE_KEY_RSVPS = "rsvps_v1";
+var CACHE_TTL_SECONDS = 21600; // 6 horas: máximo aceito pelo CacheService
+var GUEST_LONG_CACHE_TTL_SECONDS = 86400; // 24 horas na PropertiesService
+var PROP_GUESTS_META = "cache_guests_meta";
+var PROP_GUESTS_PREFIX = "cache_guests_";
+var PROP_GUESTS_CHUNK = 8000;
 
 function isRsvpClosed() {
-  var end =
-    PropertiesService.getScriptProperties().getProperty("RSVP_DEADLINE_END") ||
-    RSVP_DEADLINE_END;
+  var end = scriptProp("RSVP_DEADLINE_END") || RSVP_DEADLINE_END;
   return Date.now() > new Date(end).getTime();
 }
 
 function rsvpClosedMessage() {
-  var label =
-    PropertiesService.getScriptProperties().getProperty("RSVP_DEADLINE_LABEL") ||
-    RSVP_DEADLINE_LABEL;
+  var label = scriptProp("RSVP_DEADLINE_LABEL") || RSVP_DEADLINE_LABEL;
   return "O prazo para confirmação encerrou em " + label + ".";
 }
 
@@ -96,12 +101,26 @@ function jsonResponse(data) {
   );
 }
 
-function getSpreadsheet() {
-  var id = PropertiesService.getScriptProperties().getProperty("SPREADSHEET_ID");
-  if (!id) {
-    throw new Error("SPREADSHEET_ID não configurado nas Script Properties.");
+// Guardados enquanto a execução dura: cada chamada a esses serviços vai ao servidor
+var cachedProps = null;
+var cachedSpreadsheet = null;
+
+function scriptProp(name) {
+  if (!cachedProps) {
+    cachedProps = PropertiesService.getScriptProperties().getProperties();
   }
-  return SpreadsheetApp.openById(id);
+  return cachedProps[name];
+}
+
+function getSpreadsheet() {
+  if (!cachedSpreadsheet) {
+    var id = scriptProp("SPREADSHEET_ID");
+    if (!id) {
+      throw new Error("SPREADSHEET_ID não configurado nas Script Properties.");
+    }
+    cachedSpreadsheet = SpreadsheetApp.openById(id);
+  }
+  return cachedSpreadsheet;
 }
 
 function getSheet(name) {
@@ -182,7 +201,120 @@ function phoneLast4(value) {
   return digits.slice(-4);
 }
 
+function readCached(key, loader, longLived) {
+  var cache = CacheService.getScriptCache();
+  var raw = cache.get(key);
+
+  if (raw) {
+    try {
+      return JSON.parse(raw);
+    } catch (e) {
+      // cache corrompido: segue para o próximo nível
+    }
+  }
+
+  if (longLived) {
+    var persisted = readGuestLongCache();
+    if (persisted) {
+      cache.put(key, JSON.stringify(persisted), CACHE_TTL_SECONDS);
+      return persisted;
+    }
+  }
+
+  var data = loader();
+  var json = JSON.stringify(data);
+  cache.put(key, json, CACHE_TTL_SECONDS);
+  if (longLived) writeGuestLongCache(json);
+  return data;
+}
+
+function readGuestLongCache() {
+  var props = PropertiesService.getScriptProperties();
+  var metaRaw = props.getProperty(PROP_GUESTS_META);
+  if (!metaRaw) return null;
+
+  var meta;
+  try {
+    meta = JSON.parse(metaRaw);
+  } catch (e) {
+    return null;
+  }
+
+  if (!meta || !meta.n || Date.now() > Number(meta.exp || 0)) {
+    return null;
+  }
+
+  var json = "";
+  var i;
+  for (i = 0; i < meta.n; i++) {
+    json += props.getProperty(PROP_GUESTS_PREFIX + i) || "";
+  }
+
+  try {
+    return JSON.parse(json);
+  } catch (e) {
+    return null;
+  }
+}
+
+function writeGuestLongCache(json) {
+  var props = PropertiesService.getScriptProperties();
+  var prev = 0;
+  var prevRaw = props.getProperty(PROP_GUESTS_META);
+  if (prevRaw) {
+    try {
+      prev = Number(JSON.parse(prevRaw).n || 0);
+    } catch (e) {
+      prev = 0;
+    }
+  }
+
+  var chunks = [];
+  var i;
+  for (i = 0; i < json.length; i += PROP_GUESTS_CHUNK) {
+    chunks.push(json.substring(i, i + PROP_GUESTS_CHUNK));
+  }
+
+  var updates = {};
+  updates[PROP_GUESTS_META] = JSON.stringify({
+    exp: Date.now() + GUEST_LONG_CACHE_TTL_SECONDS * 1000,
+    n: chunks.length,
+  });
+  for (i = 0; i < chunks.length; i++) {
+    updates[PROP_GUESTS_PREFIX + i] = chunks[i];
+  }
+  props.setProperties(updates, false);
+
+  for (i = chunks.length; i < prev; i++) {
+    props.deleteProperty(PROP_GUESTS_PREFIX + i);
+  }
+}
+
+function clearGuestCache() {
+  CacheService.getScriptCache().remove(CACHE_KEY_GUESTS);
+
+  var props = PropertiesService.getScriptProperties();
+  var metaRaw = props.getProperty(PROP_GUESTS_META);
+  var n = 0;
+  if (metaRaw) {
+    try {
+      n = Number(JSON.parse(metaRaw).n || 0);
+    } catch (e) {
+      n = 0;
+    }
+  }
+  props.deleteProperty(PROP_GUESTS_META);
+  var i;
+  for (i = 0; i < n; i++) {
+    props.deleteProperty(PROP_GUESTS_PREFIX + i);
+  }
+}
+
 function readGuests() {
+  return readCached(CACHE_KEY_GUESTS, loadGuestsFromSheet, true);
+}
+
+function loadGuestsFromSheet() {
   var sheet = getSheet(SHEET_GUESTS);
   var rows = sheet.getDataRange().getValues();
   var headers = rows.shift();
@@ -209,6 +341,10 @@ function readGuests() {
 }
 
 function readRsvpsMap() {
+  return readCached(CACHE_KEY_RSVPS, loadRsvpsFromSheet);
+}
+
+function loadRsvpsFromSheet() {
   var sheet = getSheet(SHEET_RSVPS);
   var rows = sheet.getDataRange().getValues();
   var headers = rows.shift();
@@ -283,7 +419,7 @@ function unlock(payload) {
 }
 
 function createToken(invitationId) {
-  var secret = PropertiesService.getScriptProperties().getProperty("TOKEN_SECRET");
+  var secret = scriptProp("TOKEN_SECRET");
   var expires = Date.now() + 60 * 60 * 1000;
   var raw = invitationId + "|" + expires;
   var sig = Utilities.computeHmacSha256Signature(raw, secret);
@@ -293,7 +429,7 @@ function createToken(invitationId) {
 
 function verifyToken(token) {
   try {
-    var secret = PropertiesService.getScriptProperties().getProperty("TOKEN_SECRET");
+    var secret = scriptProp("TOKEN_SECRET");
     var decoded = Utilities.newBlob(Utilities.base64Decode(token)).getDataAsString();
     var parts = decoded.split("|");
     if (parts.length !== 3) return null;
@@ -326,39 +462,108 @@ function saveRsvp(payload) {
     return { ok: false, message: "Sessão expirada. Desbloqueie novamente." };
   }
 
-  var guests = readGuests().filter(function (g) {
-    return g.invitationId === invitationId;
-  });
-  var allowedIds = guests.map(function (g) {
-    return g.guestId;
+  var namesById = {};
+  readGuests().forEach(function (g) {
+    if (g.invitationId === invitationId) {
+      namesById[g.guestId] = g.fullName;
+    }
   });
 
   var sheet = getSheet(SHEET_RSVPS);
   var rows = sheet.getDataRange().getValues();
   var headers = rows[0];
+  var nameCol = ensureRsvpNameColumn(sheet, headers, rows);
+  var width = headers.length;
   var guestCol = headers.indexOf("guest_id");
   var statusCol = headers.indexOf("status");
   var updatedCol = headers.indexOf("updated_at");
-  var existing = {};
+  var rowByGuest = {};
 
   for (var i = 1; i < rows.length; i++) {
-    existing[String(rows[i][guestCol])] = i + 1;
+    rowByGuest[String(rows[i][guestCol])] = i;
   }
 
   var now = new Date().toISOString();
+  var updated = [];
+  var created = [];
+
   (payload.responses || []).forEach(function (item) {
-    if (allowedIds.indexOf(item.guestId) === -1) return;
+    if (!namesById.hasOwnProperty(item.guestId)) return;
     if (item.status !== "confirmed" && item.status !== "declined") return;
 
-    if (existing[item.guestId]) {
-      sheet.getRange(existing[item.guestId], statusCol + 1).setValue(item.status);
-      sheet.getRange(existing[item.guestId], updatedCol + 1).setValue(now);
+    var index = rowByGuest[item.guestId];
+    var row;
+
+    if (index === undefined) {
+      row = blankRow(width);
+      created.push(row);
     } else {
-      sheet.appendRow([item.guestId, item.status, now]);
+      row = rows[index];
+      updated.push(index);
     }
+
+    row[guestCol] = item.guestId;
+    row[nameCol] = namesById[item.guestId];
+    row[statusCol] = item.status;
+    row[updatedCol] = now;
   });
 
+  writeChangedRows(sheet, rows, updated, width);
+
+  if (created.length) {
+    sheet.getRange(rows.length + 1, 1, created.length, width).setValues(created);
+  }
+
+  if (updated.length || created.length) {
+    CacheService.getScriptCache().remove(CACHE_KEY_RSVPS);
+  }
+
   return { ok: true };
+}
+
+function ensureRsvpNameColumn(sheet, headers, rows) {
+  var nameCol = headers.indexOf("full_name");
+  if (nameCol !== -1) return nameCol;
+
+  nameCol = headers.length;
+  sheet.getRange(1, nameCol + 1).setValue("full_name");
+  headers.push("full_name");
+  if (rows) {
+    var i;
+    for (i = 1; i < rows.length; i++) {
+      rows[i][nameCol] = "";
+    }
+  }
+  return nameCol;
+}
+
+function blankRow(width) {
+  var row = [];
+  var i;
+  for (i = 0; i < width; i++) {
+    row.push("");
+  }
+  return row;
+}
+
+/** Grava só as linhas mexidas, juntando as vizinhas numa escrita só */
+function writeChangedRows(sheet, rows, indexes, width) {
+  indexes.sort(function (a, b) {
+    return a - b;
+  });
+
+  var i = 0;
+  while (i < indexes.length) {
+    var start = i;
+    while (i + 1 < indexes.length && indexes[i + 1] === indexes[i] + 1) {
+      i++;
+    }
+
+    var from = indexes[start];
+    var count = indexes[i] - from + 1;
+    sheet.getRange(from + 1, 1, count, width).setValues(rows.slice(from, from + count));
+    i++;
+  }
 }
 
 function admin(payload) {
@@ -366,7 +571,7 @@ function admin(payload) {
     return { ok: false, message: rateLimitMessage() };
   }
 
-  var password = PropertiesService.getScriptProperties().getProperty("ADMIN_PASSWORD");
+  var password = scriptProp("ADMIN_PASSWORD");
   if (!payload.password || payload.password !== password) {
     registerFailedAttempt("admin", "global");
     return { ok: false, message: "Senha incorreta." };
@@ -408,12 +613,51 @@ function normalizeGuests() {
     var fullName = rows[i][map.full_name];
     var phone = rows[i][map.phone];
     if (fullName) {
-      sheet.getRange(i + 1, map.first_name + 1).setValue(normalizeName(fullName));
+      rows[i][map.first_name] = normalizeName(fullName);
     }
     if (phone) {
       var normalized = normalizePhone(phone);
-      sheet.getRange(i + 1, map.phone + 1).setValue(normalized);
-      sheet.getRange(i + 1, map.phone_last4 + 1).setValue(phoneLast4(normalized));
+      rows[i][map.phone] = normalized;
+      rows[i][map.phone_last4] = phoneLast4(normalized);
     }
+  }
+
+  if (rows.length > 1) {
+    sheet.getRange(1, 1, rows.length, headers.length).setValues(rows);
+  }
+
+  backfillRsvpNames();
+  clearGuestCache();
+}
+
+/** Completa full_name nas linhas já gravadas da aba rsvps */
+function backfillRsvpNames() {
+  var namesById = {};
+  loadGuestsFromSheet().forEach(function (g) {
+    namesById[g.guestId] = g.fullName;
+  });
+
+  var sheet = getSheet(SHEET_RSVPS);
+  var rows = sheet.getDataRange().getValues();
+  if (!rows.length) return;
+
+  var headers = rows[0];
+  var nameCol = ensureRsvpNameColumn(sheet, headers, rows);
+  var guestCol = headers.indexOf("guest_id");
+  if (guestCol === -1) return;
+
+  var changed = false;
+  var i;
+  for (i = 1; i < rows.length; i++) {
+    var guestId = String(rows[i][guestCol] || "");
+    var name = namesById[guestId];
+    if (!guestId || !name || rows[i][nameCol] === name) continue;
+    rows[i][nameCol] = name;
+    changed = true;
+  }
+
+  if (changed) {
+    sheet.getRange(1, 1, rows.length, headers.length).setValues(rows);
+    CacheService.getScriptCache().remove(CACHE_KEY_RSVPS);
   }
 }
