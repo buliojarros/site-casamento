@@ -92,7 +92,18 @@ function doGet(e) {
       });
     }
   }
+
+  warmCaches();
   return ContentService.createTextOutput("RSVP API OK");
+}
+
+function warmCaches() {
+  try {
+    readGuests();
+    readRsvpsMap();
+  } catch (e) {
+    // best-effort: o GET de aquecimento não deve falhar a página
+  }
 }
 
 function jsonResponse(data) {
