@@ -16,7 +16,7 @@
  *    Execute as: Me | Who has access: Anyone
  * 7. Copie a URL e configure em js/rsvp.js (CONFIG.API_URL)
  * 8. Após editar convidados, rode normalizeGuests() — atualiza a aba
- *    rsvps com full_name e limpa o cache de 24h
+ *    rsvps com full_name e limpa o cache de convidados
  */
 
 var SHEET_GUESTS = "convidados";
@@ -29,10 +29,6 @@ var RATE_LIMIT_MAX_ADMIN = 5;
 var CACHE_KEY_GUESTS = "guests_v1";
 var CACHE_KEY_RSVPS = "rsvps_v1";
 var CACHE_TTL_SECONDS = 21600; // 6 horas: máximo aceito pelo CacheService
-var GUEST_LONG_CACHE_TTL_SECONDS = 86400; // 24 horas na PropertiesService
-var PROP_GUESTS_META = "cache_guests_meta";
-var PROP_GUESTS_PREFIX = "cache_guests_";
-var PROP_GUESTS_CHUNK = 8000;
 
 function isRsvpClosed() {
   var end = scriptProp("RSVP_DEADLINE_END") || RSVP_DEADLINE_END;
@@ -99,10 +95,29 @@ function doGet(e) {
 
 function warmCaches() {
   try {
+    discardGuestLongCache();
     readGuests();
     readRsvpsMap();
   } catch (e) {
     // best-effort: o GET de aquecimento não deve falhar a página
+  }
+}
+
+function discardGuestLongCache() {
+  var props = PropertiesService.getScriptProperties();
+  var metaRaw = props.getProperty("cache_guests_meta");
+  if (!metaRaw) return;
+
+  var n = 0;
+  try {
+    n = Number(JSON.parse(metaRaw).n || 0);
+  } catch (e) {
+    n = 0;
+  }
+  props.deleteProperty("cache_guests_meta");
+  var i;
+  for (i = 0; i < n; i++) {
+    props.deleteProperty("cache_guests_" + i);
   }
 }
 
@@ -212,7 +227,7 @@ function phoneLast4(value) {
   return digits.slice(-4);
 }
 
-function readCached(key, loader, longLived) {
+function readCached(key, loader) {
   var cache = CacheService.getScriptCache();
   var raw = cache.get(key);
 
@@ -220,109 +235,21 @@ function readCached(key, loader, longLived) {
     try {
       return JSON.parse(raw);
     } catch (e) {
-      // cache corrompido: segue para o próximo nível
-    }
-  }
-
-  if (longLived) {
-    var persisted = readGuestLongCache();
-    if (persisted) {
-      cache.put(key, JSON.stringify(persisted), CACHE_TTL_SECONDS);
-      return persisted;
+      // cache corrompido: segue para reler a planilha
     }
   }
 
   var data = loader();
-  var json = JSON.stringify(data);
-  cache.put(key, json, CACHE_TTL_SECONDS);
-  if (longLived) writeGuestLongCache(json);
+  cache.put(key, JSON.stringify(data), CACHE_TTL_SECONDS);
   return data;
-}
-
-function readGuestLongCache() {
-  var props = PropertiesService.getScriptProperties();
-  var metaRaw = props.getProperty(PROP_GUESTS_META);
-  if (!metaRaw) return null;
-
-  var meta;
-  try {
-    meta = JSON.parse(metaRaw);
-  } catch (e) {
-    return null;
-  }
-
-  if (!meta || !meta.n || Date.now() > Number(meta.exp || 0)) {
-    return null;
-  }
-
-  var json = "";
-  var i;
-  for (i = 0; i < meta.n; i++) {
-    json += props.getProperty(PROP_GUESTS_PREFIX + i) || "";
-  }
-
-  try {
-    return JSON.parse(json);
-  } catch (e) {
-    return null;
-  }
-}
-
-function writeGuestLongCache(json) {
-  var props = PropertiesService.getScriptProperties();
-  var prev = 0;
-  var prevRaw = props.getProperty(PROP_GUESTS_META);
-  if (prevRaw) {
-    try {
-      prev = Number(JSON.parse(prevRaw).n || 0);
-    } catch (e) {
-      prev = 0;
-    }
-  }
-
-  var chunks = [];
-  var i;
-  for (i = 0; i < json.length; i += PROP_GUESTS_CHUNK) {
-    chunks.push(json.substring(i, i + PROP_GUESTS_CHUNK));
-  }
-
-  var updates = {};
-  updates[PROP_GUESTS_META] = JSON.stringify({
-    exp: Date.now() + GUEST_LONG_CACHE_TTL_SECONDS * 1000,
-    n: chunks.length,
-  });
-  for (i = 0; i < chunks.length; i++) {
-    updates[PROP_GUESTS_PREFIX + i] = chunks[i];
-  }
-  props.setProperties(updates, false);
-
-  for (i = chunks.length; i < prev; i++) {
-    props.deleteProperty(PROP_GUESTS_PREFIX + i);
-  }
 }
 
 function clearGuestCache() {
   CacheService.getScriptCache().remove(CACHE_KEY_GUESTS);
-
-  var props = PropertiesService.getScriptProperties();
-  var metaRaw = props.getProperty(PROP_GUESTS_META);
-  var n = 0;
-  if (metaRaw) {
-    try {
-      n = Number(JSON.parse(metaRaw).n || 0);
-    } catch (e) {
-      n = 0;
-    }
-  }
-  props.deleteProperty(PROP_GUESTS_META);
-  var i;
-  for (i = 0; i < n; i++) {
-    props.deleteProperty(PROP_GUESTS_PREFIX + i);
-  }
 }
 
 function readGuests() {
-  return readCached(CACHE_KEY_GUESTS, loadGuestsFromSheet, true);
+  return readCached(CACHE_KEY_GUESTS, loadGuestsFromSheet);
 }
 
 function loadGuestsFromSheet() {
