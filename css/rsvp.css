@@ -61,7 +61,7 @@ body.rsvp-modal-open {
 
 .rsvp-modal__dialog--wide:not(.is-expanded) .rsvp-modal__text {
   margin-bottom: 0.85rem;
-  font-size: 0.7rem;
+  font-size: var(--text-body);
   line-height: 1.5;
 }
 

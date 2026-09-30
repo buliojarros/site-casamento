@@ -958,7 +958,7 @@ button.btn {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 1.35rem;
+  gap: 0.75rem;
   width: 100%;
   max-width: 900px;
   min-height: 0;
@@ -968,6 +968,7 @@ button.btn {
 }
 
 .playlist-section__intro {
+  margin-top: auto;
   font-family: var(--font-sans);
   font-size: var(--text-body);
   font-weight: 400;
@@ -975,7 +976,7 @@ button.btn {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-align: center;
-  margin: 0;
+  margin-bottom: 0;
   line-height: 1.7;
 }
 
@@ -1024,8 +1025,9 @@ button.btn {
 .playlist-section__credit {
   position: relative;
   z-index: 2;
+  flex-shrink: 0;
   width: 100%;
-  margin: auto 0 0;
+  margin: 0;
   padding: 0 0 1.35rem;
   font-size: var(--text-caption);
   letter-spacing: 0.05em;
@@ -1101,7 +1103,7 @@ button.btn {
 }
 
 .rsvp-modal__text {
-  font-size: var(--text-body-sm);
+  font-size: var(--text-body);
   letter-spacing: 0.04em;
   color: #9a9590;
   text-align: center;
@@ -1189,9 +1191,9 @@ button.btn {
 }
 
 .rsvp-modal__dialog .btn--olive:hover {
-  background-color: var(--burgundy);
-  border-color: var(--burgundy);
-  color: var(--cream);
+  background-color: var(--olive-dark);
+  border-color: var(--olive-dark);
+  color: var(--white);
 }
 
 .visually-hidden {

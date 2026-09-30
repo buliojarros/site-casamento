@@ -2,7 +2,8 @@
   "use strict";
 
   var CONFIG = {
-    API_URL: "https://script.google.com/macros/s/AKfycbyccf-Z1sGBcZFKEh-r4G0Iyp2nqaT35B83G4OOGrjk7tDox5ewDBWG8LhLtMv_i6Zdig/exec",
+    API_URL:
+      "https://script.google.com/macros/s/AKfycbyccf-Z1sGBcZFKEh-r4G0Iyp2nqaT35B83G4OOGrjk7tDox5ewDBWG8LhLtMv_i6Zdig/exec",
     RSVP_DEADLINE_END: "2027-03-16T02:59:59.999Z",
     RSVP_DEADLINE_LABEL: "15 de março de 2027",
   };
@@ -59,9 +60,11 @@
   function warmUpApi() {
     if (!CONFIG.API_URL) return;
 
-    fetch(CONFIG.API_URL, { method: "GET", redirect: "follow" }).catch(function () {
-      // best-effort: acorda o Apps Script após idle (cold start)
-    });
+    fetch(CONFIG.API_URL, { method: "GET", redirect: "follow" }).catch(
+      function () {
+        // best-effort: acorda o Apps Script após idle (cold start)
+      },
+    );
   }
 
   function updateDialogSize(step) {
@@ -80,7 +83,11 @@
   }
 
   function displayFirstName(fullName) {
-    return String(fullName || "").trim().split(/\s+/)[0] || "";
+    return (
+      String(fullName || "")
+        .trim()
+        .split(/\s+/)[0] || ""
+    );
   }
 
   function findGreeterName(guests, inputFirstName) {
@@ -110,9 +117,7 @@
 
   function rsvpClosedMessage() {
     return (
-      "O prazo para confirmação encerrou em " +
-      CONFIG.RSVP_DEADLINE_LABEL +
-      "."
+      "O prazo para confirmação encerrou em " + CONFIG.RSVP_DEADLINE_LABEL + "."
     );
   }
 
@@ -149,9 +154,7 @@
     }
 
     hint.innerHTML =
-      "Por favor, confirmar até " +
-      CONFIG.RSVP_DEADLINE_LABEL +
-      ".";
+      "Por favor, confirmar até " + CONFIG.RSVP_DEADLINE_LABEL + ".";
   }
 
   function updateUnlockFormState() {
@@ -191,8 +194,7 @@
     if (!box) return;
 
     box.hidden = !text;
-    box.className =
-      "rsvp-modal__" + (type === "error" ? "error" : "success");
+    box.className = "rsvp-modal__" + (type === "error" ? "error" : "success");
     box.textContent = text || "";
   }
 
@@ -242,7 +244,7 @@
       data = JSON.parse(text);
     } catch (parseErr) {
       throw new Error(
-        "Resposta inválida da API. Confira o deploy (New version) e a URL /exec."
+        "Tivemos um problema ao processar sua solicitação. Por favor, tente novamente.",
       );
     }
     if (!data.ok) {
@@ -259,14 +261,18 @@
       "&payload=" +
       encodeURIComponent(JSON.stringify(payload));
 
-    return fetch(url, { method: "GET", redirect: "follow" }).then(function (res) {
-      return res.text();
-    });
+    return fetch(url, { method: "GET", redirect: "follow" }).then(
+      function (res) {
+        return res.text();
+      },
+    );
   }
 
   function apiRequest(action, payload) {
     if (!CONFIG.API_URL) {
-      return Promise.reject(new Error("Configure a URL da API do Apps Script."));
+      return Promise.reject(
+        new Error("Configure a URL da API do Apps Script."),
+      );
     }
 
     setLoading(true);
@@ -291,7 +297,7 @@
 
     if (greeting) {
       greeting.textContent =
-        "Olá, " +
+        "Oi, " +
         (state.greeterName || "convidado") +
         "! Por favor, confirme a presença de cada convidado:";
     }
@@ -342,7 +348,7 @@
 
     state.guests.forEach(function (guest) {
       var checkbox = document.querySelector(
-        'input[name="guest-' + guest.guestId + '"]'
+        'input[name="guest-' + guest.guestId + '"]',
       );
       responses.push({
         guestId: guest.guestId,
@@ -514,9 +520,18 @@
       var particle = document.createElement("span");
       particle.className = "rsvp-thanks-particle";
       particle.style.setProperty("--x", (Math.random() * 100).toFixed(1) + "%");
-      particle.style.setProperty("--delay", (Math.random() * 0.35).toFixed(2) + "s");
-      particle.style.setProperty("--drift", ((Math.random() - 0.5) * 48).toFixed(0) + "px");
-      particle.style.setProperty("--size", (4 + Math.random() * 5).toFixed(1) + "px");
+      particle.style.setProperty(
+        "--delay",
+        (Math.random() * 0.35).toFixed(2) + "s",
+      );
+      particle.style.setProperty(
+        "--drift",
+        ((Math.random() - 0.5) * 48).toFixed(0) + "px",
+      );
+      particle.style.setProperty(
+        "--size",
+        (4 + Math.random() * 5).toFixed(1) + "px",
+      );
       particle.style.backgroundColor = colors[i % colors.length];
       delighter.appendChild(particle);
     }
@@ -536,19 +551,19 @@
       ".";
 
     if (titleEl) {
-      titleEl.textContent = hasConfirmed ? "Que alegria!" : "Recebemos sua resposta";
+      titleEl.textContent = hasConfirmed
+        ? "Que alegria!"
+        : "Recebemos sua resposta";
     }
 
     if (hasConfirmed) {
       messageEl.innerHTML =
-        "Mal podemos esperar para celebrar com você!<br><br>" +
-        editNote;
+        "Mal podemos esperar para celebrar com você!<br><br>" + editNote;
       playThanksDelighter(true);
       return;
     }
 
-    messageEl.innerHTML =
-      "Sentiremos muito a sua falta.<br><br>" + editNote;
+    messageEl.innerHTML = "Sentiremos muito a sua falta.<br><br>" + editNote;
     playThanksDelighter(false);
   }
 
@@ -571,22 +586,22 @@
     listEl.innerHTML = "";
 
     data.guests.forEach(function (guest) {
-        var row = document.createElement("div");
-        row.className = "rsvp-modal__admin-row";
+      var row = document.createElement("div");
+      row.className = "rsvp-modal__admin-row";
 
-        var name = document.createElement("span");
-        name.className = "rsvp-modal__admin-name";
-        name.textContent = guest.fullName;
+      var name = document.createElement("span");
+      name.className = "rsvp-modal__admin-name";
+      name.textContent = guest.fullName;
 
-        var badge = document.createElement("span");
-        badge.className =
-          "rsvp-modal__admin-badge rsvp-modal__admin-badge--" + guest.status;
-        badge.textContent = statusLabel(guest.status);
+      var badge = document.createElement("span");
+      badge.className =
+        "rsvp-modal__admin-badge rsvp-modal__admin-badge--" + guest.status;
+      badge.textContent = statusLabel(guest.status);
 
-        row.appendChild(name);
-        row.appendChild(badge);
-        listEl.appendChild(row);
-      });
+      row.appendChild(name);
+      row.appendChild(badge);
+      listEl.appendChild(row);
+    });
   }
 
   function statHtml(value, label) {
@@ -624,14 +639,6 @@
     });
   });
 
-  document.querySelectorAll("[data-rsvp-edit]").forEach(function (el) {
-    el.addEventListener("click", function () {
-      showMessage("", "");
-      renderGuestList(state.guests);
-      setStep("rsvp");
-    });
-  });
-
   var unlockForm = document.getElementById("rsvp-unlock-form");
   var rsvpForm = document.getElementById("rsvp-confirm-form");
 
@@ -648,12 +655,18 @@
   if (secondFieldInput) {
     secondFieldInput.addEventListener("input", function () {
       if (!firstNameInput || isAdminLogin(firstNameInput.value)) return;
-      secondFieldInput.value = secondFieldInput.value.replace(/\D/g, "").slice(0, 4);
+      secondFieldInput.value = secondFieldInput.value
+        .replace(/\D/g, "")
+        .slice(0, 4);
     });
   }
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && modal && modal.classList.contains("is-open")) {
+    if (
+      event.key === "Escape" &&
+      modal &&
+      modal.classList.contains("is-open")
+    ) {
       closeModal();
     }
   });
